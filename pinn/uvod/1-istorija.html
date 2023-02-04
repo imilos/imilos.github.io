@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="sr" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Кратка историја методе &mdash; документација Физички поткрепљене неуронске мреже - Практикум прво</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Индекс" href="../genindex.html" />
+    <link rel="search" title="Претрага" href="../search.html" />
+    <link rel="next" title="Физички поткрепљене неуронске мреже" href="2-metoda.html" />
+    <link rel="prev" title="Увод" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Физички поткрепљене неуронске мреже - Практикум
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Садржај</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Увод</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Кратка историја методе</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-metoda.html">Физички поткрепљене неуронске мреже</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-primer.html">Пример конструкције функције губитка</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../toplota/index.html">Провођење топлоте</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oscilacije/index.html">Механичке осцилације</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hidrologija/index.html">Хидрологија</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../akustika/index.html">Акустика</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misici/index.html">Моделовање мишића</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solari/index.html">Моделовање производње соларних електрана</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../literatura/literatura.html">Литература</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Физички поткрепљене неуронске мреже - Практикум</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Увод</a></li>
+      <li class="breadcrumb-item active">Кратка историја методе</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/uvod/1-istorija.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="istorija">
+<span id="id1"></span><h1>Кратка историја методе<a class="headerlink" href="#istorija" title="Permalink to this heading"></a></h1>
+<p>Током последње деценије се убрзано развијају различите методе дубоког учења решавање различитих врста проблема из области машинског учења, као што су препознавање слике, препознавање говора, обрада природног језика (<em>Natural Language Processing</em> - NLP), претраживање, системи за препоруке, биоинформатика, итд. Међутим, класично надгледано дубоко учење као метода није погодно за решавање баш свих врста проблема, без обзира на довољну количину доступних података који описују понашање моделованог система. На пример, проблеми описани кроз линеарне и нелинеарне једначине и системе једначина никад и нису били у фокусу дубоког учења. Класичне нумеричке методе и даље држе апсолутни примат у нумеричком решавању парцијалних диференцијалних једначина. Методе као што су коначне разлике (<em>Finite Difference Method</em>), коначне запремине (<em>Finite Volume Method</em>) и коначни елементи (<em>Finite Element Method</em>) се и даље сматрају најсавременијим методама због њихове робусности, ефикасности и могућности примене у широком спектру проблема.</p>
+<p>Са друге стране, решавање нелинеарних инверзних проблема класичним нумеричким методама захтева прорачуне који су изузетно рачунарски и временски захтевни. Претрага оптималних параметра модела укључује итеративни поступак који често укључује десетине и стотине пролаза директне симулације. Због тога се тачност често жртвује за ефикасност, те ове врсте претрага често нису исцрпне и укључују тзв. мета-хеуристике, без гаранције да ће се пронаћи најбоље (оптимално) решење. Примери из праксе аутора и сарадника најчешће користе генетске алгоритме (<em>Genetic Algorithm</em> - GA), спроводе оптимизацију базирану на симулацији (<em>Simulation Based Optimization</em>) и захтевају употребу више стотина процесора да би се до решења (које није гарантовано оптимално) дошло у иоле разумном временском року, према <span id="id2">Ivanovic <em>et al.</em> [<a class="reference internal" href="../literatura/literatura.html#id6" title="Milos Ivanovic, Visnja Simic, Boban Stojanovic, Ana Kaplarevic-Malisic, and Branko Marovic. Elastic grid resource provisioning with wobingo: a parallel framework for genetic algorithm based optimization. Future Generation Computer Systems, 42:44–54, 2015.">ISS+15</a>]</span>, <span id="id3">Simic <em>et al.</em> [<a class="reference internal" href="../literatura/literatura.html#id7" title="Visnja Simic, Boban Stojanovic, and Milos Ivanovic. Optimizing the performance of optimization in the cloud environment–an intelligent auto-scaling approach. Future Generation Computer Systems, 101:909–920, 2019.">SSI19</a>]</span> и <span id="id4">Ivanovic and Simic [<a class="reference internal" href="../literatura/literatura.html#id9" title="Milos Ivanovic and Visnja Simic. Efficient evolutionary optimization using predictive auto-scaling in containerized environment. Applied Soft Computing, 129:109610, 2022.">IS22</a>]</span>. Поред кардиналоних потешкоћа при решавању инверзних проблема, очигледни су још и следећи недостаци класичних нумеричких метода:</p>
+<ul class="simple">
+<li><p>Није могуће на лак начин у модел укључити <strong>податке са шумом</strong>.</p></li>
+<li><p><strong>Генерисање прорачунске мреже</strong> остаје сложена мануелна операција, често подложна грешкама.</p></li>
+<li><p>Проблеме који укључују <strong>већи број димензија</strong> није могуће решити у реалним временским оквирима рачунарским ресурсима којима тренутно располажемо.</p></li>
+</ul>
+<p>Да би се елиминисали ови недостаци класичних нумеричких метода, развијена је нова метода дубоког учења за решавање парцијалних диференцијалних једначина. Та методa, под именом <strong>Физички поткрепљене неуронске мреже</strong> (<em>Physics Informed Neural Netorks</em> - PINN), користи се за решавање проблема надгледаног учења уз поштовање било ког закона физике описаног општим нелинеарним парцијалним диференцијалним једначинама <span id="id5">Raissi <em>et al.</em> [<a class="reference internal" href="../literatura/literatura.html#id3" title="Maziar Raissi, Paris Perdikaris, and George E Karniadakis. Physics-informed neural networks: a deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations. Journal of Computational Physics, 378:686–707, 2019.">RPK19</a>]</span>.</p>
+<p>Главна иновација Фузички поткрепљених неуронских мрежа (ФПНМ) у поређењу са класичним дубоким неуронским мрежама је увођење функције губитка која кодира основне једначине физичких закона, узима излаз дубоке мреже, која се зове апроксиматор, и израчунава вредност губитка <span id="id6">Markidis [<a class="reference internal" href="../literatura/literatura.html#id8" title="Stefano Markidis. The old and the new: can physics-informed deep-learning replace traditional linear solvers? Frontiers in big Data, pages 92, 2021.">Mar21</a>]</span>. Функција губитка која се односи на  диференцијалну једначину се минимизира обуком апроксиматорске неуронске мреже, где се диференцијални оператори примењују коришћењем аутоматске диференцијације. Аутоматска диференцијација је предуслов да би се уопште обавило тренирање пропагацијом уназад и поседују је све библиотеке за машинско учење, као што су <em>Tensorflow</em>, <em>PyTorch</em>, <em>Theano</em>, и друге.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Увод" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="2-metoda.html" class="btn btn-neutral float-right" title="Физички поткрепљене неуронске мреже" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2023, Милош Ивановић.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

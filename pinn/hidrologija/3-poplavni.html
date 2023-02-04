@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="sr" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Пропагација поплавног таласа у отвореном каналу &mdash; документација Физички поткрепљене неуронске мреже - Практикум прво</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Индекс" href="../genindex.html" />
+    <link rel="search" title="Претрага" href="../search.html" />
+    <link rel="next" title="Акустика" href="../akustika/index.html" />
+    <link rel="prev" title="Филтрација подземних вода" href="2-podzemne.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Физички поткрепљене неуронске мреже - Практикум
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Садржај</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../uvod/index.html">Увод</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toplota/index.html">Провођење топлоте</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oscilacije/index.html">Механичке осцилације</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Хидрологија</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1-uvod.html">Увод</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-podzemne.html">Филтрација подземних вода</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Пропагација поплавног таласа у отвореном каналу</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Усмеравање поплава - физички закони</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Конструкција функције губитка</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Тест пример и имплементација</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">Инверзни проблем</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../akustika/index.html">Акустика</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misici/index.html">Моделовање мишића</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solari/index.html">Моделовање производње соларних електрана</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../literatura/literatura.html">Литература</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Физички поткрепљене неуронске мреже - Практикум</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Хидрологија</a></li>
+      <li class="breadcrumb-item active">Пропагација поплавног таласа у отвореном каналу</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/hidrologija/3-poplavni.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="poplavni">
+<span id="id1"></span><h1>Пропагација поплавног таласа у отвореном каналу<a class="headerlink" href="#poplavni" title="Permalink to this heading"></a></h1>
+<p>Управљање водним ресурсима захтева алате за дугорочно и краткорочно предвиђање различитих хидролошких феномена. Предвиђање је значајно у областима управљања ризиком од поплава, управљања хидро-електрана, унутрашње пловидбе, водоснабдевања, итд. Бројни задаци у вези са предвиђањем хидролошких података успешно су обрађени коришћењем приступа предвиђања заснованог на класичном нумеричком моделовању. Иако овај приступ даје задовољавајуће резултате, још увек има много проблема које треба решити. У многим случајевима, време рачунања је параметар који може ограничити примену физички заснованих хидролошких и хидрауличких модела у реалној примени. Поред тога, физички засновани модели су недовољно флексибилни у случајевима инверзних проблема, идентификације параметара, асимилације мерених података итд.</p>
+<p>Модели предвиђања засновани на неуронским мрежама примењени су у моделовању падавина и отицаја <span id="id2">Chadalawada <em>et al.</em> [<a class="reference internal" href="../literatura/literatura.html#id19" title="Jayashree Chadalawada, HMVV Herath, and Vladan Babovic. Hydrologically informed machine learning for rainfall-runoff modeling: a genetic programming-based toolkit for automatic model induction. Water Resources Research, 56(4):e2019WR026933, 2020.">CHB20</a>]</span>, системима раног упозорења на поплаве <span id="id3">Duncan <em>et al.</em> [<a class="reference internal" href="../literatura/literatura.html#id20" title="Andrew Duncan, Albert S Chen, Edward Keedwell, Slobodan Djordjevic, and Dragan Savic. Rapids: early warning system for urban flooding and water quality hazards. 2013.">DCK+13</a>]</span>, као и моделовању урбаних водоводних мрежа <span id="id4">Garzón <em>et al.</em> [<a class="reference internal" href="../literatura/literatura.html#id21" title="Alexander Garzón, Zoran Kapelan, J Langeveld, and Riccardo Taormina. Machine learning-based surrogate modelling for urban water networks: review and future research directions. Water Resources Research, pages e2021WR031808, 2022.">GarzonKLT22</a>]</span>. Ови приступи захтевају велику количину података за обуку, што може створити проблеме уколико нема довољно података. Поред тога, може се приметити да ова врста модела није у стању да испоручи добре резултате када улазни подаци излазе изван опсега података који се користе за обуку. У овим случајевима, модели засновани на неуронским мрежама могу произвести физички немогуће резултате. У последњих неколико година, убрзано се уводи ФПНМ приступ и у овој области. У наредном примеру ћемо сагледати потенцијал употребе ФПНМ у једнодимензионом проблему пропагације поплавног таласа у отвореним каналима спајањем физичког закона са почетним и граничним условима описаним кинематичкком једначином пропагације таласа.</p>
+<section id="id5">
+<h2>Усмеравање поплава - физички закони<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
+<p>Ширење поплавног таласа у отвореним каналима је описано помоћу две једначине, и то <strong>једначином континуитета</strong> <a class="reference internal" href="#equation-eq-poplava-kontinuitet">(28)</a> и <strong>законом одржања количине кретања</strong> <a class="reference internal" href="#equation-eq-poplava-dinamicka">(29)</a>. Ова једначина садржи утицаје трења, гравитације, силе притиска, као и локалног и конвективног убрзања. У овом примеру, усмеравање поплава у правоугаоном каналу је представљено кинематичким таласом који поједностављује динамичку једначину узимајући само утицај трења и гравитације:</p>
+<div class="math notranslate nohighlight" id="equation-eq-poplava-kontinuitet">
+<span class="eqno">(28)<a class="headerlink" href="#equation-eq-poplava-kontinuitet" title="Permalink to this equation"></a></span>\[\frac{\partial h(x,t)}{\partial t} + c \frac{\partial h(x,t)}{\partial x} = 0\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-poplava-dinamicka">
+<span class="eqno">(29)<a class="headerlink" href="#equation-eq-poplava-dinamicka" title="Permalink to this equation"></a></span>\[Q(x,t) = \frac{1}{n} \cdot B \cdot h(x,t)^\frac{5}{3} \cdot \sqrt{I_d},\]</div>
+<p>где <span class="math notranslate nohighlight">\(h \, [m]\)</span> представља дубину воде, <span class="math notranslate nohighlight">\(t \, [s]\)</span> је време, <span class="math notranslate nohighlight">\(x \, [m]\)</span> просторну координату, <span class="math notranslate nohighlight">\(c \, [m/s]\)</span> брзину пропагације поремећаја, <span class="math notranslate nohighlight">\(Q [m^3/s]\)</span> даје проток (пражњење), <span class="math notranslate nohighlight">\(n [m^{-\frac{1}{3}}s]\)</span> репрезентује Манингову храпавост, <span class="math notranslate nohighlight">\(B \, [m]\)</span> ширину попречног пресека и <span class="math notranslate nohighlight">\(I_d\)</span> нагиб по уздужној оси.</p>
+<p>Циљ моделовања усмеравања поплава је процена промене дубине воде дуж канала <span class="math notranslate nohighlight">\(h(x,t)\)</span> која је изазвана поплавним таласом представљеним хидрографом тока <span class="math notranslate nohighlight">\(Q_{in}(t) = Q(0,t)\)</span> на узводној граници.</p>
+</section>
+<section id="id6">
+<h2>Конструкција функције губитка<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h2>
+<p>Ако се осврнемо на општи израз за функцију губитка <a class="reference internal" href="../uvod/2-metoda.html#equation-eq-loss1">(2)</a>, видимо три компоненте, и то губитак који потиче од резидуалне мреже, губитак који потиче од почетних услова и губитак који потиче од граничних услова. Кренимо редом. Компонента функције губитка која потиче од диференцијалне једначине <a class="reference internal" href="#equation-eq-poplava-kontinuitet">(28)</a> дефнисана је десном страном исте једначине. Компонента почетних услова се дефинише као:</p>
+<div class="math notranslate nohighlight">
+\[h(x,t=0) = h_0\]</div>
+<p>Поред тога, потребан нам је и гранични услов који дефинише вредност висине таласа на почетку моделованог домена, тј. на <span class="math notranslate nohighlight">\(x=0\)</span> одакле талас долази. Тај гранични услов изводимо из динамичке једначине <a class="reference internal" href="#equation-eq-poplava-dinamicka">(29)</a>:</p>
+<div class="math notranslate nohighlight">
+\[h(0,t) = \left(  \frac{Q_{in}(t) \cdot n}{B \cdot \sqrt{I_d}}  \right)^\frac{3}{5}.\]</div>
+<p>Уколико као меру грешке усвојимо средњу квадратну грешку (<em>Mean Squared Error - MSE</em>), композитна функција губитка изгледаће овако:</p>
+<div class="math notranslate nohighlight">
+\[MSE = MSE_r + MSE_0 + MSE_b,\]</div>
+<p>где су:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}MSE_r = \frac{1}{N_{x_f,t_f}} \sum \left| r(x_f, t_f) \right|^2, \\
+MSE_0 = \frac{1}{N_{x_0,t_0}} \sum \left| \tilde{h}(x_0,0)-h(x_0,0) \right|^2, \\
+MSE_b = \frac{1}{N_{x_b,t_b}} \sum \left| \tilde{h}(0,t_b)-h(0,t_b) \right|^2.\end{split}\]</div>
+<p>Овде су <span class="math notranslate nohighlight">\(N_{x_f,t_f}\)</span>, <span class="math notranslate nohighlight">\(N_{x_0,t_0}\)</span> и <span class="math notranslate nohighlight">\(N_{x_b,t_b}\)</span> укупни бројеви колокационих тачака у унутрашњости моделованог домена, за почетне и за граничне услове, респективно.</p>
+</section>
+<section id="id7">
+<h2>Тест пример и имплементација<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h2>
+<p>Пример на коме ћемо тестирати ваљаност нашег ФПНМ приступа за моделовање ширења поплавног таласа је пропагација таласа дуж канала дугог 1600 метара, облика призме и правоугаоног попречног пресека широког 15 метара, као на <a class="reference internal" href="#poplavni-postavka"><span class="std std-numref">Сл. 32</span></a>.</p>
+<figure class="align-default" id="id11">
+<span id="poplavni-postavka"></span><a class="reference internal image-reference" href="../_images/poplavni1.png"><img alt="../_images/poplavni1.png" src="../_images/poplavni1.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 32 </span><span class="caption-text">Поставка проблема пропагације поплавног таласа у времену.</span><a class="headerlink" href="#id11" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Манингова храпавост има вредност од <span class="math notranslate nohighlight">\(n = 0,015 m^{-\frac{1}{3}}s\)</span>, нагиб је постављен на <span class="math notranslate nohighlight">\(I_d=0,005\)</span>, a брзина пропагације на <span class="math notranslate nohighlight">\(c=15 \, m/s\)</span>. Циљ је израчунати промене дубине и протока воде дуж канала, изазване поплавним таласом генерисаним као узводни гранични услов на <span class="math notranslate nohighlight">\(x=0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[Q_{in}(t) = Q(0,t) = 180 \cdot \left[  1 + \left( -\frac{sgn(t-600)}{2} + \frac{1}{2} \right) \cdot \sin \left( \frac{\pi t}{600} \right)  \right].\]</div>
+<p>Поред овог услова, ту је и почетни услов Дирихлеовог типа, а то је да је висина воде у каналу <span class="math notranslate nohighlight">\(h(x,t=0)=1,751m\)</span>. Интересантни делови решења приказани су на  <a class="reference internal" href="#listing-poplavni"><span class="std std-numref">Листинг 7</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<span id="listing-poplavni"></span><div class="code-block-caption"><span class="caption-number">Листинг 7 </span><span class="caption-text">Решење проблема пропагације поплавног таласа коришћењем DeepXDE оквира</span><a class="headerlink" href="#id12" title="Permalink to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">deepxde</span> <span class="k">as</span> <span class="nn">dde</span>
+<span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="linenos"> 3</span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="linenos"> 4</span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">deepxde.backend</span> <span class="kn">import</span> <span class="n">tf</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="n">c</span> <span class="o">=</span> <span class="mi">15</span> <span class="c1"># brzina propagacije talasa</span>
+<span class="linenos"> 8</span><span class="n">n</span> <span class="o">=</span> <span class="mf">0.015</span> <span class="c1"># hrapavost kanala</span>
+<span class="linenos"> 9</span><span class="n">Id</span> <span class="o">=</span> <span class="mf">0.005</span> <span class="c1"># nagib dna kanala</span>
+<span class="linenos">10</span><span class="n">B</span> <span class="o">=</span> <span class="mi">15</span> <span class="c1"># poprecni presek</span>
+<span class="linenos">11</span><span class="n">length</span> <span class="o">=</span> <span class="mi">1600</span>
+<span class="linenos">12</span><span class="n">total_time</span> <span class="o">=</span> <span class="mf">1000.0</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="c1"># Hiperparametri</span>
+<span class="linenos">15</span><span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">30</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">16</span><span class="n">activation</span> <span class="o">=</span> <span class="s1">&#39;tanh&#39;</span>
+<span class="linenos">17</span><span class="n">initializer</span> <span class="o">=</span> <span class="s1">&#39;Glorot uniform&#39;</span>
+<span class="linenos">18</span><span class="n">optimizer</span> <span class="o">=</span> <span class="s1">&#39;rmsprop&#39;</span>
+<span class="linenos">19</span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="linenos">20</span><span class="n">num_of_epochs</span> <span class="o">=</span> <span class="mi">20000</span>
+<span class="linenos">21</span><span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.001</span>
+<span class="linenos">22</span><span class="n">loss</span> <span class="o">=</span> <span class="s1">&#39;mse&#39;</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span><span class="c1"># Jednacina kontinuiteta</span>
+<span class="linenos">25</span><span class="k">def</span> <span class="nf">pde</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+<span class="linenos">26</span>    <span class="n">dh_t</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">jacobian</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">27</span>    <span class="n">dh_x</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">jacobian</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">28</span>    <span class="k">return</span> <span class="n">dh_t</span> <span class="o">+</span> <span class="n">c</span> <span class="o">*</span> <span class="n">dh_x</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span><span class="c1"># Da li je t=0?</span>
+<span class="linenos">31</span><span class="k">def</span> <span class="nf">initial_h</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">on_boundary</span><span class="p">):</span>
+<span class="linenos">32</span>    <span class="k">return</span> <span class="n">on_boundary</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">33</span>
+<span class="linenos">34</span><span class="c1"># Da li je x=0?</span>
+<span class="linenos">35</span><span class="k">def</span> <span class="nf">boundary_hx0</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">on_boundary</span><span class="p">):</span>
+<span class="linenos">36</span>    <span class="k">return</span> <span class="n">on_boundary</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">37</span>
+<span class="linenos">38</span><span class="c1"># Pocetni uslov za visinu vode x(t=0)</span>
+<span class="linenos">39</span><span class="k">def</span> <span class="nf">func_init_h</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="linenos">40</span>    <span class="k">return</span> <span class="mf">1.751</span>
+<span class="linenos">41</span>
+<span class="linenos">42</span><span class="c1"># Dirihleov granicni uslov - Profil poplavnog talasa u vremenu</span>
+<span class="linenos">43</span><span class="k">def</span> <span class="nf">func_hx0</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="linenos">44</span>    <span class="n">t</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="linenos">45</span>
+<span class="linenos">46</span>    <span class="n">Qin</span> <span class="o">=</span> <span class="mi">180</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="mi">600</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span> <span class="o">*</span>  <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">600</span><span class="p">))</span>
+<span class="linenos">47</span>    <span class="n">a</span> <span class="o">=</span> <span class="n">Qin</span> <span class="o">*</span> <span class="n">n</span>
+<span class="linenos">48</span>    <span class="n">b</span> <span class="o">=</span> <span class="n">B</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Id</span><span class="p">)</span>
+<span class="linenos">49</span>    <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
+<span class="linenos">50</span>    <span class="k">return</span> <span class="n">custom_pow</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">3</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span>
+<span class="linenos">51</span>
+<span class="linenos">52</span><span class="n">time_domain</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">TimeDomain</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">total_time</span><span class="p">)</span>
+<span class="linenos">53</span><span class="n">geom_domain</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">Interval</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+<span class="linenos">54</span><span class="n">geotime</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">GeometryXTime</span><span class="p">(</span><span class="n">geom_domain</span><span class="p">,</span> <span class="n">time_domain</span><span class="p">)</span>
+<span class="linenos">55</span>
+<span class="linenos">56</span><span class="c1"># Realizacija granicnog i pocetnog uslova</span>
+<span class="linenos">57</span><span class="n">bc</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">icbc</span><span class="o">.</span><span class="n">DirichletBC</span><span class="p">(</span><span class="n">geotime</span><span class="p">,</span> <span class="n">func</span> <span class="o">=</span> <span class="n">func_hx0</span><span class="p">,</span> <span class="n">on_boundary</span> <span class="o">=</span> <span class="n">boundary_hx0</span><span class="p">)</span>
+<span class="linenos">58</span><span class="n">ic</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">icbc</span><span class="o">.</span><span class="n">IC</span><span class="p">(</span><span class="n">geotime</span><span class="p">,</span> <span class="n">func</span> <span class="o">=</span> <span class="n">func_init_h</span><span class="p">,</span> <span class="n">on_initial</span> <span class="o">=</span> <span class="n">initial_h</span><span class="p">)</span>
+<span class="linenos">59</span>
+<span class="linenos">60</span><span class="c1"># Konstrukcija modela i definisanje kolokacionih tacaka</span>
+<span class="linenos">61</span><span class="n">data</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">TimePDE</span><span class="p">(</span><span class="n">geotime</span><span class="p">,</span> <span class="n">pde</span><span class="p">,</span> <span class="p">[</span><span class="n">bc</span><span class="p">,</span> <span class="n">ic</span><span class="p">],</span> <span class="n">num_domain</span> <span class="o">=</span> <span class="mi">16000</span><span class="p">,</span> <span class="n">num_boundary</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
+<span class="linenos">62</span>      <span class="n">num_initial</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">train_distribution</span> <span class="o">=</span> <span class="s1">&#39;uniform&#39;</span><span class="p">)</span>
+<span class="linenos">63</span><span class="n">net</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">FNN</span><span class="p">(</span><span class="n">layers</span><span class="p">,</span> <span class="n">activation</span><span class="p">,</span> <span class="n">initializer</span><span class="p">)</span>
+<span class="linenos">64</span><span class="n">model</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">net</span><span class="p">)</span>
+<span class="linenos">65</span>
+<span class="linenos">66</span><span class="c1"># Treniranje RMSProp metodom</span>
+<span class="linenos">67</span><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">loss</span> <span class="o">=</span> <span class="n">loss</span><span class="p">,</span> <span class="n">lr</span> <span class="o">=</span> <span class="n">learning_rate</span><span class="p">)</span>
+<span class="linenos">68</span><span class="n">loss_history</span><span class="p">,</span> <span class="n">train_state</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">epochs</span> <span class="o">=</span> <span class="n">num_of_epochs</span><span class="p">,</span> <span class="n">display_every</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="n">batch_size</span><span class="p">)</span>
+<span class="linenos">69</span>
+<span class="linenos">70</span><span class="c1"># Dodatno treniranje L-BFGS-B metodom posle RMSprop optimizacije</span>
+<span class="linenos">71</span><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;L-BFGS-B&quot;</span><span class="p">)</span>
+<span class="linenos">72</span><span class="n">loss_history</span><span class="p">,</span> <span class="n">train_state</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>У овој скрипти одмах на почетку дефинишемо и физичке параметре проблема и хипер-параметре модела. Погледом на групу хипер-параметара одмах може да се примети значајно већи број епоха за тренинг, као и оптимизатор <code class="docutils literal notranslate"><span class="pre">RMSProp</span></code> уместо стандардног <code class="docutils literal notranslate"><span class="pre">Adam</span></code>. <code class="docutils literal notranslate"><span class="pre">Adam</span></code> приликом рачунања градијента користи и први и други извод (момент), док <code class="docutils literal notranslate"><span class="pre">RMSProp</span></code> користи само други извод. Током експериментисања са различитим хипер-параметрима, испоставило се да за овај конкретан пример <code class="docutils literal notranslate"><span class="pre">RMSProp</span></code> заиста нешто брже конвергира. Такође, показало се да је пример у неким сценаријима осетљив чак и на избор <code class="docutils literal notranslate"><span class="pre">batch_size</span></code> и иницијализатора тежина. Правило каже да је уз активационе функције као што су <code class="docutils literal notranslate"><span class="pre">sigmoid</span></code> или <code class="docutils literal notranslate"><span class="pre">tanh</span></code> боље користити <code class="docutils literal notranslate"><span class="pre">Glorot</span></code> иницијализатор, док уз активациону фуинцију <code class="docutils literal notranslate"><span class="pre">relu</span></code> боље иде <code class="docutils literal notranslate"><span class="pre">He</span></code>, по <span id="id8">Katanforoosh and Kunin [<a class="reference internal" href="../literatura/literatura.html#id22" title="Kian Katanforoosh and Daniel Kunin. Initializing neural networks. DeepLearning. ai, 2019.">KK19</a>]</span>.</p>
+<p>На жалост, око избора хипер-параметара не постоје строга правила. Све зависи од самог примера, па се избор оптималних хиперпараметара за неки конкретан проблем углавном своди на мануелну, временски захтевну процедуру. Помоћу алата као што је <em>Tensorflow/Keras</em> може се донекле умањити овај проблем једноставним алгоритмима као што је насумична претрага (<em>Random Grid Search</em>), која захтева огромне рачунарске ресурсе да би се добили иоле употребљиви резултати. С друге стране, постоји неколико алата који ову претрагу чине ефикаснијом паметнијим приступом оптимизацији. На пример, алат <a class="reference external" href="https://blackfox.ai">BlackFox</a> користи дистрибуирани генетски алгоритам, а проблем хардверских ресурса решава дистрибуираном обуком на локалном <em>Kubernetes</em> кластеру или кластеру постављеном на неком клауд провајдеру.</p>
+<p>Следи поставка почетног Дирихлеовог услова за ниво воде у каналу и нешто сложенијег граничног услова за висину воде <span class="math notranslate nohighlight">\(h\)</span> који се мења у времену по јединачини <a class="reference internal" href="#equation-eq-poplava-dinamicka">(29)</a>. Овде само треба нагласити да се код DeepXDE улази <span class="math notranslate nohighlight">\(x\)</span> и <span class="math notranslate nohighlight">\(t\)</span> воде као један двоколонски тензор, у коме је:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># ulaz x</span>
+<span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="c1"># ulaz t</span>
+</pre></div>
+</div>
+<p>Како је у питању динамички проблем који покрива релативно велики просторни и временски домен, тј. прати се линија од 1,6 km током неких 17 минута, потребан је и већи број колокационих тачака него у неким проблемима које смо раније обрађивали. Модел се поставља као:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">TimePDE</span><span class="p">(</span><span class="n">geotime</span><span class="p">,</span> <span class="n">pde</span><span class="p">,</span> <span class="p">[</span><span class="n">bc</span><span class="p">,</span> <span class="n">ic</span><span class="p">],</span> <span class="n">num_domain</span> <span class="o">=</span> <span class="mi">16000</span><span class="p">,</span> <span class="n">num_boundary</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
+  <span class="n">num_initial</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">train_distribution</span> <span class="o">=</span> <span class="s1">&#39;uniform&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Бројност колокационих тачака за почетне и граничне услове прати бројност тачака унутар домена. Након стандардног тренирања методом <code class="docutils literal notranslate"><span class="pre">RMSProp</span></code> примећујемо још једну специфичност у односу на једноставније примере. Наиме, након што се обави „глобална” претрага, алгоритам <em>Limited Memory Broyden-Fletcher-Goldfarb-Shanno</em> има прилику да се додатно приближи оптималном решењу према <span id="id9">Markidis [<a class="reference internal" href="../literatura/literatura.html#id8" title="Stefano Markidis. The old and the new: can physics-informed deep-learning replace traditional linear solvers? Frontiers in big Data, pages 92, 2021.">Mar21</a>]</span>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;L-BFGS-B&quot;</span><span class="p">)</span>
+<span class="n">loss_history</span><span class="p">,</span> <span class="n">train_state</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Примећујемо да се овде не наводи број епоха, већ се алгоритам ослања на аутоматску детекцију конвергенције. График функције губитка се може видети на <a class="reference internal" href="#poplavni-loss2"><span class="std std-numref">Сл. 33</span></a>, где до 20.000. епохе, као што је већ речено, тече <code class="docutils literal notranslate"><span class="pre">RMSProp</span></code>, а онда се у локалној околини наставља са <code class="docutils literal notranslate"><span class="pre">L-BFGS-B</span></code>. Веома је уочљив раст перформанси тренирања, тј. пад вредности функције губитка у том делу.</p>
+<figure class="align-default" id="id13">
+<span id="poplavni-loss2"></span><a class="reference internal image-reference" href="../_images/poplavni-loss2.png"><img alt="../_images/poplavni-loss2.png" src="../_images/poplavni-loss2.png" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 33 </span><span class="caption-text">Почетно тренирање методом <em>RMSProp</em> у 20.000 епоха и додатно тренирање методом <em>L-BFGS-B</em> до детектоване конвергенције</span><a class="headerlink" href="#id13" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Што се самог процеса тренирања ове ФПНМ тиче, треба нагласити да је за оволику количину података, тј. колокационих тачака, тај процес далеко брже ради на графичком процесору него на стандардном процесору. Слободна процена је да је тренирање на <em>Tesla T4</em> графичком процесору више од 10 пута брже него на процесору <em>Intel Xeon Silver 4208 &#64; 2.10GHz</em>.</p>
+<p>Коначно долазимо и до резултата. Висина воденог стуба у више контролних тачака (0, 400m, 800m, 1200m, 1600m) приказана је на <a class="reference internal" href="#poplavni-rezultati"><span class="std std-numref">Сл. 34</span></a>. Ова решења се добро уклапају са решењима које даје метода коначних разлика, али то поређење овде нећемо приказивати.</p>
+<figure class="align-default" id="id14">
+<span id="poplavni-rezultati"></span><a class="reference internal image-reference" href="../_images/poplavni-rezultati.png"><img alt="../_images/poplavni-rezultati.png" src="../_images/poplavni-rezultati.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 34 </span><span class="caption-text">Висина воденог стуба у неколико тачака током времена.</span><a class="headerlink" href="#id14" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id10">
+<h2>Инверзни проблем<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h2>
+<p>Пошто смо успешно решили директни проблем, хајде да замислимо ситуацију да нам није познат параметар <span class="math notranslate nohighlight">\(n\)</span> који репрезентује Манингову храпавост, али да смо посматрањем кретања таласа утврдили да је његов врх висине 2,65m прошао крoз контролне тачке (0, 400m, 800m, 1200m, 1600m) у следећим тренуцима:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>x [m]</strong></p></th>
+<th class="head"><p>0</p></th>
+<th class="head"><p>400</p></th>
+<th class="head"><p>800</p></th>
+<th class="head"><p>1200</p></th>
+<th class="head"><p>1600</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>t [s]</strong></p></td>
+<td><p>300</p></td>
+<td><p>320</p></td>
+<td><p>360</p></td>
+<td><p>380</p></td>
+<td><p>400</p></td>
+</tr>
+</tbody>
+</table>
+<p>Ове опсервације чине могућим креирање <code class="docutils literal notranslate"><span class="pre">PointSet</span></code> граничног услова који смо већ користили, а то се код DeepXDE оквира ради на следећи начин:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bc_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">300</span><span class="p">],[</span><span class="mi">400</span><span class="p">,</span><span class="mi">320</span><span class="p">],[</span><span class="mi">800</span><span class="p">,</span><span class="mi">360</span><span class="p">],[</span><span class="mi">1200</span><span class="p">,</span><span class="mi">380</span><span class="p">],[</span><span class="mi">1600</span><span class="p">,</span><span class="mi">400</span><span class="p">]])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">bc_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.65</span><span class="p">,</span><span class="mf">2.65</span><span class="p">,</span><span class="mf">2.65</span><span class="p">,</span><span class="mf">2.65</span><span class="p">,</span><span class="mf">2.65</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ic3</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">icbc</span><span class="o">.</span><span class="n">PointSetBC</span><span class="p">(</span><span class="n">bc_x</span><span class="p">,</span> <span class="n">bc_y</span><span class="p">,</span> <span class="n">component</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Резултати висине воденог стуба су приказани на <a class="reference internal" href="#poplavni-inverzni1"><span class="std std-numref">Сл. 35</span></a>, док је вредност параметра <span class="math notranslate nohighlight">\(n\)</span> током обуке приказана на <a class="reference internal" href="#poplavni-parametar-n"><span class="std std-numref">Сл. 36</span></a>.</p>
+<figure class="align-default" id="id15">
+<span id="poplavni-inverzni1"></span><a class="reference internal image-reference" href="../_images/poplavni-inv-rezultati.png"><img alt="../_images/poplavni-inv-rezultati.png" src="../_images/poplavni-inv-rezultati.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 35 </span><span class="caption-text">Висина воденог стуба код инверзног проблема</span><a class="headerlink" href="#id15" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id16">
+<span id="poplavni-parametar-n"></span><a class="reference internal image-reference" href="../_images/parametar-n.png"><img alt="../_images/parametar-n.png" src="../_images/parametar-n.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 36 </span><span class="caption-text">Вредност непознатог параметра <span class="math notranslate nohighlight">\(n\)</span> током обуке</span><a class="headerlink" href="#id16" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Видимо да се ФПНМ и у овом проблему доста добро сналази са инверзном поставком. Још једном ваља нагласити да се код ФПНМ дикректни и инверзни приступ методолошки уопште не разликују и да захтевају исту количину рачунарских ресурса. Насупрот томе, класичне нумеричке методе као МКЕ су у стању да реше искључиво директне проблеме. За индентификацију параметара код МКЕ морају да се користе методе за конвексну или чешће, неконвексну оптимизацију и које су у реалним применама рачунарски веома захтевне, а понекад и нерешиве.</p>
+<p>Наравно, ни ФПНМ није идеалан. Успешност обуке и овом примеру много зависи од избора хипер-параметара, а често се дешава да услед стохастичког карактера саме обуке ни исти хипер-параметри не доводе до решења баш у сваком тренингу. Поред хипер-параметара, овде имамо и почетну вредност непознатог физичког параметра (или више параметара), па се неретко дешава да оптимизација за неке почетне вредности уопшете не конвергира, задржавајући се у неком локалном минимуму.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="2-podzemne.html" class="btn btn-neutral float-left" title="Филтрација подземних вода" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../akustika/index.html" class="btn btn-neutral float-right" title="Акустика" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2023, Милош Ивановић.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

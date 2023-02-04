@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="sr" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Једнодимензиони инверзни проблем &mdash; документација Физички поткрепљене неуронске мреже - Практикум прво</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Индекс" href="../genindex.html" />
+    <link rel="search" title="Претрага" href="../search.html" />
+    <link rel="next" title="Стефанов проблем у моделима топљења" href="4-stefan.html" />
+    <link rel="prev" title="Једнодимензиони директни проблем" href="2-stap.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Физички поткрепљене неуронске мреже - Практикум
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Садржај</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../uvod/index.html">Увод</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Провођење топлоте</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1-uvod.html">Једначина провођења топлоте</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-stap.html">Једнодимензиони директни проблем</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Једнодимензиони инверзни проблем</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4-stefan.html">Стефанов проблем у моделима топљења</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../oscilacije/index.html">Механичке осцилације</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hidrologija/index.html">Хидрологија</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../akustika/index.html">Акустика</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misici/index.html">Моделовање мишића</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solari/index.html">Моделовање производње соларних електрана</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../literatura/literatura.html">Литература</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Физички поткрепљене неуронске мреже - Практикум</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Провођење топлоте</a></li>
+      <li class="breadcrumb-item active">Једнодимензиони инверзни проблем</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/toplota/3-stap-inv.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="stap-inverzni">
+<span id="id1"></span><h1>Једнодимензиони инверзни проблем<a class="headerlink" href="#stap-inverzni" title="Permalink to this heading"></a></h1>
+<p>Поставка инверзног проблема је потпуно иста као и у претходном поглављу <a class="reference internal" href="2-stap.html#stap"><span class="std std-ref">Једнодимензиони директни проблем</span></a>, тј. описана је <a class="reference internal" href="2-stap.html#fdheat"><span class="std std-numref">Сл. 3</span></a>, једначином <a class="reference internal" href="1-uvod.html#equation-eq-toplota1">(10)</a> и граничним условима <a class="reference internal" href="2-stap.html#equation-eq-granicni1">(13)</a>. Међутим, овога пута нам параметар проблема <span class="math notranslate nohighlight">\(\alpha\)</span> на почетку није познат и покушаћемо да га добијемо уз помоћ метода обучавања пропагацијом уназад. Наравно, чим смо увели нову непознату, морамо да уведемо и нови гранични услов. Рецимо, можемо да поставимо да је у једној тачки у неком временском тренутку, температура <span class="math notranslate nohighlight">\(u\)</span> одговарала некој нумеричкој вредности која се поклапа са аналитичким решењем <a class="reference internal" href="2-stap.html#equation-eq-analiticko1">(12)</a>. Рецимо, поставимо температуру на средини штапа у <span class="math notranslate nohighlight">\(x=0,5\)</span> у тренутку <span class="math notranslate nohighlight">\(t=0,05\)</span> на:</p>
+<div class="math notranslate nohighlight">
+\[u(x=0,5, t=0,05) = 0,8623931,\]</div>
+<p>и покушајмо да решимо проблем постављајући граничне услове на следећи начин:</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-number">Листинг 2 </span><span class="caption-text">Проналажење непознатог параметра <span class="math notranslate nohighlight">\(\alpha\)</span></span><a class="headerlink" href="#id2" title="Permalink to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">x</span> <span class="o">=</span> <span class="n">sn</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="linenos"> 2</span><span class="n">t</span> <span class="o">=</span> <span class="n">sn</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="linenos"> 3</span><span class="n">u</span> <span class="o">=</span> <span class="n">sn</span><span class="o">.</span><span class="n">Functional</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">],</span> <span class="mi">3</span><span class="o">*</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span> <span class="s1">&#39;tanh&#39;</span><span class="p">)</span>
+<span class="linenos"> 4</span><span class="n">alpha</span> <span class="o">=</span> <span class="n">sn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;alpha&quot;</span><span class="p">)</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="n">L1</span> <span class="o">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">diff</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="n">TOL</span> <span class="o">=</span> <span class="mf">0.011</span>
+<span class="linenos"> 9</span><span class="n">TOLT</span><span class="o">=</span> <span class="mf">0.0011</span>
+<span class="linenos">10</span><span class="n">C1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sign</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">TOLT</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">sin</span><span class="p">(</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
+<span class="linenos">11</span><span class="n">C2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="mi">0</span><span class="o">+</span><span class="n">TOL</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="linenos">12</span><span class="n">C3</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">TOL</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="linenos">13</span><span class="n">C4</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">sign</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mf">0.049</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sign</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mf">0.051</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mf">0.49</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mf">0.51</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span><span class="o">-</span><span class="mf">0.8623931</span><span class="p">)</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="n">m</span> <span class="o">=</span> <span class="n">sn</span><span class="o">.</span><span class="n">SciModel</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">],</span> <span class="p">[</span><span class="n">L1</span><span class="p">,</span> <span class="n">C1</span><span class="p">,</span> <span class="n">C2</span><span class="p">,</span> <span class="n">C3</span><span class="p">,</span> <span class="n">C4</span><span class="p">],</span> <span class="s1">&#39;mse&#39;</span><span class="p">,</span> <span class="s1">&#39;Adam&#39;</span><span class="p">)</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="n">x_data</span><span class="p">,</span> <span class="n">t_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span>
+<span class="linenos">18</span>    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">),</span>
+<span class="linenos">19</span>    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+<span class="linenos">20</span><span class="p">)</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span><span class="n">h</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">train</span><span class="p">([</span><span class="n">x_data</span><span class="p">,</span> <span class="n">t_data</span><span class="p">],</span> <span class="mi">5</span><span class="o">*</span><span class="p">[</span><span class="s1">&#39;zero&#39;</span><span class="p">],</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.002</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">1200</span><span class="p">,</span>
+<span class="linenos">23</span>    <span class="n">adaptive_weights</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;method&#39;</span><span class="p">:</span><span class="s1">&#39;NTK&#39;</span><span class="p">,</span> <span class="s1">&#39;freq&#39;</span><span class="p">:</span><span class="mi">100</span><span class="p">})</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="c1"># Test</span>
+<span class="linenos">26</span><span class="n">nx</span><span class="p">,</span> <span class="n">nt</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">10</span>
+<span class="linenos">27</span><span class="n">x_test</span><span class="p">,</span> <span class="n">t_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span>
+<span class="linenos">28</span>    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">,</span> <span class="n">nx</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span>
+<span class="linenos">29</span>    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">nt</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">30</span><span class="p">)</span>
+<span class="linenos">31</span><span class="n">u_pred</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="p">[</span><span class="n">x_test</span><span class="p">,</span> <span class="n">t_test</span><span class="p">])</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span><span class="nb">print</span><span class="p">(</span><span class="n">alpha</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Очигледно је да је код готово исти као претходни у коме се решава директни проблем, јер је и методологија за решавање директних и инверзних проблема код ФПНМ идентична. Једина разлика је у поставци. Линија 4 поставља <span class="math notranslate nohighlight">\(\alpha\)</span> као непознати параметар и даје му почетну вредност. У линији 13 се поставља додатни гранични услов у тачки <code class="docutils literal notranslate"><span class="pre">u(x=0.4,t=0.05)</span></code>, који ће постати још једна компонента композитне функције губитка која се формира у линији 15. Вредност непознатог параметра се штампа у последњој линији и у нашем тесту износи око 0,308, што је довољно блиско реалној вредности од 0,3. Потврда задовољавајућег решења инверзног проблема приказана је и графички на <a class="reference internal" href="#heat-inv1"><span class="std std-numref">Сл. 9</span></a>.</p>
+<figure class="align-default" id="id3">
+<span id="heat-inv1"></span><a class="reference internal image-reference" href="../_images/heat-inv.png"><img alt="../_images/heat-inv.png" src="../_images/heat-inv.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 9 </span><span class="caption-text">Поље температуре дуж штапа у тренутку <span class="math notranslate nohighlight">\(t=0,1\)</span> добијено решавањем инверзног проблема</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="2-stap.html" class="btn btn-neutral float-left" title="Једнодимензиони директни проблем" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="4-stefan.html" class="btn btn-neutral float-right" title="Стефанов проблем у моделима топљења" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2023, Милош Ивановић.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

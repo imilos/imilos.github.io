@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="sr" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Филтрација подземних вода &mdash; документација Физички поткрепљене неуронске мреже - Практикум прво</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Индекс" href="../genindex.html" />
+    <link rel="search" title="Претрага" href="../search.html" />
+    <link rel="next" title="Пропагација поплавног таласа у отвореном каналу" href="3-poplavni.html" />
+    <link rel="prev" title="Увод" href="1-uvod.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Физички поткрепљене неуронске мреже - Практикум
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Садржај</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../uvod/index.html">Увод</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toplota/index.html">Провођење топлоте</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oscilacije/index.html">Механичке осцилације</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Хидрологија</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1-uvod.html">Увод</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Филтрација подземних вода</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Стационарно струјање кроз порозну средину</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Стационарно струјање кроз порозну средину са слободном површином</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="3-poplavni.html">Пропагација поплавног таласа у отвореном каналу</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../akustika/index.html">Акустика</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misici/index.html">Моделовање мишића</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solari/index.html">Моделовање производње соларних електрана</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../literatura/literatura.html">Литература</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Физички поткрепљене неуронске мреже - Практикум</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Хидрологија</a></li>
+      <li class="breadcrumb-item active">Филтрација подземних вода</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/hidrologija/2-podzemne.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="podzemne">
+<span id="id1"></span><h1>Филтрација подземних вода<a class="headerlink" href="#podzemne" title="Permalink to this heading"></a></h1>
+<p>Основна величина од које се полази у теорији струјања течности кроз порозно тло је потенцијал <span class="math notranslate nohighlight">\(\phi\)</span> дефинисан као</p>
+<div class="math notranslate nohighlight">
+\[\phi = \frac{p}{\gamma} + h,\]</div>
+<p>где је <span class="math notranslate nohighlight">\(p\)</span> притисак течности, <span class="math notranslate nohighlight">\(\gamma\)</span> специфична тежина, а <span class="math notranslate nohighlight">\(h\)</span> висина у вертикалном правцу мерена у односу на изабрану референтну раван. Брзина течности <span class="math notranslate nohighlight">\(\mathbf{q}\)</span>, позната и као Дарсијева брзина, представља запремину течности која прође у јединици времена кроз јединичну површину порозне средине. Она се може изразити помоћу потенцијала <span class="math notranslate nohighlight">\(\phi\)</span> релацијом која се зове Дарсијев закон:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{q} = -\mathbf{K} \nabla \phi,\]</div>
+<p>где је <span class="math notranslate nohighlight">\(\mathbf{K}\)</span> матрица пермеабилности која за ортотропни материал има облик</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{K} =
+\begin{bmatrix}
+k_x &amp; 0 &amp; 0 \\
+0 &amp; k_y &amp; 0 \\
+0 &amp; 0 &amp; k_z
+\end{bmatrix},\end{split}\]</div>
+<p>где су <span class="math notranslate nohighlight">\(k_x\)</span>, <span class="math notranslate nohighlight">\(k_y\)</span> и <span class="math notranslate nohighlight">\(k_z\)</span> коефицијенти пермеабилости у  одговарајућим правцима. Kомпонентни облик једначине је према томе:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}q_x = -k_x \frac{\partial \phi}{\partial x}, \\
+q_y = -k_y \frac{\partial \phi}{\partial y}, \\
+q_z = -k_z \frac{\partial \phi}{\partial z}.\end{split}\]</div>
+<p>Сада у систем уводимо једначину континуитета. У случају стационарног струјања нестишљивог флуида, каква је вода, једначина континуитета има облик</p>
+<div class="math notranslate nohighlight">
+\[\nabla^T \mathbf{q} = 0,\]</div>
+<p>или уз коришћење Дарсијевог закона</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial}{\partial x}\left( k_x \frac{\partial \phi}{\partial x} \right) +
+\frac{\partial}{\partial y}\left( k_y \frac{\partial \phi}{\partial y} \right) +
+\frac{\partial}{\partial z}\left( k_z \frac{\partial \phi}{\partial z} \right) = 0\]</div>
+<p>У случају када се промена коефицијената <span class="math notranslate nohighlight">\(k_x, k_y, k_z\)</span> са координатама може занемарити, што је најчешћи случај, једначина се своди на</p>
+<div class="math notranslate nohighlight">
+\[k_x \frac{\partial^2\phi}{\partial x^2} +
+k_y \frac{\partial^2\phi}{\partial y^2} +
+k_z \frac{\partial^2\phi}{\partial z^2} = 0\]</div>
+<p>Коначно, ако постоји извор и/или понор, за стационарне услове, <strong>хидродинамичка једначина</strong> има следећи облик:</p>
+<div class="math notranslate nohighlight" id="equation-eq-hidrodinamicka">
+<span class="eqno">(26)<a class="headerlink" href="#equation-eq-hidrodinamicka" title="Permalink to this equation"></a></span>\[k_x \frac{\partial^2\phi}{\partial x^2} +
+k_y \frac{\partial^2\phi}{\partial y^2} +
+k_z \frac{\partial^2\phi}{\partial z^2} + \bar{Q}= 0\]</div>
+<p>где је <span class="math notranslate nohighlight">\(\bar{Q}\)</span> запремински флукс (извор или понор као количина течности по јединици запремине порозне средине). Гранични услови који се срећу у решавању проблема струјања кроз порозну средину описаног горњим једначинама приказани су на <a class="reference internal" href="#filtracija-granicni-uslovi"><span class="std std-numref">Сл. 25</span></a>.</p>
+<figure class="align-default" id="id7">
+<span id="filtracija-granicni-uslovi"></span><a class="reference internal image-reference" href="../_images/hidrologija-bc.png"><img alt="../_images/hidrologija-bc.png" src="../_images/hidrologija-bc.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 25 </span><span class="caption-text">Различити гранични услови код проблема филтрације у две димензије.</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Они могу бити:</p>
+<ol class="arabic">
+<li><dl>
+<dt><strong>задат потенцијал</strong></dt><dd><div class="math notranslate nohighlight">
+\[\phi = \bar{\phi}, \qquad \mid \Gamma_1\]</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>задат површински проток (флукс)</strong></dt><dd><div class="math notranslate nohighlight">
+\[q_n = \bar{q} \qquad \mid \Gamma_2\]</div>
+</dd>
+</dl>
+</li>
+<li><p><strong>слободна површина</strong></p>
+<blockquote>
+<div><div class="math notranslate nohighlight" id="equation-eq-uslov-sp">
+<span class="eqno">(27)<a class="headerlink" href="#equation-eq-uslov-sp" title="Permalink to this equation"></a></span>\[p=0, \, \phi=y, \, \frac{\partial \phi}{\partial n}=0 \qquad \mid  \Gamma_3\]</div>
+</div></blockquote>
+</li>
+</ol>
+<p>Приметимо да је на слободној површини <span class="math notranslate nohighlight">\(\phi=y\)</span>. Пошто се облик слободне површине не зна, то је њено одређивање посебан задатак у овој области. И овај проблем ћемо покушати да покријемо ФПНМ методом.</p>
+<section id="id2">
+<h2>Стационарно струјање кроз порозну средину<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<p>Дводимензионални стационарни ток кроз порозни медијум је регулисан константном разликом потенцијала на две површине. Проток се јавља између два непропусна слоја у правоугаоној геометрији димензија <em>2m x 2m</em>, као на <a class="reference internal" href="#hidrologija-bc-bez-sp"><span class="std std-numref">Сл. 26</span></a>.</p>
+<figure class="align-default" id="id8">
+<span id="hidrologija-bc-bez-sp"></span><a class="reference internal image-reference" href="../_images/hidrologija-bc-bez-sp.png"><img alt="../_images/hidrologija-bc-bez-sp.png" src="../_images/hidrologija-bc-bez-sp.png" style="width: 60%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 26 </span><span class="caption-text">Поставка проблема стационарног струјања кроз порозну средину без слободне површине</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Имплементација проблема је једноставна и њени најважнији делови се налазе на следећем листингу.</p>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-number">Листинг 6 </span><span class="caption-text">Решење проблема филтрације без слободне површине у 2Д коришћењем SCIANN библиотеке</span><a class="headerlink" href="#id9" title="Permalink to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># Osnovni grid</span>
+<span class="linenos"> 2</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span>
+<span class="linenos"> 3</span>    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">201</span><span class="p">),</span>
+<span class="linenos"> 4</span>    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">201</span><span class="p">)</span>
+<span class="linenos"> 5</span><span class="p">)</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="c1"># Modeluje se phi(x,y)</span>
+<span class="linenos"> 8</span><span class="n">x</span> <span class="o">=</span> <span class="n">sn</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="linenos"> 9</span><span class="n">y</span> <span class="o">=</span> <span class="n">sn</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="linenos">10</span><span class="n">phi</span> <span class="o">=</span> <span class="n">sn</span><span class="o">.</span><span class="n">Functional</span><span class="p">(</span><span class="s1">&#39;phi&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">],</span> <span class="mi">4</span><span class="o">*</span><span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="s1">&#39;sigmoid&#39;</span><span class="p">)</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="c1"># %%</span>
+<span class="linenos">13</span><span class="n">k</span> <span class="o">=</span> <span class="mf">1.</span><span class="n">е</span><span class="o">-</span><span class="mi">5</span>
+<span class="linenos">14</span><span class="n">TOL</span> <span class="o">=</span> <span class="mf">0.015</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="c1"># Osnovna jednacina</span>
+<span class="linenos">17</span><span class="n">fun1</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="n">diff</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">diff</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="c1"># Dirihleovi granicni uslovi</span>
+<span class="linenos">20</span><span class="n">C1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="mi">0</span><span class="o">+</span><span class="n">TOL</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="n">phi</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="linenos">21</span><span class="n">C2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="mi">2</span><span class="o">-</span><span class="n">TOL</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="n">phi</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="c1"># Njumanovi granicni uslovi</span>
+<span class="linenos">24</span><span class="n">N1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sign</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="p">(</span><span class="mi">0</span><span class="o">+</span><span class="n">TOL</span><span class="p">)))</span> <span class="o">*</span> <span class="n">diff</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="linenos">25</span><span class="n">N2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">sign</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="p">(</span><span class="mi">2</span><span class="o">-</span><span class="n">TOL</span><span class="p">)))</span> <span class="o">*</span> <span class="n">diff</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span><span class="c1"># FZNN model</span>
+<span class="linenos">28</span><span class="n">m2</span> <span class="o">=</span> <span class="n">sn</span><span class="o">.</span><span class="n">SciModel</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">],</span> <span class="p">[</span><span class="n">fun1</span><span class="p">,</span> <span class="n">C1</span><span class="p">,</span> <span class="n">C2</span><span class="p">,</span> <span class="n">N1</span><span class="p">,</span> <span class="n">N2</span><span class="p">],</span>  <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;Adam&#39;</span><span class="p">)</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span><span class="c1"># Trening</span>
+<span class="linenos">31</span><span class="n">pinn_model</span> <span class="o">=</span> <span class="n">m2</span><span class="o">.</span><span class="n">train</span><span class="p">([</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">],</span> <span class="mi">5</span><span class="o">*</span><span class="p">[</span><span class="s1">&#39;zero&#39;</span><span class="p">],</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">stop_loss_value</span><span class="o">=</span><span class="mf">1E-15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Са свим овим поставкама смо се мање-више већ сретали, осим што до сада нисмо имали 2Д стационарни проблем. Постављамо равномерни грид колокационих тачака у димензијама домена (<em>2m x 2m</em>), затим дефинишем функционал <span class="math notranslate nohighlight">\(\Phi(x,y)\)</span> и диференцијалну једначину проблема. Приметимо да решење уопште не би требало да зависи од коефицијента <span class="math notranslate nohighlight">\(k\)</span>. Следећи корак је поставка Дирихелових граничних услова на левом (<span class="math notranslate nohighlight">\(\Phi_1=2m\)</span>) и на десном (<span class="math notranslate nohighlight">\(\Phi_1=1m\)</span>) крају домена, тј. на вертикалама <span class="math notranslate nohighlight">\(x_1=0m\)</span> и <span class="math notranslate nohighlight">\(x=2m\)</span>, респективно:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">C1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="mi">0</span><span class="o">+</span><span class="n">TOL</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="n">phi</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">C2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="mi">2</span><span class="o">-</span><span class="n">TOL</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="n">phi</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Недостају само још Нојманови гранични услови који јамче да су доња (<span class="math notranslate nohighlight">\(y=0\)</span>) и горња (<span class="math notranslate nohighlight">\(y=2m\)</span>) површина непропусне, тј. да је извод потенцијала по <span class="math notranslate nohighlight">\(y\)</span> једнак нули:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">N1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sign</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="p">(</span><span class="mi">0</span><span class="o">+</span><span class="n">TOL</span><span class="p">)))</span> <span class="o">*</span> <span class="n">diff</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">N2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">sign</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="p">(</span><span class="mi">2</span><span class="o">-</span><span class="n">TOL</span><span class="p">)))</span> <span class="o">*</span> <span class="n">diff</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Када се постави проблем, решење се назире већ за неколико десетина епоха тренирања. Аналитичко решење за потенцијал је, према <span id="id3">Bear [<a class="reference internal" href="../literatura/literatura.html#id17" title="Jacob Bear. Hydraulics of groundwater. Courier Corporation, 2012.">Bea12</a>]</span>:</p>
+<div class="math notranslate nohighlight">
+\[\Phi = \Phi_1 - \frac{\Phi_1-\Phi_2}{L} (x-x_1)\]</div>
+<p>где је <span class="math notranslate nohighlight">\(L=x_2-x_1\)</span>. Дакле, потенцијално поље је једнолично у односу на <span class="math notranslate nohighlight">\(Y\)</span> координату, док је градијент потенцијала константан у правцу <span class="math notranslate nohighlight">\(X\)</span> осе.</p>
+<figure class="align-default" id="id10">
+<span id="bez-slobodne-povrsine-res1"></span><a class="reference internal image-reference" href="../_images/2d-filtracija-bez-sp1.png"><img alt="../_images/2d-filtracija-bez-sp1.png" src="../_images/2d-filtracija-bez-sp1.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 27 </span><span class="caption-text">ФПНМ решење потенцијала дуж <span class="math notranslate nohighlight">\(X\)</span> осе за 2Д случај филтрације без слободне површине.</span><a class="headerlink" href="#id10" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Поређење аналитичког и ФПНМ решења је приказано на <a class="reference internal" href="#bez-slobodne-povrsine-res1"><span class="std std-numref">Сл. 27</span></a>, а потенцијално поље је приказано на <a class="reference internal" href="#bez-slobodne-povrsine-res2"><span class="std std-numref">Сл. 28</span></a>. Униформност потенцијалног поља у <span class="math notranslate nohighlight">\(Y\)</span> смеру, показује тачност 2Д ФПНМ решења за овај стационарни проблем.</p>
+<figure class="align-default" id="id11">
+<span id="bez-slobodne-povrsine-res2"></span><a class="reference internal image-reference" href="../_images/2d-filtracija-bez-sp2.png"><img alt="../_images/2d-filtracija-bez-sp2.png" src="../_images/2d-filtracija-bez-sp2.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 28 </span><span class="caption-text">ФПНМ решење поља потенцијала за 2Д случај филтрације без слободне површине.</span><a class="headerlink" href="#id11" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id4">
+<h2>Стационарно струјање кроз порозну средину са слободном површином<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<p>Стационарни ток кроз порозни медијум, са слободном површином је регулисан константном разликом потенцијала на две супротне површине, као што је приказано на <a class="reference internal" href="#hidrologija-bc-sp"><span class="std std-numref">Сл. 29</span></a>. Доња површина је непропусна. Геометријски и материјални подаци, као и гранични услови, такође су дати на <a class="reference internal" href="#hidrologija-bc-sp"><span class="std std-numref">Сл. 29</span></a>.</p>
+<figure class="align-default" id="id12">
+<span id="hidrologija-bc-sp"></span><a class="reference internal image-reference" href="../_images/hidrologija-bc-sp.png"><img alt="../_images/hidrologija-bc-sp.png" src="../_images/hidrologija-bc-sp.png" style="width: 60%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 29 </span><span class="caption-text">Поставка проблема стационарног струјања кроз порозну средину са слободном површином</span><a class="headerlink" href="#id12" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Вредности потенцијала у колокационим тачкама на површини <span class="math notranslate nohighlight">\(x_1=0\)</span> су <span class="math notranslate nohighlight">\(\Phi_1=2m\)</span> док су у тачкама на линији <span class="math notranslate nohighlight">\(x_2=2m\)</span> вредности <span class="math notranslate nohighlight">\(\Phi_2=1m\)</span>. Дакле, и Дирихлеови и Нојманови гранични услови су идентични као и претходни пример који није укључивао постојање слободне површине. Међутим, њено постојање је физички нужно и дефинисано условима <a class="reference internal" href="#equation-eq-uslov-sp">(27)</a>.</p>
+<p>Како бисмо имплементирали овај гранични услов, морамо да израчунамо правац нормале:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">k1</span> <span class="o">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="n">atan</span><span class="p">(</span><span class="n">k1</span><span class="p">)</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">nx</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+<span class="n">ny</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>који ћемо добити тиме што додамо угао <span class="math notranslate nohighlight">\(\frac{\pi}{2}\)</span> правцу тангенте на <code class="docutils literal notranslate"><span class="pre">phi</span></code>, коју израчунавамо захваљујући тривијалној доступности првог извода у ФПНМ методологији. Након тога лако израчунавамо компоненте нормале <code class="docutils literal notranslate"><span class="pre">nx</span></code> и <code class="docutils literal notranslate"><span class="pre">ny</span></code>. Гранични услов слободне површине постављамо на исти начин као и раније када смо користили библиотеку SCIANN, тј. у виду коњункције се наводи где услов важи и шта у том делу домена важи. Међутим, овог пута немамо строго дефинисане координате, јер положај слободне површине не знамо. Оно што знамо је да је на читавој слободној површини <span class="math notranslate nohighlight">\(\Phi=y\)</span>, па ово наводимо као област важења:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">FS1</span> <span class="o">=</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">phi</span><span class="p">)</span><span class="o">&lt;</span><span class="mf">0.009</span><span class="p">)</span> <span class="o">*</span> <span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="n">diff</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">nx</span> <span class="o">+</span> <span class="n">diff</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="o">*</span><span class="n">ny</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>док услов непостојања протока кроз слободну површину <span class="math notranslate nohighlight">\(\frac{\partial \Phi}{\partial n} = \frac{\partial \Phi}{\partial x} n_x + \frac{\partial \Phi}{\partial y} n_y=0\)</span> наводимо као главну компоненту.</p>
+<p>Потребно је обезбедити и довољан број колокационих тачака да би се исправно испратио облик слободне површине. То ћемо обезбедити тако што у делу домена у коме очекујемо појаву слободне површине концентрацију колокационих тачака повећамо (у нашој имплементацији) четири пута. Како је у питању чисто техничко решење, овде се тиме нећемо бавити, већ читаоца упућујемо на комплетан пример.</p>
+<p>Аналитичко решење за потенцијал за овај једноставан проблем се по <span id="id5">Bear [<a class="reference internal" href="../literatura/literatura.html#id17" title="Jacob Bear. Hydraulics of groundwater. Courier Corporation, 2012.">Bea12</a>]</span>, може се написати у облику</p>
+<div class="math notranslate nohighlight">
+\[\Phi = \sqrt{\Phi_1^2 - 2B (x-x_1)},\]</div>
+<p>где је</p>
+<div class="math notranslate nohighlight">
+\[B = \frac{\Phi_1^2-\Phi_2^2}{2L}\]</div>
+<p>и <span class="math notranslate nohighlight">\(L=x_2-x_1\)</span>. Дакле, као и код проблема без слободне површине, потенцијално поље је униформно у односу на <span class="math notranslate nohighlight">\(Y\)</span> координату, тј. не зависи од ње под условом да се налазимо испод слободне површине. Поређење ФПНМ решења са аналитичким решењем може се видети на <a class="reference internal" href="#slobodna-povrsina-res1"><span class="std std-numref">Сл. 30</span></a>. Поље потенцијала је приказано на <a class="reference internal" href="#slobodn-povrsin-res2"><span class="std std-numref">Сл. 31</span></a>.</p>
+<figure class="align-default" id="id13">
+<span id="slobodna-povrsina-res1"></span><a class="reference internal image-reference" href="../_images/2d-filtracija-sp1.png"><img alt="../_images/2d-filtracija-sp1.png" src="../_images/2d-filtracija-sp1.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 30 </span><span class="caption-text">ФПНМ решење потенцијала дуж <span class="math notranslate nohighlight">\(X\)</span> осе за 2Д случај филтрације са слободном површином.</span><a class="headerlink" href="#id13" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id14">
+<span id="slobodn-povrsin-res2"></span><a class="reference internal image-reference" href="../_images/2d-filtracija-sp2.png"><img alt="../_images/2d-filtracija-sp2.png" src="../_images/2d-filtracija-sp2.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 31 </span><span class="caption-text">ФПНМ решење поља потенцијала за 2Д случај филтрације са слободном површином.</span><a class="headerlink" href="#id14" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Може се приметити релативно добро слагање ФПНМ решења са аналитичким решењем, као и очигкледна разлика распореда поља потенцијала у односу на случај без слободне површине приказан на <a class="reference internal" href="#bez-slobodne-povrsine-res2"><span class="std std-numref">Сл. 28</span></a>. Ако пак упоредимо приступ решавању проблема слободне површине ФПНМ методом и класичном методом коначних елемената код <span id="id6">Kojić [<a class="reference internal" href="../literatura/literatura.html#id18" title="Miloš Kojić. Metod konačnih elemenata: Linearna analiza. I. Mašinski fakultet, 1998.">Kojic98</a>]</span>, можемо приметити да је ФПНМ приступ једноставнији. Разлог томе је што се код ФПНМ не захтева никакав посебан нумерички третман и употреба нумеричких претпоставки, већ се физика проблема директним путем преводи у ФПНМ гранични услов.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="1-uvod.html" class="btn btn-neutral float-left" title="Увод" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="3-poplavni.html" class="btn btn-neutral float-right" title="Пропагација поплавног таласа у отвореном каналу" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2023, Милош Ивановић.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

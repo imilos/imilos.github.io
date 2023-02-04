@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="sr" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Решавање на домену облика квадрата &mdash; документација Физички поткрепљене неуронске мреже - Практикум прво</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Индекс" href="../genindex.html" />
+    <link rel="search" title="Претрага" href="../search.html" />
+    <link rel="next" title="Решавање на домену облика квадрата са шупљином" href="3-rupa.html" />
+    <link rel="prev" title="Увод" href="1-uvod.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Физички поткрепљене неуронске мреже - Практикум
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Садржај</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../uvod/index.html">Увод</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toplota/index.html">Провођење топлоте</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oscilacije/index.html">Механичке осцилације</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hidrologija/index.html">Хидрологија</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Акустика</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1-uvod.html">Увод</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Решавање на домену облика квадрата</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Имплементација</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Резултати</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="3-rupa.html">Решавање на домену облика квадрата са шупљином</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4-socivo.html">Дводимензиони проблем са сочивом</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../misici/index.html">Моделовање мишића</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solari/index.html">Моделовање производње соларних електрана</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../literatura/literatura.html">Литература</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Физички поткрепљене неуронске мреже - Практикум</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Акустика</a></li>
+      <li class="breadcrumb-item active">Решавање на домену облика квадрата</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/akustika/2-ravan.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="akustika-ravan">
+<span id="id1"></span><h1>Решавање на домену облика квадрата<a class="headerlink" href="#akustika-ravan" title="Permalink to this heading"></a></h1>
+<p>Кренућемо од најједноставнијег дводимензионог случаја стојећег таласа у акустици. За таласни број <span class="math notranslate nohighlight">\(k_0=2 \pi n\)</span> за <span class="math notranslate nohighlight">\(n=2\)</span>, треба решити Хелмхолцову (<em>Helmholtz</em>) једначину облика:</p>
+<div class="math notranslate nohighlight">
+\[-\frac{\partial^2 u}{\partial x^2} - \frac{\partial^2 u}{\partial y^2} - k_0^2 u = f, \quad \mid \Omega=[0,1]^2,\]</div>
+<p>уз Дирихлеове граничне услове</p>
+<div class="math notranslate nohighlight">
+\[u(x,y)=0, \quad (x,y) \in \partial \Omega\]</div>
+<p>приказане на <a class="reference internal" href="#akustika-2d"><span class="std std-numref">Сл. 37</span></a> и члан који специфицира извор <span class="math notranslate nohighlight">\(f(x,y)=k_0^2 \sin(k_0x) \sin(k_0 y)\)</span>.</p>
+<figure class="align-default" id="id5">
+<span id="akustika-2d"></span><a class="reference internal image-reference" href="../_images/akustika1.png"><img alt="../_images/akustika1.png" src="../_images/akustika1.png" style="width: 60%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 37 </span><span class="caption-text">Поставка проблема и гранични услови.</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Постоји аналитичко решење овог проблема и оно гласи:</p>
+<div class="math notranslate nohighlight">
+\[u(x,y) = \sin(k_0 x) \sin(k_0 y).\]</div>
+<p>За више детаља у погледу теоријске позадине диференцијалне једначине и граничних услова читалац може консултовати <span id="id2">Ihlenburg [<a class="reference internal" href="../literatura/literatura.html#id23" title="Frank Ihlenburg. Finite element analysis of acoustic scattering. Springer, 1998.">Ihl98</a>]</span>. Решење методом коначних елемената (МКЕ) је такође доступно у оквиру <a class="reference external" href="https://github.com/FEniCS/dolfinx/blob/main/python/demo/demo_helmholtz.py">Dolfinx туторијала</a>.</p>
+<section id="id3">
+<h2>Имплементација<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<p>Решење директног проблема приказано је на следећем листингу.</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-number">Листинг 8 </span><span class="caption-text">Решење проблема простирања стојећег таласа у 2Д коришћењем DeepXDE библиотеке</span><a class="headerlink" href="#id6" title="Permalink to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">deepxde</span> <span class="k">as</span> <span class="nn">dde</span>
+<span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="c1"># Frekvencija</span>
+<span class="linenos"> 5</span><span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="n">precision_train</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="linenos"> 8</span><span class="n">precision_test</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="linenos"> 9</span><span class="n">weights</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="linenos">10</span><span class="n">iterations</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="linenos">11</span><span class="n">learning_rate</span><span class="p">,</span> <span class="n">num_dense_layers</span><span class="p">,</span> <span class="n">num_dense_nodes</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="mf">1e-3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="s2">&quot;sin&quot;</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="c1"># Uvezi sinus</span>
+<span class="linenos">14</span><span class="kn">from</span> <span class="nn">deepxde.backend</span> <span class="kn">import</span> <span class="n">tf</span>
+<span class="linenos">15</span><span class="n">sin</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">sin</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="c1"># Osnovna PDE</span>
+<span class="linenos">18</span><span class="k">def</span> <span class="nf">pde</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+<span class="linenos">19</span>    <span class="n">du_xx</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">hessian</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos">20</span>    <span class="n">du_yy</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">hessian</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>    <span class="n">f</span> <span class="o">=</span> <span class="n">k0</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">k0</span> <span class="o">*</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">k0</span> <span class="o">*</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+<span class="linenos">23</span>    <span class="k">return</span> <span class="o">-</span><span class="n">du_xx</span> <span class="o">-</span> <span class="n">du_yy</span> <span class="o">-</span> <span class="n">k0</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">u</span> <span class="o">-</span> <span class="n">f</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="c1"># Egzaktno resenje</span>
+<span class="linenos">26</span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="linenos">27</span>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">k0</span> <span class="o">*</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">k0</span> <span class="o">*</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span><span class="c1"># Da li je kol. tacka na granici?</span>
+<span class="linenos">30</span><span class="k">def</span> <span class="nf">boundary</span><span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">on_boundary</span><span class="p">):</span>
+<span class="linenos">31</span>    <span class="k">return</span> <span class="n">on_boundary</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span><span class="c1"># Geometrija jedinicnog kvadrata</span>
+<span class="linenos">34</span><span class="n">geom</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="linenos">35</span><span class="c1"># Talasni broj</span>
+<span class="linenos">36</span><span class="n">k0</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">n</span>
+<span class="linenos">37</span><span class="c1"># Talasna duzina</span>
+<span class="linenos">38</span><span class="n">wave_len</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">n</span>
+<span class="linenos">39</span>
+<span class="linenos">40</span><span class="n">hx_train</span> <span class="o">=</span> <span class="n">wave_len</span> <span class="o">/</span> <span class="n">precision_train</span>
+<span class="linenos">41</span><span class="n">nx_train</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">hx_train</span><span class="p">)</span>
+<span class="linenos">42</span>
+<span class="linenos">43</span><span class="n">hx_test</span> <span class="o">=</span> <span class="n">wave_len</span> <span class="o">/</span> <span class="n">precision_test</span>
+<span class="linenos">44</span><span class="n">nx_test</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">hx_test</span><span class="p">)</span>
+<span class="linenos">45</span>
+<span class="linenos">46</span><span class="c1"># Dirihleov granicni uslov y=0 na granicama</span>
+<span class="linenos">47</span><span class="n">bc</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">icbc</span><span class="o">.</span><span class="n">DirichletBC</span><span class="p">(</span><span class="n">geom</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">boundary</span><span class="p">)</span>
+<span class="linenos">48</span>
+<span class="linenos">49</span><span class="n">data</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">PDE</span><span class="p">(</span>
+<span class="linenos">50</span>    <span class="n">geom</span><span class="p">,</span>
+<span class="linenos">51</span>    <span class="n">pde</span><span class="p">,</span>
+<span class="linenos">52</span>    <span class="n">bc</span><span class="p">,</span>
+<span class="linenos">53</span>    <span class="n">num_domain</span><span class="o">=</span><span class="n">nx_train</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span>
+<span class="linenos">54</span>    <span class="n">num_boundary</span><span class="o">=</span><span class="mi">4</span> <span class="o">*</span> <span class="n">nx_train</span><span class="p">,</span>
+<span class="linenos">55</span>    <span class="n">solution</span><span class="o">=</span><span class="n">func</span><span class="p">,</span>
+<span class="linenos">56</span>    <span class="n">num_test</span><span class="o">=</span><span class="n">nx_test</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span>
+<span class="linenos">57</span><span class="p">)</span>
+<span class="linenos">58</span>
+<span class="linenos">59</span><span class="c1"># Mreza i model</span>
+<span class="linenos">60</span><span class="n">net</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">FNN</span><span class="p">([</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">num_dense_nodes</span><span class="p">]</span> <span class="o">*</span> <span class="n">num_dense_layers</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">activation</span><span class="p">,</span> <span class="s2">&quot;Glorot uniform&quot;</span><span class="p">)</span>
+<span class="linenos">61</span><span class="n">model</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">net</span><span class="p">)</span>
+<span class="linenos">62</span>
+<span class="linenos">63</span><span class="c1"># Forsiraj vece tezine za granicne uslove nego za unutrasnjost domena</span>
+<span class="linenos">64</span><span class="n">loss_weights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">weights</span><span class="p">]</span>
+<span class="linenos">65</span>
+<span class="linenos">66</span><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;adam&quot;</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;l2 relative error&quot;</span><span class="p">],</span> <span class="n">loss_weights</span><span class="o">=</span><span class="n">loss_weights</span><span class="p">)</span>
+<span class="linenos">67</span>
+<span class="linenos">68</span><span class="n">losshistory</span><span class="p">,</span> <span class="n">train_state</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">iterations</span><span class="o">=</span><span class="n">iterations</span><span class="p">)</span>
+<span class="linenos">69</span><span class="n">dde</span><span class="o">.</span><span class="n">saveplot</span><span class="p">(</span><span class="n">losshistory</span><span class="p">,</span> <span class="n">train_state</span><span class="p">,</span> <span class="n">issave</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">isplot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Након стандардног импорта одговарајућих модула, почињемо спецификацијом општих параметара. Овај пример има пар специфичности у односу на остале. Наиме, да би се успешно моделовале таласне појаве помоћу ФПНМ, густина колокационих тачака мора да буде директно пропорционална фреквенцији. Што је виша фреквенција <code class="docutils literal notranslate"><span class="pre">n</span></code>, мања је таласна дужина <code class="docutils literal notranslate"><span class="pre">wave_len</span></code>, па је потребно више колокационих тачака да покрије домен. Овде смо узели 10 колокационих тачака по таласној дужини током тренинга и 30 тачака по таласној дужини у тест скупу.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Frekvencija talasa</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">precision_train</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">precision_test</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">learning_rate</span><span class="p">,</span> <span class="n">num_dense_layers</span><span class="p">,</span> <span class="n">num_dense_nodes</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="mf">1e-3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="s2">&quot;sin&quot;</span>
+</pre></div>
+</div>
+<p>Такође, видимо да користимо архитектуру са мањим бројем слојева, али са више неурона по слоју, као и активациону функцију <span class="math notranslate nohighlight">\(\sin(x)\)</span> која би требало да буде погоднија за опонашање таласних феномена.</p>
+<p>Следи спецификација саме парцијалне диференцијалне једначине у облику функције губитка како смо то већ навикли:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pde</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+    <span class="n">du_xx</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">hessian</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">du_yy</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">hessian</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">f</span> <span class="o">=</span> <span class="n">k0</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">k0</span> <span class="o">*</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">k0</span> <span class="o">*</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">du_xx</span> <span class="o">-</span> <span class="n">du_yy</span> <span class="o">-</span> <span class="n">k0</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">u</span> <span class="o">-</span> <span class="n">f</span>
+</pre></div>
+</div>
+<p>Овде користимо услужну функцију <code class="docutils literal notranslate"><span class="pre">dde.grad.hessian</span></code> одабиром координате која се диференцира и којом се диференцира. У овом примеру су гранични услови елементарни, па их овде нећемо посебно наводити.</p>
+<p>Геометрија, таласни број <span class="math notranslate nohighlight">\(k_0=2 \pi \nu\)</span> и таласна дужина <span class="math notranslate nohighlight">\(\lambda=\frac{1}{\nu}\)</span> дају се као:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">geom</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">k0</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">n</span>
+<span class="n">wave_len</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">n</span>
+</pre></div>
+</div>
+<p>Једина специфичност коју додатно треба нагласити је да понекад треба форсирати поштовање граничних услова тиме што ћемо члану функције губитка који се односи на Дирихлеов гранични услов добити већу тежину у односу на члан који се односи на диференцијалну једначину.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">weights</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">loss_weights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">weights</span><span class="p">]</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;adam&quot;</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;l2 relative error&quot;</span><span class="p">],</span> <span class="n">loss_weights</span><span class="o">=</span><span class="n">loss_weights</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Да би се избегао овај корак који са собом носи експериментисање са различитим вредностима тежинског фактора, гранични услов се код <em>DeepXDE</em> може задавати и дирекнтом трансоформацијом функције губитка, али овде се тиме нећемо бавити.</p>
+</section>
+<section id="id4">
+<h2>Резултати<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<p>Након 10.000 епоха обучавања оптимизационом меотодом <code class="docutils literal notranslate"><span class="pre">Adam</span></code> који је протекао као што је приказано на <a class="reference internal" href="#rezultati1-loss"><span class="std std-numref">Сл. 38</span></a>, добијамо стојећи талас чији 3Д приказ можемо видети на <a class="reference internal" href="#rezultati1"><span class="std std-numref">Сл. 39</span></a>.</p>
+<figure class="align-default" id="id7">
+<span id="rezultati1-loss"></span><a class="reference internal image-reference" href="../_images/rezultati1-loss.png"><img alt="../_images/rezultati1-loss.png" src="../_images/rezultati1-loss.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 38 </span><span class="caption-text">Ток обучавања ФПНМ</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id8">
+<span id="rezultati1"></span><a class="reference internal image-reference" href="../_images/rezultati1.png"><img alt="../_images/rezultati1.png" src="../_images/rezultati1.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 39 </span><span class="caption-text">Тродимензиони приказ таласа у домену облика квадрата</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Мера грешке модела RMSE (<em>Root Mean Squared Error</em>) износи <span class="math notranslate nohighlight">\(7,98 \cdot 10^{-2}\)</span>. Уз обраћање посебне пажње на форсирање граничних услова, затим архитектуру ФПНМ и најзад тип активационе функције, успели смо да добијемо прилично добро решење. Читалац може самостално да проба како би промена фреквенције (а самим тим и таласне дужине), густине колокационих тачака, архитектуре, утицала на процес обучавања модела.</p>
+<p>Овде можемо дати и кратку препоруку <strong>како приступити моделовању сложенијих појава</strong>, са сложенијом геометријом и комплекснијим граничним условима. Пошто ФПНМ решавање зависи од већег броја хипер-параметара, препорука је да се прво реши до краја поједностављен проблем базиран на истој диференцијалној једначини, али са једноставнијом геометријом и граничним условима. Када се стекне слика о томе која комбинација хипер-параметара води до конвергенције решења, онда је лакше приступити главном, комплексном проблему. С друге стране, постоји неколико алата који претрагу хипер-параметара чине ефикаснијом, као већ поменути <a class="reference external" href="https://blackfox.ai">BlackFox</a> који користи дистрибуирани генетски алгоритам.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="1-uvod.html" class="btn btn-neutral float-left" title="Увод" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="3-rupa.html" class="btn btn-neutral float-right" title="Решавање на домену облика квадрата са шупљином" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2023, Милош Ивановић.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

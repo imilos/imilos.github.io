@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="sr" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Стефанов проблем у моделима топљења &mdash; документација Физички поткрепљене неуронске мреже - Практикум прво</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Индекс" href="../genindex.html" />
+    <link rel="search" title="Претрага" href="../search.html" />
+    <link rel="next" title="Механичке осцилације" href="../oscilacije/index.html" />
+    <link rel="prev" title="Једнодимензиони инверзни проблем" href="3-stap-inv.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Физички поткрепљене неуронске мреже - Практикум
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Садржај</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../uvod/index.html">Увод</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Провођење топлоте</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1-uvod.html">Једначина провођења топлоте</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-stap.html">Једнодимензиони директни проблем</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-stap-inv.html">Једнодимензиони инверзни проблем</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Стефанов проблем у моделима топљења</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Конструкција функције губитка</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Имплементација</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Инверзни 1-Д Стефанов проблем</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../oscilacije/index.html">Механичке осцилације</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hidrologija/index.html">Хидрологија</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../akustika/index.html">Акустика</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misici/index.html">Моделовање мишића</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solari/index.html">Моделовање производње соларних електрана</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../literatura/literatura.html">Литература</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Физички поткрепљене неуронске мреже - Практикум</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Провођење топлоте</a></li>
+      <li class="breadcrumb-item active">Стефанов проблем у моделима топљења</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/toplota/4-stefan.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="stefan">
+<span id="id1"></span><h1>Стефанов проблем у моделима топљења<a class="headerlink" href="#stefan" title="Permalink to this heading"></a></h1>
+<p>Након што смо успешно решили и директни и инверзни проблем провођења топлоте који је описан једноставном параболичном парцијалном диференцијалном једначином, позабавићемо се мало компликованијом поставком сличног проблема, пре свега имајући у виду граничне услове. Овде ће се они динамички мењати у зависности од градијента температуре. Показаћемо да је заправо овако постављен проблем лакше и природније решавати помоћу ФПНМ-а него помоћу класичних нумеричких метода базираних на мрежи интеграционих тачака (МКЕ, МКР).</p>
+<p>Стефанови проблеми фазних промена имају примену у разним областима науке и инжењерства, када год се фаза посматране супстанце мења између течног, чврстог или гасовитог стања. Претпоставља се да материјал пролази кроз фазну промену са кретањем границе, чији је положај непознат и мора се одредити као део саме нумеричке анализе. Пошто проблеми са померањем граница захтевају решавање топлотне једначине у непознатој области која се такође мора одредити као део решења, они су инхерентно нелинеарни.</p>
+<p>Проблем једнодимензионалне промене фазе могао би се демонстрирати помоћу полубесконачног чврстог тела, као што је танак блок леда који заузима <span class="math notranslate nohighlight">\(0 \le x &lt; \infty\)</span>, на температури очвршћавања. На фиксној граници танког блока леда <span class="math notranslate nohighlight">\(x=0\)</span>, могу да делују различите врсте флукса. У овом примеру користимо исти гранични услов као <span id="id2">Ivanovic <em>et al.</em> [<a class="reference internal" href="../literatura/literatura.html#id14" title="Milos Ivanovic, Marina Svicevic, and Svetislav Savovic. Numerical solution of stefan problem with variable space grid method based on mixed finite element/finite difference approach. International Journal of Numerical Methods for Heat and Fluid Flow, 2017.">ISS17</a>]</span>, <span id="id3">Savovic and Caldwell [<a class="reference internal" href="../literatura/literatura.html#id15" title="Svetislav Savovic and James Caldwell. Numerical solution of stefan problem with time-dependent boundary conditions by variable space grid method. Thermal Science, 13:165-174, 2009.">SC09</a>]</span>, тако се температура при <span class="math notranslate nohighlight">\(x=0\)</span> повећава експоненцијално са временом. Такође, прописујемо да се читава чврста фаза налази на температури топљења. Стога сводимо проблем на одређивање расподела температуре у течној фази у време <span class="math notranslate nohighlight">\(t_0\)</span>, где је <span class="math notranslate nohighlight">\(x &lt; s(t_0)\)</span>, као и положаја границе између фаза <span class="math notranslate nohighlight">\(s(t_0)\)</span>.</p>
+<p>У неком каснијем временском тренутку <span class="math notranslate nohighlight">\(t_1 &gt; t_0\)</span>, покретна граница <span class="math notranslate nohighlight">\(s(t)\)</span> креће се удесно, заузимајући позицију <span class="math notranslate nohighlight">\(s(t_1) &gt; s (t_0) = s_0\)</span>, као што је приказано на <a class="reference internal" href="#stefan1"><span class="std std-numref">Сл. 10</span></a>. Део танког блока леда од позиције <span class="math notranslate nohighlight">\(s(t_0)\)</span> до позиције <span class="math notranslate nohighlight">\(s(t_1)\)</span>, отопио се током временског интервала <span class="math notranslate nohighlight">\((t_0,t_1)\)</span>.</p>
+<figure class="align-default" id="id7">
+<span id="stefan1"></span><a class="reference internal image-reference" href="../_images/stefann.png"><img alt="../_images/stefann.png" src="../_images/stefann.png" style="width: 60%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 10 </span><span class="caption-text">Стефанов проблем у једној димензији. <span class="math notranslate nohighlight">\(s(t)\)</span> означава покретну границу, а <span class="math notranslate nohighlight">\(u(x,t)\)</span> температуру течне фазе (за <span class="math notranslate nohighlight">\(x&lt;s\)</span>).</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Дистрибуција температуре <span class="math notranslate nohighlight">\(u(x,t)\)</span> у региону у коме влада течно стање <span class="math notranslate nohighlight">\(0 \le x \le s(t)\)</span> дата је топлотном једначином:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial u}{\partial t} = \alpha \cdot \frac{\partial^2 u}{\partial x^2},\]</div>
+<p>која може да се напише на следећи начин:</p>
+<div class="math notranslate nohighlight" id="equation-eq-stefan-jednacina">
+<span class="eqno">(14)<a class="headerlink" href="#equation-eq-stefan-jednacina" title="Permalink to this equation"></a></span>\[\frac{\partial u}{\partial t} - \alpha \cdot \frac{\partial^2 u}{\partial x^2} = 0,\]</div>
+<p>под следећим граничним условима:</p>
+<div class="math notranslate nohighlight" id="equation-eq-stefan-granicni">
+<span class="eqno">(15)<a class="headerlink" href="#equation-eq-stefan-granicni" title="Permalink to this equation"></a></span>\[\begin{split}u(x,t) = e^{\alpha t}, \quad x = 0, \quad t &gt; 0  \\
+u(x,t) = 1,\quad x = s(t), \quad t &gt; 0.\end{split}\]</div>
+<p>Овде <span class="math notranslate nohighlight">\(\alpha\)</span>, као и у претходним примерима означава физички параметар који комбинује топлотну проводност, густину и специфичну топлоту. Позиција покретне границе дата је једначином која је позната као Стефанов услов:</p>
+<div class="math notranslate nohighlight" id="equation-eq-stefancond">
+<span class="eqno">(16)<a class="headerlink" href="#equation-eq-stefancond" title="Permalink to this equation"></a></span>\[\frac{1}{\alpha} \cdot \frac{ds}{dt} = - \frac{\partial u}{\partial x}, \quad x = s(t), \quad t &gt; 0.\]</div>
+<p>У општем случају, почетни услов за положај границе фаза дат је са:</p>
+<div class="math notranslate nohighlight" id="equation-eq-stefan-granicni1">
+<span class="eqno">(17)<a class="headerlink" href="#equation-eq-stefan-granicni1" title="Permalink to this equation"></a></span>\[s(0) = 0.\]</div>
+<p>За овако постављен проблем познато је и аналитичко решење, и то:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}u(x,t) = e^{\alpha t - x} \\
+s(t)  = \alpha t.\end{split}\]</div>
+<p>Решавање овог проблема ФПНМ приступом подразумева конструкцију две неуронске мреже. Прва ће апроксимирати дистрибуцију температура <span class="math notranslate nohighlight">\(u(x,t)\)</span> док ће друга апроксимирати положај слободне границе између фаза <span class="math notranslate nohighlight">\(s(t)\)</span>. Апроксимативна решења биће аутоматски диференцирана у односу на улазне варијабле од којих зависе, за вредности дефинисане скупом колокационих тачака из домена <span class="math notranslate nohighlight">\(\lbrack 0,T\rbrack \times \mathcal{D}\)</span>, где је <span class="math notranslate nohighlight">\(\mathcal{D \subset}\mathbb{R}^{d}\)</span> ограничени домен, а <span class="math notranslate nohighlight">\(T\)</span> означава коначно време симулације. Функција губитка састоји се из компоненти изведених из <a class="reference internal" href="#equation-eq-stefan-jednacina">(14)</a>, <a class="reference internal" href="#equation-eq-stefan-granicni">(15)</a> и <a class="reference internal" href="#equation-eq-stefan-granicni1">(17)</a>, користећи апрокцимације за <span class="math notranslate nohighlight">\(u\)</span> и <span class="math notranslate nohighlight">\(s\)</span> у колокационим тачкама, које покривају како унутрашњост домена, тако и домене у којима важе почетни и гранични услови.</p>
+<section id="id4">
+<h2>Конструкција функције губитка<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<p>Као што је већ речено, прва мрежа апроксимира функцију температуре <span class="math notranslate nohighlight">\(u(x,t)\)</span>, а друга мрежа апроксимира положај слободне границе између фаза <span class="math notranslate nohighlight">\(s(t)\)</span>. Функција губитка састоји се из разлике <span class="math notranslate nohighlight">\(u\)</span> и <span class="math notranslate nohighlight">\(s\)</span> и њихових апроксимација <span class="math notranslate nohighlight">\(\widehat{u}\)</span> и <span class="math notranslate nohighlight">\(\widehat{s}\)</span> које даје ФПНМ и који представљају
+резидууме које даје главна диференцијална једначина, почетни и гранични услови. Дакле, укупан губитак <span class="math notranslate nohighlight">\(\mathcal{L}\)</span> одређен је сумом резидуума:</p>
+<div class="math notranslate nohighlight" id="equation-eq-stefan-loss1">
+<span class="eqno">(18)<a class="headerlink" href="#equation-eq-stefan-loss1" title="Permalink to this equation"></a></span>\[\mathcal{L} = \mathcal{L}_r + \mathcal{L}_0 + \mathcal{L}_{b_{1}} + \mathcal{L}_{b_{2}} + \mathcal{L}_{b_{3}},\]</div>
+<p>где су:</p>
+<div class="math notranslate nohighlight" id="equation-eq-stefan-loss2">
+<span class="eqno">(19)<a class="headerlink" href="#equation-eq-stefan-loss2" title="Permalink to this equation"></a></span>\[\begin{split}\mathcal{L}_r = \frac{1}{N_r}\sum_{i = 1}^{N_r}{\left| \frac{\partial\widehat{u}(x,t)}{\partial t} - \alpha\frac{\partial^{2}\widehat{u}(x,t)}{\partial x^2} \right|^2}, \\
+\mathcal{L}_0 = \frac{1}{N_{0}}\sum_{i = 1}^{N_0}{\left| \widehat{s}(0) - s(0) \right|^2},  \\
+\mathcal{L}_{b_1} = \frac{1}{N_{b_1}}\sum_{i = 1}^{N_{b_1}}\left| \frac{1}{a}\frac{\partial\widehat{s}(t)}{\partial t} + \frac{\partial\widehat{u}}{\partial\widehat{s}(t)} \right|^2, \\
+\mathcal{L}_{b_2} = \frac{1}{N_{b_2}}\sum_{i = 1}^{N_{b_2}}\left| \widehat{u}(0,t) - u(0,t) \right|^{2},  \\
+\mathcal{L}_{b_3} = \frac{1}{N_{b_3}}\sum_{i = 1}^{N_{b_3}}\left| \widehat{u}\left( \widehat{s}(t),t \right) - u\left( s(t),t \right) \right|^2.\end{split}\]</div>
+<p>Први члан <span class="math notranslate nohighlight">\(\mathcal{L}_r\)</span> пенализује по главној диференцијалној једначини <a class="reference internal" href="#equation-eq-stefan-jednacina">(14)</a>, где је <span class="math notranslate nohighlight">\(N_r\)</span> величина <em>batch</em>-a колокационих талака које се случајно узоркују из домена простор-временских координата које узимају вредности <span class="math notranslate nohighlight">\(0 \leq x \leq 1\)</span> и <span class="math notranslate nohighlight">\(0s \leq t \leq 0,5s\)</span>, респективно. <span class="math notranslate nohighlight">\(\widehat{u}(x,t)\)</span> је апроксимативна неуронска мрежа температурског поља <span class="math notranslate nohighlight">\(u(x,t)\)</span>. Други члан <span class="math notranslate nohighlight">\(\mathcal{L}_0\)</span> одређује испуњеност граничног услова <a class="reference internal" href="#equation-eq-stefan-granicni1">(17)</a>. Испуњеност Стефановог граничног услова <a class="reference internal" href="#equation-eq-stefancond">(16)</a> дат је резидуумом <span class="math notranslate nohighlight">\(\mathcal{L}_{b_1}\)</span>, где <span class="math notranslate nohighlight">\(\widehat{s}(t)\)</span> означава ФПНМ апроксимацију положаја покретне границе. Последња два члана <span class="math notranslate nohighlight">\(\mathcal{L}_{b_2}\)</span> и <span class="math notranslate nohighlight">\(\mathcal{L}_{b_3}\)</span> одређују резуидуале граничних услова <a class="reference internal" href="#equation-eq-stefan-granicni">(15)</a>, где <span class="math notranslate nohighlight">\(N_0, \, N_{b_1}, \, N_{b_2}\)</span>,  и <span class="math notranslate nohighlight">\(N_{b_3}\)</span> означавају број колокационих тачака у којима важе почетни и гранични услови.</p>
+</section>
+<section id="id5">
+<h2>Имплементација<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
+<p>Решење које користи функционалност већ познате библиотеке SCIANN дато је у следећем листингу:</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-number">Листинг 3 </span><span class="caption-text">Решење Стефановог проблема у 1Д коришћењем SCIANN библиотеке</span><a class="headerlink" href="#id8" title="Permalink to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="c1"># Pocetni uslovi</span>
+<span class="linenos"> 4</span><span class="n">t0</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="linenos"> 5</span><span class="n">s0</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">t0</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="c1"># Varijable</span>
+<span class="linenos"> 8</span><span class="n">x</span> <span class="o">=</span> <span class="n">sn</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="linenos"> 9</span><span class="n">t</span> <span class="o">=</span> <span class="n">sn</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="linenos">10</span><span class="n">u</span> <span class="o">=</span> <span class="n">sn</span><span class="o">.</span><span class="n">Functional</span> <span class="p">([</span><span class="s2">&quot;u&quot;</span><span class="p">],</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">],</span> <span class="mi">3</span><span class="o">*</span><span class="p">[</span><span class="mi">30</span><span class="p">]</span> <span class="p">,</span> <span class="s1">&#39;tanh&#39;</span><span class="p">)</span>
+<span class="linenos">11</span><span class="n">s</span> <span class="o">=</span> <span class="n">sn</span><span class="o">.</span><span class="n">Functional</span> <span class="p">([</span><span class="s2">&quot;s&quot;</span><span class="p">],</span> <span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="mi">3</span><span class="o">*</span><span class="p">[</span><span class="mi">30</span><span class="p">]</span> <span class="p">,</span> <span class="s1">&#39;tanh&#39;</span><span class="p">)</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="c1"># Glavna dif. jednacina</span>
+<span class="linenos">14</span><span class="n">L1</span> <span class="o">=</span>  <span class="n">diff</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">diff</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="n">TOLX</span><span class="o">=</span><span class="mf">0.004</span>
+<span class="linenos">17</span><span class="n">TOLT</span><span class="o">=</span><span class="mf">0.002</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="c1"># Stefanov uslov</span>
+<span class="linenos">20</span><span class="n">C1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">alpha</span><span class="o">*</span><span class="n">diff</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">diff</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">x</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">sign</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="n">TOLX</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">s</span><span class="p">))</span>
+<span class="linenos">21</span><span class="c1"># Pocetno s u trenutku t=t0</span>
+<span class="linenos">22</span><span class="n">C2</span> <span class="o">=</span> <span class="p">(</span> <span class="n">s</span> <span class="o">-</span> <span class="n">s0</span> <span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sign</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="p">(</span><span class="n">t0</span><span class="o">+</span><span class="n">TOLT</span><span class="p">)))</span>
+<span class="linenos">23</span><span class="c1"># Granicni uslov za u kada je x=0</span>
+<span class="linenos">24</span><span class="n">C3</span> <span class="o">=</span> <span class="p">(</span> <span class="n">u</span> <span class="o">-</span> <span class="n">exp</span><span class="p">(</span><span class="n">alpha</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="mi">0</span> <span class="o">+</span><span class="n">TOLX</span><span class="p">)))</span>
+<span class="linenos">25</span><span class="c1"># Temperatura na granici izmedju faza je 1</span>
+<span class="linenos">26</span><span class="n">C4</span> <span class="o">=</span> <span class="p">(</span><span class="n">u</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="n">TOLX</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">s</span><span class="p">))</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span><span class="n">x_data</span><span class="p">,</span> <span class="n">t_data</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span><span class="c1"># Trening skup</span>
+<span class="linenos">31</span><span class="n">x_train</span><span class="p">,</span> <span class="n">t_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span>
+<span class="linenos">32</span>    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">300</span><span class="p">),</span>
+<span class="linenos">33</span>    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="linenos">34</span><span class="p">)</span>
+<span class="linenos">35</span>
+<span class="linenos">36</span><span class="n">x_data</span><span class="p">,</span> <span class="n">t_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x_train</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">t_train</span><span class="p">)</span>
+<span class="linenos">37</span>
+<span class="linenos">38</span><span class="n">m</span> <span class="o">=</span> <span class="n">sn</span><span class="o">.</span><span class="n">SciModel</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">],</span> <span class="p">[</span><span class="n">L1</span><span class="p">,</span><span class="n">C1</span><span class="p">,</span><span class="n">C2</span><span class="p">,</span><span class="n">C3</span><span class="p">,</span><span class="n">C4</span><span class="p">],</span> <span class="s1">&#39;mse&#39;</span><span class="p">,</span> <span class="s1">&#39;Adam&#39;</span><span class="p">)</span>
+<span class="linenos">39</span><span class="n">h</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">train</span><span class="p">([</span><span class="n">x_data</span><span class="p">,</span> <span class="n">t_data</span><span class="p">],</span> <span class="mi">5</span><span class="o">*</span><span class="p">[</span><span class="s1">&#39;zero&#39;</span><span class="p">],</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.002</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">adaptive_weights</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;method&#39;</span><span class="p">:</span><span class="s1">&#39;NTK&#39;</span><span class="p">,</span> <span class="s1">&#39;freq&#39;</span><span class="p">:</span><span class="mi">20</span><span class="p">})</span>
+<span class="linenos">40</span>
+<span class="linenos">41</span><span class="c1"># Test</span>
+<span class="linenos">42</span><span class="n">x_test</span><span class="p">,</span> <span class="n">t_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span>
+<span class="linenos">43</span>    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span>
+<span class="linenos">44</span>    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="linenos">45</span><span class="p">)</span>
+<span class="linenos">46</span><span class="n">u_pred</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="p">[</span><span class="n">x_test</span><span class="p">,</span> <span class="n">t_test</span><span class="p">])</span>
+<span class="linenos">47</span><span class="n">s_pred</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="p">[</span><span class="n">x_test</span><span class="p">,</span> <span class="n">t_test</span><span class="p">])</span>
+<span class="linenos">48</span>
+<span class="linenos">49</span><span class="n">s</span><span class="o">=</span><span class="p">[]</span>
+<span class="linenos">50</span><span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">s_pred</span><span class="p">:</span>
+<span class="linenos">51</span>    <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<p>На почетку (линије 1-11) постављамо константе и варијабле. Приметимо да моделовање креће од временског тренутка <span class="math notranslate nohighlight">\(t_0=0,1s\)</span>. Прва заграда у изразу за <code class="docutils literal notranslate"><span class="pre">C1</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">C1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">alpha</span><span class="o">*</span><span class="n">diff</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">diff</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">x</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">sign</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="n">TOLX</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">s</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>представља сам Стефанов услов. Као што је уобичајено за постављање граничних услова, друга заграда поставља правило где тај гранични услов важи. За <code class="docutils literal notranslate"><span class="pre">C1</span></code> је тај израз мало компликованији због толеранције, али заправо представља услов да је <span class="math notranslate nohighlight">\(x \approx s\)</span>. Услов</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">C2</span> <span class="o">=</span> <span class="p">(</span> <span class="n">s</span> <span class="o">-</span> <span class="n">s0</span> <span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sign</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="p">(</span><span class="n">t0</span><span class="o">+</span><span class="n">TOLT</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>дефинише положај границе у почетном тренутку. Даље, услов</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">C3</span> <span class="o">=</span> <span class="p">(</span> <span class="n">u</span> <span class="o">-</span> <span class="n">exp</span><span class="p">(</span><span class="n">alpha</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="mi">0</span> <span class="o">+</span><span class="n">TOLX</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>поставља динамички услов промене температуре у тачки <span class="math notranslate nohighlight">\(x=0\)</span> према једначини <a class="reference internal" href="#equation-eq-stefan-granicni">(15)</a>. Коначно, последљи услов</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">C4</span> <span class="o">=</span> <span class="p">(</span><span class="n">u</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="n">TOLX</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">s</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>у истом скупу колокационих тачака као што је то био случај са условом <code class="docutils literal notranslate"><span class="pre">C1</span></code>, тј. на граници између фаза <span class="math notranslate nohighlight">\(x \approx s\)</span> поставља вредност температуре на 1. Остатак кода је мање-више стандардно тренирање, формирање тестног скупа и екстракција података о кретању границе <code class="docutils literal notranslate"><span class="pre">s</span></code> кроз време. Кретање границе између фаза кроз време може се видети на <a class="reference internal" href="#stefan-s"><span class="std std-numref">Сл. 11</span></a>, док се поље температуре <span class="math notranslate nohighlight">\(u(x,t=0,5)\)</span> може видети на <a class="reference internal" href="#stefan-u"><span class="std std-numref">Сл. 12</span></a>.</p>
+<figure class="align-default" id="id9">
+<span id="stefan-s"></span><a class="reference internal image-reference" href="../_images/stefan-s.png"><img alt="../_images/stefan-s.png" src="../_images/stefan-s.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 11 </span><span class="caption-text">Кретање границе између фаза <span class="math notranslate nohighlight">\(s(t)\)</span> током времена.</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id10">
+<span id="stefan-u"></span><a class="reference internal image-reference" href="../_images/stefan-u.png"><img alt="../_images/stefan-u.png" src="../_images/stefan-u.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 12 </span><span class="caption-text">Поље температура <span class="math notranslate nohighlight">\(u(x,t)\)</span> у тренутку <span class="math notranslate nohighlight">\(t=0,5\)</span></span><a class="headerlink" href="#id10" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Са дијаграма је очигледно да се ФПНМ (<em>PINN</em>) решења у задовољавајућој мери слажу са аналитичким решењем за посматрану појаву. У складу са претходном општом дискусијом о употребној вредности ФПНМ приступа, код директних проблема као што је овај, додатна вредност у односу на класичне нумеричке методе може се наћи у једноставнијој фромулацији. Међутим, тек код инверзних проблема, када су и неки од параметара недовољно познати, приступ учења пропагацијом уназад показује своју праву снагу. Следећи одељак уводи непознати параметар у овај исти проблем.</p>
+</section>
+<section id="id6">
+<h2>Инверзни 1-Д Стефанов проблем<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h2>
+<p>Претпоставим идентичну поставку Стефановог проблема, осим што сада није позната вредност материјалног параметра <span class="math notranslate nohighlight">\(\alpha\)</span>, па тиме ни потпуни облик диференцијалне једначине, али је зато познато да је, на пример, у тренутку <span class="math notranslate nohighlight">\(t=0,2\)</span> граница између фаза уочена на координати <span class="math notranslate nohighlight">\(x=0,2\)</span>. Непознати параметар увешћемо формулацијом:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Nepoznati parametar</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="n">sn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Параметру је дата почетна вредност од 2,5 и постављена зависност од обе улазне варијабле <span class="math notranslate nohighlight">\(x\)</span> и <span class="math notranslate nohighlight">\(t\)</span>. Додатни гранични услов <code class="docutils literal notranslate"><span class="pre">C5</span></code> дат је стандардно:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dodatni uslov u tacki s(t=0.2)=0.2</span>
+<span class="n">C5</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sign</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="p">(</span><span class="mf">0.2</span><span class="o">+</span><span class="n">TOLT</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">sign</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mf">0.2</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="mf">0.2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Иако је овог пута потребно нешто више епоха у процесу тренинга, јер је почетна вредност непознатог параметра <span class="math notranslate nohighlight">\(\alpha\)</span> (2,5) прилично далеко од реалне вредности (1), алгоритам који користи брзину учења од 0,001 у 100-инак епоха долази до вредности <span class="math notranslate nohighlight">\(\alpha=0,99\)</span> и заиста задовољавајућег поклапања са аналитичким решењем, као што се види на <a class="reference internal" href="#stefan-inv-s"><span class="std std-numref">Сл. 13</span></a> за кретање границе и за поље температуре у <span class="math notranslate nohighlight">\(u(x,t=0,5)\)</span> на <a class="reference internal" href="#stefan-inv-u"><span class="std std-numref">Сл. 14</span></a>.</p>
+<figure class="align-default" id="id11">
+<span id="stefan-inv-s"></span><a class="reference internal image-reference" href="../_images/stefan-inv-s.png"><img alt="../_images/stefan-inv-s.png" src="../_images/stefan-inv-s.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 13 </span><span class="caption-text">Кретање границе између фаза <span class="math notranslate nohighlight">\(s(t)\)</span> током времена за инверзни проблем</span><a class="headerlink" href="#id11" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id12">
+<span id="stefan-inv-u"></span><a class="reference internal image-reference" href="../_images/stefan-inv-u.png"><img alt="../_images/stefan-inv-u.png" src="../_images/stefan-inv-u.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 14 </span><span class="caption-text">Поље температура <span class="math notranslate nohighlight">\(u(x,t)\)</span> у тренутку <span class="math notranslate nohighlight">\(t=0,5\)</span> за инверзни проблем</span><a class="headerlink" href="#id12" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="3-stap-inv.html" class="btn btn-neutral float-left" title="Једнодимензиони инверзни проблем" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../oscilacije/index.html" class="btn btn-neutral float-right" title="Механичке осцилације" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2023, Милош Ивановић.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

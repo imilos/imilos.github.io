@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="sr" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Пример прорачуна производње &mdash; документација Физички поткрепљене неуронске мреже - Практикум прво</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Индекс" href="../genindex.html" />
+    <link rel="search" title="Претрага" href="../search.html" />
+    <link rel="next" title="Резултати" href="4-rezultati.html" />
+    <link rel="prev" title="Основне једначине модела" href="2-pvwatts.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Физички поткрепљене неуронске мреже - Практикум
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Садржај</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../uvod/index.html">Увод</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toplota/index.html">Провођење топлоте</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oscilacije/index.html">Механичке осцилације</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hidrologija/index.html">Хидрологија</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../akustika/index.html">Акустика</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misici/index.html">Моделовање мишића</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Моделовање производње соларних електрана</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1-uvod.html">Увод</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-pvwatts.html">Основне једначине модела</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Пример прорачуна производње</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Аналитички модел</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Подешавање параметра помоћу ФПНМ</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="4-rezultati.html">Резултати</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../literatura/literatura.html">Литература</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Физички поткрепљене неуронске мреже - Практикум</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Моделовање производње соларних електрана</a></li>
+      <li class="breadcrumb-item active">Пример прорачуна производње</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/solari/3-implementacija.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="solari-implementacija">
+<span id="id1"></span><h1>Пример прорачуна производње<a class="headerlink" href="#solari-implementacija" title="Permalink to this heading"></a></h1>
+<section id="id2">
+<h2>Аналитички модел<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<p>У овом одељку ћемо употребити методологију приказану у <a class="reference internal" href="1-uvod.html#solari-uvod"><span class="std std-ref">Увод</span></a> и једноставни модел <em>PVWatts</em> објашњен у <a class="reference internal" href="2-pvwatts.html#pvwatts"><span class="std std-ref">Основне једначине модела</span></a> употребити на једном реалном примеру. У питању је соларна електрана у Централној Србији са 146 инсталисаних панела на крову једне зграде. Све карактеристике инсталације су нам познате (угао нагиба, азимут, врста панела, карактеристике инвертора и слично). Од података имамо и серије температуре ваздуха и компоненти осунчаности, тако да лако можемо аналитички, по једначинама <a class="reference internal" href="2-pvwatts.html#equation-eq-sapm-temp">(35)</a>, <a class="reference internal" href="2-pvwatts.html#equation-eq-pvwatts">(36)</a> и <a class="reference internal" href="2-pvwatts.html#equation-eq-pvwatts-inverter">(37)</a> да израчунамо производњу. У случају да поседујемо временску прогнозу, можемо приближно и да предвидимо будућу призводњу користећи стандардни <em>PVWatts</em> модел.</p>
+<p>Иако математика није компликована, за програмску имплементацију овог аналитичког модела користићемо помоћ библиотеке PVLIB <span id="id3">Holmgren <em>et al.</em> [<a class="reference internal" href="../literatura/literatura.html#id28" title="William F Holmgren, Clifford W Hansen, and Mark A Mikofski. Pvlib python: a python package for modeling solar energy systems. Journal of Open Source Software, 3(29):884, 2018.">HHM18</a>]</span>. На наредном листингу приказан је део кода који се тиче учитавања, припреме података и извођења <em>PVWatts</em> модела.</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<span id="lst-pvwatts-orig"></span><div class="code-block-caption"><span class="caption-number">Листинг 12 </span><span class="caption-text">Имплементација <em>PVWatts</em> (аналитичког) модела производње</span><a class="headerlink" href="#id5" title="Permalink to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="linenos"> 3</span><span class="kn">import</span> <span class="nn">pvlib</span>
+<span class="linenos"> 4</span><span class="kn">from</span> <span class="nn">pvlib.location</span> <span class="kn">import</span> <span class="n">Location</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="c1"># Ucitaj podatke o vremenu i proizvodnji</span>
+<span class="linenos"> 7</span><span class="n">solcast_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data_21.08.16_22.10.14.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s2">&quot;Time&quot;</span><span class="p">)</span>
+<span class="linenos"> 8</span><span class="n">solcast_data</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">solcast_data</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">dayfirst</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="c1"># Nagib, azimut i lokacija panela</span>
+<span class="linenos">11</span><span class="n">surface_tilt</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="linenos">12</span><span class="n">surface_azimuth</span> <span class="o">=</span> <span class="mi">290</span>
+<span class="linenos">13</span><span class="n">location</span> <span class="o">=</span> <span class="n">Location</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="mf">43.905410</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=</span><span class="mf">20.341986</span><span class="p">,</span> <span class="n">altitude</span><span class="o">=</span><span class="mi">243</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="s2">&quot;Europe/Belgrade&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Pons Cacak&quot;</span><span class="p">)</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="c1"># Pomeri vreme za pola sata, izracunaj poziciju sunca u svakom trenutku</span>
+<span class="linenos">16</span><span class="n">times</span> <span class="o">=</span> <span class="n">solcast_data</span><span class="o">.</span><span class="n">index</span> <span class="o">-</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="s1">&#39;30min&#39;</span><span class="p">)</span>
+<span class="linenos">17</span><span class="n">solar_position</span> <span class="o">=</span> <span class="n">location</span><span class="o">.</span><span class="n">get_solarposition</span><span class="p">(</span><span class="n">times</span><span class="p">)</span>
+<span class="linenos">18</span><span class="n">solar_position</span><span class="o">.</span><span class="n">index</span> <span class="o">+=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="s1">&#39;30min&#39;</span><span class="p">)</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="c1"># Novi dataframe sa vrednostima za vrednosti osuncanosti DNI, GHI, DHI</span>
+<span class="linenos">21</span><span class="n">df_poa</span> <span class="o">=</span> <span class="n">pvlib</span><span class="o">.</span><span class="n">irradiance</span><span class="o">.</span><span class="n">get_total_irradiance</span><span class="p">(</span>
+<span class="linenos">22</span>    <span class="n">surface_tilt</span><span class="o">=</span><span class="n">surface_tilt</span><span class="p">,</span>
+<span class="linenos">23</span>    <span class="n">surface_azimuth</span><span class="o">=</span><span class="n">surface_azimuth</span><span class="p">,</span>
+<span class="linenos">24</span>    <span class="n">dni</span><span class="o">=</span><span class="n">solcast_data</span><span class="p">[</span><span class="s1">&#39;DNI&#39;</span><span class="p">],</span>
+<span class="linenos">25</span>    <span class="n">ghi</span><span class="o">=</span><span class="n">solcast_data</span><span class="p">[</span><span class="s1">&#39;GHI&#39;</span><span class="p">],</span>
+<span class="linenos">26</span>    <span class="n">dhi</span><span class="o">=</span><span class="n">solcast_data</span><span class="p">[</span><span class="s1">&#39;DHI&#39;</span><span class="p">],</span>
+<span class="linenos">27</span>    <span class="n">solar_zenith</span><span class="o">=</span><span class="n">solar_position</span><span class="p">[</span><span class="s1">&#39;apparent_zenith&#39;</span><span class="p">],</span>
+<span class="linenos">28</span>    <span class="n">solar_azimuth</span><span class="o">=</span><span class="n">solar_position</span><span class="p">[</span><span class="s1">&#39;azimuth&#39;</span><span class="p">],</span>
+<span class="linenos">29</span>    <span class="n">model</span><span class="o">=</span><span class="s1">&#39;isotropic&#39;</span><span class="p">)</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span><span class="c1"># Izvuci ukupnu POA vrednost iz df_poa</span>
+<span class="linenos">32</span><span class="n">E_data</span> <span class="o">=</span> <span class="n">df_poa</span><span class="p">[</span><span class="s2">&quot;poa_global&quot;</span><span class="p">]</span>
+<span class="linenos">33</span><span class="c1"># Izvuci temperaturu vazduha</span>
+<span class="linenos">34</span><span class="n">T_data</span> <span class="o">=</span> <span class="n">solcast_data</span><span class="p">[</span><span class="s2">&quot;Tamb&quot;</span><span class="p">]</span>
+<span class="linenos">35</span><span class="c1"># Izvuci proizvodnju P</span>
+<span class="linenos">36</span><span class="n">P_data</span> <span class="o">=</span> <span class="n">solcast_data</span><span class="p">[</span><span class="s2">&quot;P&quot;</span><span class="p">]</span>
+<span class="linenos">37</span>
+<span class="linenos">38</span><span class="c1"># Nedelju dana za treniranje</span>
+<span class="linenos">39</span><span class="n">E_data_train</span> <span class="o">=</span> <span class="n">E_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;2021-10-31&quot;</span><span class="p">:</span><span class="s2">&quot;2021-11-06&quot;</span><span class="p">]</span>
+<span class="linenos">40</span><span class="n">T_data_train</span> <span class="o">=</span> <span class="n">T_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;2021-10-31&quot;</span><span class="p">:</span><span class="s2">&quot;2021-11-06&quot;</span><span class="p">]</span>
+<span class="linenos">41</span><span class="n">P_data_train</span> <span class="o">=</span> <span class="n">P_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;2021-10-31&quot;</span><span class="p">:</span><span class="s2">&quot;2021-11-06&quot;</span><span class="p">]</span>
+<span class="linenos">42</span>
+<span class="linenos">43</span><span class="c1"># Sledecih nedelju dana za testiranje</span>
+<span class="linenos">44</span><span class="n">E_data_test</span> <span class="o">=</span> <span class="n">E_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;2021-11-07&quot;</span><span class="p">:</span><span class="s2">&quot;2021-11-13&quot;</span><span class="p">]</span>
+<span class="linenos">45</span><span class="n">T_data_test</span> <span class="o">=</span> <span class="n">T_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;2021-11-07&quot;</span><span class="p">:</span><span class="s2">&quot;2021-11-13&quot;</span><span class="p">]</span>
+<span class="linenos">46</span><span class="n">P_data_test</span> <span class="o">=</span> <span class="n">P_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;2021-11-07&quot;</span><span class="p">:</span><span class="s2">&quot;2021-11-13&quot;</span><span class="p">]</span>
+<span class="linenos">47</span>
+<span class="linenos">48</span><span class="c1">#</span>
+<span class="linenos">49</span><span class="c1"># Parametri modela</span>
+<span class="linenos">50</span><span class="c1">#</span>
+<span class="linenos">51</span><span class="n">pdc0</span> <span class="o">=</span> <span class="mf">0.375</span> <span class="c1"># nominal power [kWh]</span>
+<span class="linenos">52</span><span class="n">Tref</span> <span class="o">=</span> <span class="mf">25.0</span> <span class="c1"># cell reference temperature</span>
+<span class="linenos">53</span><span class="n">gamma_pdc</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.005</span> <span class="c1"># influence of the cell temperature on PV system</span>
+<span class="linenos">54</span><span class="n">pdc0_inv</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="linenos">55</span><span class="n">eta_inv_nom</span> <span class="o">=</span> <span class="mf">0.96</span>
+<span class="linenos">56</span><span class="n">eta_inv_ref</span> <span class="o">=</span> <span class="mf">0.9637</span>
+<span class="linenos">57</span><span class="n">pac0_inv</span> <span class="o">=</span> <span class="n">eta_inv_nom</span> <span class="o">*</span> <span class="n">pdc0_inv</span> <span class="c1"># maximum inverter capacity</span>
+<span class="linenos">58</span><span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.98</span> <span class="c1"># cell temperature parameter</span>
+<span class="linenos">59</span><span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.0471</span> <span class="c1"># Wind coefficient</span>
+<span class="linenos">60</span><span class="n">E0</span> <span class="o">=</span> <span class="mi">1000</span> <span class="c1"># reference irradiance</span>
+<span class="linenos">61</span><span class="n">deltaT</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># cell temperature parameter</span>
+<span class="linenos">62</span><span class="n">num_of_panels</span> <span class="o">=</span> <span class="mi">146</span> <span class="c1"># Broj panela u instalaciji</span>
+<span class="linenos">63</span>
+<span class="linenos">64</span><span class="c1">#</span>
+<span class="linenos">65</span><span class="c1"># Originalni PVWAtts model</span>
+<span class="linenos">66</span><span class="c1">#</span>
+<span class="linenos">67</span><span class="k">def</span> <span class="nf">orig_pvwatts_model</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="linenos">68</span>    <span class="n">Ta</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># Temperatura vazduha</span>
+<span class="linenos">69</span>    <span class="n">E</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="c1"># Ukupna POA osuncanost</span>
+<span class="linenos">70</span>
+<span class="linenos">71</span>    <span class="n">Tm</span> <span class="o">=</span> <span class="n">E</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">Ta</span> <span class="c1"># Brzina vetra uzeta kao prosecna od 2 m/s</span>
+<span class="linenos">72</span>    <span class="n">Tc</span> <span class="o">=</span> <span class="n">Tm</span> <span class="o">+</span> <span class="n">E</span><span class="o">/</span><span class="n">E0</span><span class="o">*</span><span class="n">deltaT</span>
+<span class="linenos">73</span>    <span class="n">P_dc_temp</span> <span class="o">=</span> <span class="p">((</span><span class="n">Tc</span><span class="o">-</span><span class="n">Tref</span><span class="p">)</span> <span class="o">*</span> <span class="n">gamma_pdc</span> <span class="o">+</span> <span class="mf">1.</span><span class="p">)</span>
+<span class="linenos">74</span>    <span class="n">P_dc</span> <span class="o">=</span> <span class="p">(</span><span class="n">E</span> <span class="o">*</span> <span class="mf">1.e-03</span> <span class="o">*</span> <span class="n">pdc0</span> <span class="o">*</span> <span class="n">P_dc_temp</span><span class="p">)</span> <span class="o">*</span> <span class="n">num_of_panels</span>
+<span class="linenos">75</span>    <span class="n">zeta</span> <span class="o">=</span> <span class="p">(</span><span class="n">P_dc</span><span class="o">+</span><span class="mf">1.e-2</span><span class="p">)</span><span class="o">/</span><span class="n">pdc0_inv</span>
+<span class="linenos">76</span>
+<span class="linenos">77</span>    <span class="n">eta</span> <span class="o">=</span> <span class="n">eta_inv_nom</span><span class="o">/</span><span class="n">eta_inv_ref</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.0162</span><span class="o">*</span><span class="n">zeta</span> <span class="o">-</span> <span class="mf">0.0059</span><span class="o">/</span><span class="n">zeta</span> <span class="o">+</span> <span class="mf">0.9858</span><span class="p">)</span>
+<span class="linenos">78</span>    <span class="n">eta</span><span class="p">[</span><span class="n">eta</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
+<span class="linenos">79</span>    <span class="n">ac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">eta</span><span class="o">*</span><span class="n">P_dc</span><span class="p">,</span> <span class="n">pac0_inv</span><span class="p">)</span>
+<span class="linenos">80</span>
+<span class="linenos">81</span>    <span class="k">return</span> <span class="n">ac</span>
+</pre></div>
+</div>
+</div>
+<p>Након стандардних импорта библиотека, учитавамо сатне серије података о времену:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Ta</span></code> - температура ваздуха,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DNI</span></code>, <code class="docutils literal notranslate"><span class="pre">GHI</span></code>, <code class="docutils literal notranslate"><span class="pre">DHI</span></code> - компоненте оснучаности</p></li>
+</ul>
+<p>и податке о производњи <code class="docutils literal notranslate"><span class="pre">P</span></code> у <em>Pandas</em> оквир. На жалост, немамо доступне податке о брзини ветра на локацији, па ћемо ту компоненту узети као просечну на том поднебљу, тј. вредност од <span class="math notranslate nohighlight">\(2\,m/s\)</span>. Функција <code class="docutils literal notranslate"><span class="pre">pvlib.irradiance.get_total_irradiance()</span></code> библиотеке <em>PVLIB</em> нам израчунава положај сунца за било који временски тренутак и било коју локацију на Земљи, а на основу њега и укупну осунчаност панела чији је положај дат угловима <code class="docutils literal notranslate"><span class="pre">surface_tilt</span></code> и <code class="docutils literal notranslate"><span class="pre">surface_azimuth</span></code>. Као улаз, ова метода узима компоненте <code class="docutils literal notranslate"><span class="pre">DNI</span></code>, <code class="docutils literal notranslate"><span class="pre">GHI</span></code> и <code class="docutils literal notranslate"><span class="pre">DHI</span></code> дефинисане у одељку <a class="reference internal" href="1-uvod.html#solari-komponente"><span class="std std-ref">Компоненте зрачења</span></a>.</p>
+<p>Након екстракције периода од недељу дана од 31. октобра до 6. новембра и другог периода од 7. до 13. новембра, постављамо све параметре који се користе у једначинама <a class="reference internal" href="2-pvwatts.html#equation-eq-sapm-temp">(35)</a>, <a class="reference internal" href="2-pvwatts.html#equation-eq-pvwatts">(36)</a> и <a class="reference internal" href="2-pvwatts.html#equation-eq-pvwatts-inverter">(37)</a>, онако како најбоље одговара самој инсталацији. Сви параметри осим три су константе прихваћене у литератури. Та три параметра чија вредност може да се подешава су <code class="docutils literal notranslate"><span class="pre">a</span></code> и <code class="docutils literal notranslate"><span class="pre">b</span></code> из израза <a class="reference internal" href="2-pvwatts.html#equation-eq-sapm-temp">(35)</a> и <code class="docutils literal notranslate"><span class="pre">gamma_pdc</span></code> из израза <a class="reference internal" href="2-pvwatts.html#equation-eq-pvwatts">(36)</a>. Њихове вредности (-2,98, -0.0471 и -0,005 респективно) задајемо према врсти панела и начину постављања инсталације.</p>
+<p>Поређење резултата добијених чистим моделом и мерених вредности може се видети на <a class="reference internal" href="#pvwatts-pons"><span class="std std-numref">Сл. 61</span></a>. Очигледно је да постоји значајно одступање, тј. модел даје више вредности од мерења. Корен средње квадратне грешке (<em>RMSE</em>) износи чак 2,46 kW. Одређени допринос овако високој вредности грешке сигурно је последица чињенице да хлађење панела услед утицаја ветра нисмо узели у обзир услед недостатка података о ветру.</p>
+<figure class="align-default" id="id6">
+<span id="pvwatts-pons"></span><a class="reference internal image-reference" href="../_images/pvwatts-pons.png"><img alt="../_images/pvwatts-pons.png" src="../_images/pvwatts-pons.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 61 </span><span class="caption-text">Поређење чистог <em>PVWAtts</em> модела са мереном производњом</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Ниједан модел није савршена слика стварности и не може да обухвати све факторе који утичу на производњу. Чак иако је модел савршен (а не може бити), могуће су појаве грешака при мерењу температуре, осунчаности, брзине ветра. Даље, код самог модела имамо више параметара чије вредности узимамо из литературе и декларације произвођача. Реалне вредности тих параметара сигурно одступају од тих вредности и мењају се током животног века уређаја.</p>
+</section>
+<section id="id4">
+<h2>Подешавање параметра помоћу ФПНМ<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<p>Поставља се питање да ли вредности које даје модел могу бити приближније реалним вредностима само подешавањем параметара модела. Пробаћемо да искористимо чињеницу да податке о производњи за недељу од 31. октобра имамо и да помоћу ФПНМ пробамо да „помиримо” излаз аналитичког модела и мерења производње тако што ћемо параметар <code class="docutils literal notranslate"><span class="pre">a</span></code> једначине <a class="reference internal" href="2-pvwatts.html#equation-eq-pvwatts">(36)</a> прогласити непознатим. Основна идеја је да се ФПНМ тренира и једначином и подацима и да као излаз испоручи и модел са мањом грешком и нову, бољу вредност параметра <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p>
+<p>На следећем листингу могу се видети интересантни делови имплементације ове идеје:</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-number">Листинг 13 </span><span class="caption-text">Инверзни проблем подешавања параметара PVWatts/SAPM модела</span><a class="headerlink" href="#id7" title="Permalink to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># Parametar &quot;a&quot; pustamo da se trenira</span>
+<span class="linenos"> 2</span><span class="n">a_var</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="o">-</span><span class="mf">4.0</span><span class="p">)</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="c1">#</span>
+<span class="linenos"> 5</span><span class="c1"># Jednacina koju koristi PINN</span>
+<span class="linenos"> 6</span><span class="c1">#</span>
+<span class="linenos"> 7</span><span class="k">def</span> <span class="nf">pvwatts_eq</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="linenos"> 8</span>    <span class="n">Ta</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># Temperatura vazduha</span>
+<span class="linenos"> 9</span>    <span class="n">E</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="c1"># Ukupna POA osuncanost</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span>    <span class="n">Tm</span> <span class="o">=</span> <span class="n">E</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">a_var</span><span class="o">+</span><span class="n">b</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">Ta</span> <span class="c1"># Brzina vetra uzeta kao prosecna od 2 m/s</span>
+<span class="linenos">12</span>    <span class="n">Tc</span> <span class="o">=</span> <span class="n">Tm</span> <span class="o">+</span> <span class="n">E</span><span class="o">/</span><span class="n">E0</span><span class="o">*</span><span class="n">deltaT</span>
+<span class="linenos">13</span>    <span class="n">P_dc_temp</span> <span class="o">=</span> <span class="p">((</span><span class="n">Tc</span><span class="o">-</span><span class="n">Tref</span><span class="p">)</span> <span class="o">*</span> <span class="n">gamma_pdc</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">14</span>    <span class="n">P_dc</span> <span class="o">=</span> <span class="p">(</span><span class="n">E</span> <span class="o">*</span> <span class="mf">1.e-03</span> <span class="o">*</span> <span class="n">pdc0</span> <span class="o">*</span> <span class="n">P_dc_temp</span><span class="p">)</span> <span class="o">*</span> <span class="n">num_of_panels</span>
+<span class="linenos">15</span>    <span class="n">zeta</span> <span class="o">=</span> <span class="p">(</span><span class="n">P_dc</span><span class="o">+</span><span class="mf">1.e-2</span><span class="p">)</span><span class="o">/</span><span class="n">pdc0_inv</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span>    <span class="n">eta</span> <span class="o">=</span> <span class="n">eta_inv_nom</span><span class="o">/</span><span class="n">eta_inv_ref</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.0162</span><span class="o">*</span><span class="n">zeta</span> <span class="o">-</span> <span class="mf">0.0059</span><span class="o">/</span><span class="n">zeta</span> <span class="o">+</span> <span class="mf">0.9858</span><span class="p">)</span>
+<span class="linenos">18</span>    <span class="n">eta</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">eta</span><span class="p">))</span> <span class="o">*</span> <span class="n">eta</span>
+<span class="linenos">19</span>    <span class="n">ac</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">eta</span><span class="o">*</span><span class="n">P_dc</span><span class="p">,</span> <span class="n">pac0_inv</span><span class="p">)</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span>    <span class="k">return</span> <span class="n">y</span> <span class="o">-</span> <span class="n">ac</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="c1"># Imamo 168 tacaka sa merenjima prozivodnje. Pripremi strukturu za PointSet granicni uslov</span>
+<span class="linenos">24</span><span class="n">train_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">168</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="linenos">25</span><span class="n">train_measured_production</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">168</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="linenos">26</span><span class="n">train_points</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">T_data_train</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+<span class="linenos">27</span><span class="n">train_points</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">E_data_train</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+<span class="linenos">28</span><span class="n">train_measured_production</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span>  <span class="n">P_data_train</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span><span class="c1"># Imamo 168 tacaka sa merenjima za narednu nedelju za test</span>
+<span class="linenos">31</span><span class="n">test_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">168</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="linenos">32</span><span class="n">test_measured_production</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">168</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="linenos">33</span><span class="n">test_points</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">T_data_test</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+<span class="linenos">34</span><span class="n">test_points</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">E_data_test</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+<span class="linenos">35</span><span class="n">test_measured_production</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span>  <span class="n">P_data_test</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+<span class="linenos">36</span>
+<span class="linenos">37</span><span class="c1"># Minimumi i maksimumi T i E za kreiranje geometrije problema</span>
+<span class="linenos">38</span><span class="n">minT</span><span class="p">,</span> <span class="n">maxT</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">train_points</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">max</span><span class="p">(</span><span class="n">train_points</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+<span class="linenos">39</span><span class="n">minE</span><span class="p">,</span> <span class="n">maxE</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">train_points</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">max</span><span class="p">(</span><span class="n">train_points</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos">40</span>
+<span class="linenos">41</span><span class="n">geom</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">([</span><span class="n">minT</span><span class="p">,</span> <span class="n">minE</span><span class="p">],</span> <span class="p">[</span><span class="n">maxT</span><span class="p">,</span> <span class="n">maxE</span><span class="p">])</span>
+<span class="linenos">42</span><span class="n">bc_y</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">icbc</span><span class="o">.</span><span class="n">PointSetBC</span><span class="p">(</span><span class="n">train_points</span><span class="p">,</span> <span class="n">train_measured_production</span><span class="p">,</span> <span class="n">component</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos">43</span>
+<span class="linenos">44</span><span class="c1"># Isti broj kolokacionih tacaka za jednacinu i za granicne uslove. Moze i drugacije.</span>
+<span class="linenos">45</span><span class="n">data</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">PDE</span><span class="p">(</span><span class="n">geom</span><span class="p">,</span> <span class="n">pvwatts_eq</span><span class="p">,</span> <span class="p">[</span><span class="n">bc_y</span><span class="p">],</span> <span class="mi">168</span><span class="p">,</span> <span class="mi">168</span><span class="p">,</span> <span class="n">solution</span> <span class="o">=</span> <span class="n">orig_pvwatts_model</span><span class="p">,</span> <span class="n">num_test</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="linenos">46</span>
+<span class="linenos">47</span><span class="n">layer_size</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">30</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">48</span><span class="n">activation</span> <span class="o">=</span> <span class="s2">&quot;tanh&quot;</span>
+<span class="linenos">49</span><span class="n">initializer</span> <span class="o">=</span> <span class="s2">&quot;Glorot uniform&quot;</span>
+<span class="linenos">50</span><span class="n">net</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">FNN</span><span class="p">(</span><span class="n">layer_size</span><span class="p">,</span> <span class="n">activation</span><span class="p">,</span> <span class="n">initializer</span><span class="p">)</span>
+<span class="linenos">51</span>
+<span class="linenos">52</span><span class="n">variable_a</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">VariableValue</span><span class="p">(</span><span class="n">a_var</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="linenos">53</span><span class="n">model</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">net</span><span class="p">)</span>
+<span class="linenos">54</span>
+<span class="linenos">55</span><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;adam&quot;</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;l2 relative error&quot;</span><span class="p">],</span> <span class="n">external_trainable_variables</span><span class="o">=</span><span class="p">[</span><span class="n">a_var</span><span class="p">])</span>
+<span class="linenos">56</span><span class="n">losshistory</span><span class="p">,</span> <span class="n">train_state</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">iterations</span><span class="o">=</span><span class="mi">20000</span><span class="p">,</span> <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">variable_a</span><span class="p">])</span>
+<span class="linenos">57</span><span class="n">predicted_test</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_points</span><span class="p">)</span>
+<span class="linenos">58</span>
+<span class="linenos">59</span><span class="c1"># Predikcije manje od nule nemaju smisla. Nuluj ih.</span>
+<span class="linenos">60</span><span class="n">predicted_test</span><span class="p">[</span><span class="n">predicted_test</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<p>Као и код раније обрађених инверзних проблема који користе библиотеку <em>DeepXDE</em>, постављамо параметар као варијаблу чија се вредност добија процесом обучавања:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a_var</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="o">-</span><span class="mf">4.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Ако погледамо функцију <code class="docutils literal notranslate"><span class="pre">pvwatts_eq(x,</span> <span class="pre">y)</span></code>, она је готово идентична функцији <code class="docutils literal notranslate"><span class="pre">orig_pvwatts_model(x)</span></code> са <a class="reference internal" href="#lst-pvwatts-orig"><span class="std std-numref">Листинг 12</span></a>. Разлика је у томе што <code class="docutils literal notranslate"><span class="pre">pvwatts_eq(x,</span> <span class="pre">y)</span></code> не враћа вредност снаге, већ функцију губитка, као што смо већ навикли. Још једна разлика огледа се у коришћењу <em>TensorFlow</em> логике уместо условног израза:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">eta</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">eta</span><span class="p">))</span> <span class="o">*</span> <span class="n">eta</span>
+</pre></div>
+</div>
+<p>Овај израз није ништа друго него услов да ако имамо нефизичку вредност <code class="docutils literal notranslate"><span class="pre">eta&lt;0</span></code> поставимо да је <code class="docutils literal notranslate"><span class="pre">eta=0</span></code>. Овом формулацијом избегавамо инструкцију условног скока, која се на графичком процесору изводи доста спорије од чистог рачуна у покретном зарезу.</p>
+<p>У даљем току програма треба да поставимо структуру за посебан гранични услов <code class="docutils literal notranslate"><span class="pre">PointSet</span></code>, који смо већ користили у одељку <a class="reference internal" href="../oscilacije/4-inverzni.html#oscilacije-inverzni"><span class="std std-ref">Инверзни проблем</span></a> и <a class="reference internal" href="../hidrologija/3-poplavni.html#poplavni"><span class="std std-ref">Пропагација поплавног таласа у отвореном каналу</span></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">train_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">168</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">train_measured_production</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">168</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">train_points</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">T_data_train</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+<span class="n">train_points</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">E_data_train</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+<span class="n">train_measured_production</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span>  <span class="n">P_data_train</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+
+<span class="n">bc_y</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">icbc</span><span class="o">.</span><span class="n">PointSetBC</span><span class="p">(</span><span class="n">train_points</span><span class="p">,</span> <span class="n">train_measured_production</span><span class="p">,</span> <span class="n">component</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Имамо укупно 168 тачака (7x24) мерења производње које ћемо искористити у покушају да „спустимо” вредности које даје оригинални модел. Геометрију проблема који решавамо дефинишемо опсегом улазних варијабли температуре и укупне осунчаности, које се узимају из табеле података. Онда можемо да поставимо и колокационе тачке на домену наредбом:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">PDE</span><span class="p">(</span><span class="n">geom</span><span class="p">,</span> <span class="n">pvwatts_eq</span><span class="p">,</span> <span class="p">[</span><span class="n">bc_y</span><span class="p">],</span> <span class="mi">168</span><span class="p">,</span> <span class="mi">168</span><span class="p">,</span> <span class="n">solution</span> <span class="o">=</span> <span class="n">orig_pvwatts_model</span><span class="p">,</span> <span class="n">num_test</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>За број случајних колокационих тачака унутар домена узели смо исти број тачака колико имамо у <code class="docutils literal notranslate"><span class="pre">PointSet</span></code> граничном услову. Није нужно да број тачака буде једнак, па остављамо читаоцу да експериментише различитим вредностима. Остатак кода је мање-више исти као код свих других примера који користе DeepXDE за решавање инверзних проблема. Ту је постављање архитектуре ФПНМ и хипер-параметара, алгоритма оптимизације, стопе обуке, <em>callback</em> функције за штампу тренутне вредности <code class="docutils literal notranslate"><span class="pre">a_var</span></code> током обуке и слично. На крају се анулирају негативне вредности предвиђене производње јер немају физичког смисла.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="2-pvwatts.html" class="btn btn-neutral float-left" title="Основне једначине модела" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="4-rezultati.html" class="btn btn-neutral float-right" title="Резултати" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2023, Милош Ивановић.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

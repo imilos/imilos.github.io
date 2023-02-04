@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="sr" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Изометријски случај &mdash; документација Физички поткрепљене неуронске мреже - Практикум прво</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Индекс" href="../genindex.html" />
+    <link rel="search" title="Претрага" href="../search.html" />
+    <link rel="next" title="Моделовање производње соларних електрана" href="../solari/index.html" />
+    <link rel="prev" title="Увод" href="1-uvod.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Физички поткрепљене неуронске мреже - Практикум
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Садржај</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../uvod/index.html">Увод</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toplota/index.html">Провођење топлоте</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oscilacije/index.html">Механичке осцилације</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hidrologija/index.html">Хидрологија</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../akustika/index.html">Акустика</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Моделовање мишића</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1-uvod.html">Увод</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Изометријски случај</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Имплементација</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Резултати</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../solari/index.html">Моделовање производње соларних електрана</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../literatura/literatura.html">Литература</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Физички поткрепљене неуронске мреже - Практикум</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Моделовање мишића</a></li>
+      <li class="breadcrumb-item active">Изометријски случај</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/misici/2-izometrijski.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="izometrijski">
+<span id="id1"></span><h1>Изометријски случај<a class="headerlink" href="#izometrijski" title="Permalink to this heading"></a></h1>
+<p>Ради тестирања способности ФПНМ да решавају ову врсту парцијалних диференцијалних једначина, најпре је од интереса изометријски случај, јер је он најједноставнији, будући да је <strong>брзина клизања филамената једнака нули</strong>. Код изометријског случаја, вишеслојни перцептрон као улаз узима позицију <span class="math notranslate nohighlight">\(x\)</span> доступног актинскиг сајта у односу на равнотежни положај миозинске главе и време <span class="math notranslate nohighlight">\(t\)</span>, а предвиђа вероватноће закачињања миозинских глава за актинске сајтове <span class="math notranslate nohighlight">\(n(x,t)\)</span>.</p>
+<section id="id2">
+<h2>Имплементација<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<p>Комплетан код је дат на следећем листингу.</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-number">Листинг 11 </span><span class="caption-text">Решење Хакслијеве једначине за изометријски случај</span><a class="headerlink" href="#id5" title="Permalink to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">deepxde</span> <span class="k">as</span> <span class="nn">dde</span>
+<span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="linenos"> 3</span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="sd">&#39;&#39;&#39; fixed parameters &#39;&#39;&#39;</span>
+<span class="linenos"> 6</span><span class="n">f1_0</span> <span class="o">=</span> <span class="mf">43.3</span>
+<span class="linenos"> 7</span><span class="n">h</span> <span class="o">=</span> <span class="mf">15.6</span>
+<span class="linenos"> 8</span><span class="n">g1</span> <span class="o">=</span> <span class="mf">10.0</span>
+<span class="linenos"> 9</span><span class="n">g2</span> <span class="o">=</span> <span class="mf">209.0</span>
+<span class="linenos">10</span><span class="n">fzah</span> <span class="o">=</span> <span class="mf">4.0</span>
+<span class="linenos">11</span><span class="n">a</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="c1"># Verovatnoca kacenja</span>
+<span class="linenos">14</span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">a</span><span class="p">):</span>
+<span class="linenos">15</span>    <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">tf</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">tf</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">h</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">f1_0</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="n">h</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.25</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="c1"># Verovatnoca raskacivanja</span>
+<span class="linenos">18</span><span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="linenos">19</span>    <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">tf</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">*</span> <span class="n">g2</span> <span class="o">+</span> \
+<span class="linenos">20</span>        <span class="mf">0.25</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">tf</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">tf</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">h</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">g1</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="n">h</span><span class="p">)</span> <span class="o">+</span> \
+<span class="linenos">21</span>        <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">tf</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">h</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">fzah</span><span class="o">*</span><span class="n">g1</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="n">h</span><span class="p">)</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="c1"># n = n(x,t)</span>
+<span class="linenos">24</span><span class="k">def</span> <span class="nf">pde</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="linenos">25</span>    <span class="n">dn_dt</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">jacobian</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">26</span>    <span class="n">loss</span> <span class="o">=</span> <span class="n">dn_dt</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">-</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">],</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos">27</span>    <span class="c1"># Obezbedi pozitivna resenja</span>
+<span class="linenos">28</span>    <span class="k">return</span> <span class="n">loss</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">tf</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span><span class="c1"># Computational geometry</span>
+<span class="linenos">31</span><span class="n">geom</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">Interval</span><span class="p">(</span><span class="o">-</span><span class="mf">20.8</span><span class="p">,</span> <span class="mi">63</span><span class="p">)</span>
+<span class="linenos">32</span><span class="n">timedomain</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">TimeDomain</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">)</span>
+<span class="linenos">33</span><span class="n">geomtime</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">GeometryXTime</span><span class="p">(</span><span class="n">geom</span><span class="p">,</span> <span class="n">timedomain</span><span class="p">)</span>
+<span class="linenos">34</span>
+<span class="linenos">35</span><span class="c1"># Pocetni uslovi</span>
+<span class="linenos">36</span><span class="n">ic1</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">icbc</span><span class="o">.</span><span class="n">IC</span><span class="p">(</span><span class="n">geomtime</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">_</span><span class="p">,</span> <span class="n">on_initial</span><span class="p">:</span> <span class="n">on_initial</span><span class="p">)</span>
+<span class="linenos">37</span>
+<span class="linenos">38</span><span class="n">data</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">TimePDE</span><span class="p">(</span><span class="n">geomtime</span><span class="p">,</span> <span class="n">pde</span><span class="p">,</span> <span class="p">[</span><span class="n">ic1</span><span class="p">],</span> <span class="n">num_domain</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">num_boundary</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">num_initial</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="linenos">39</span><span class="n">net</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">FNN</span><span class="p">([</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">40</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;tanh&quot;</span><span class="p">,</span> <span class="s2">&quot;Glorot normal&quot;</span><span class="p">)</span>
+<span class="linenos">40</span><span class="n">model</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">net</span><span class="p">)</span>
+<span class="linenos">41</span>
+<span class="linenos">42</span><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;adam&quot;</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+<span class="linenos">43</span><span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>
+<span class="linenos">44</span><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;L-BFGS&quot;</span><span class="p">,</span> <span class="n">loss_weights</span><span class="o">=</span><span class="p">[</span><span class="mf">1.e-1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="linenos">45</span><span class="n">losshistory</span><span class="p">,</span> <span class="n">train_state</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+<span class="linenos">46</span><span class="n">dde</span><span class="o">.</span><span class="n">saveplot</span><span class="p">(</span><span class="n">losshistory</span><span class="p">,</span> <span class="n">train_state</span><span class="p">,</span> <span class="n">issave</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">isplot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Конструисана је мрежа са 3 слоја, са по 40 неурона и активационом функцијом <code class="docutils literal notranslate"><span class="pre">tanh</span></code>. Генерисана је мрежа података за 10.000 еквидистантних вредности за <span class="math notranslate nohighlight">\(x\)</span> у опсегу <span class="math notranslate nohighlight">\(-20.8 [nm] \, \le  x \le  63 \, [nm]\)</span>  и са 500 насумичних вредности за <span class="math notranslate nohighlight">\(t\)</span> у опсегу <span class="math notranslate nohighlight">\(0 \, [s] \le t \le  0.4 \, [s]\)</span>. Ове генерисане тачке су коришћене као улазни подаци за обуку мреже. У току обуке, од 100.000 епоха, минимизује се резидуал Хакслијеве једначине за мишићну контракцију и резидуал почетног услова, коришћењем Адам оптимизације са стопом учења <span class="math notranslate nohighlight">\(10^{-3}\)</span>.</p>
+<p>Што се саме имплеементације тиче, треба скренути пажњу на неколико битних момената. Као прво, да бисмо формулисали једначине <a class="reference internal" href="1-uvod.html#equation-eq-fg">(34)</a> не саветује се коришћење услових израза (<code class="docutils literal notranslate"><span class="pre">if</span></code> клаузула), већ се иста функционалност интерпретира помоћу <em>TensorFlow</em> израза за знак, ако се он користи као бекенд. На пример:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">tf</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">*</span> <span class="n">g2</span> <span class="o">+</span> \
+        <span class="mf">0.25</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">tf</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">tf</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">h</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">g1</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="n">h</span><span class="p">)</span> <span class="o">+</span> \
+        <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">tf</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">h</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">fzah</span><span class="o">*</span><span class="n">g1</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="n">h</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>У функцији парцијалне диференцијалне једначине имамо нешто другачији проблем. Наиме, морамо да обезбедимо да функција <span class="math notranslate nohighlight">\(n(x,t)\)</span> не почне да узима вредности мање од нуле. Иако сама математичка поставка то дозвољава, подсетимо се да <span class="math notranslate nohighlight">\(n(x,t)\)</span> означава вероватноћу закачињања, па негативна вредност нема никаквог физичког смисла. То ћемо урадити на следећи начин:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pde</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">dn_dt</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">jacobian</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">dn_dt</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">-</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">],</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">])</span>
+    <span class="c1"># Obezbedi pozitivna resenja</span>
+    <span class="k">return</span> <span class="n">loss</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">tf</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>У последњој линији се вредности функције губитка додаје члан који има ненулту вредност у случају да је <span class="math notranslate nohighlight">\(n\)</span> негативно. На први поглед, било би довољно уместо <code class="docutils literal notranslate"><span class="pre">n*(1-tf.sign(n))</span></code> поставити само <code class="docutils literal notranslate"><span class="pre">1-tf.sign(n)</span></code>. Међутим, испоставља се да тако формирана функција губитка не доводи до конвергенције, јер није диференцијабилна, па оптимизациони алгоритми као што је <code class="docutils literal notranslate"><span class="pre">Адам</span></code> не конвергирају. Када се пак функција знака помножи са <span class="math notranslate nohighlight">\(n\)</span>, добијамо диференцијабилнију функцију губитка, а самим тим и већу вероватноћу конвергенције.</p>
+<p>Као и у примеру <a class="reference internal" href="../hidrologija/3-poplavni.html#poplavni"><span class="std std-ref">Пропагација поплавног таласа у отвореном каналу</span></a>, и овде ћемо покушати да додатно смањимо вредност функције губитка методом L-BFGS:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;L-BFGS&quot;</span><span class="p">,</span> <span class="n">loss_weights</span><span class="o">=</span><span class="p">[</span><span class="mf">1.e-1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">losshistory</span><span class="p">,</span> <span class="n">train_state</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Веома је важно испоштовати постављене почетне услове, па ћемо им помоћу <code class="docutils literal notranslate"><span class="pre">loss_weights=[1.e-1,</span> <span class="pre">1]</span></code> дати за ред величине већу тежину од компоненте која следи из саме парцијалне диференцијалне једначине.</p>
+</section>
+<section id="id3">
+<h2>Резултати<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<p>И овај пример ће услед великог броја колкационих тачака (података) најбоље перформансе имати уколико се извршава на неком графичком процесору који ову масовност уме да паралелизује. На пример, на нашем графичком процесору NVidia Tesla T4 обука траје око 170 секунди, док на осмојезгарном процесору Intel Xeon Silver 4208 на 2.10GHz траје 2150 секунди. То је убрзање од готово 13 пута!</p>
+<p>На <a class="reference internal" href="#huxley-loss"><span class="std std-numref">Сл. 47</span></a> се види како је текао процес тренинга ФПНМ. Уочљиво је да додатно обучавање помоћу L-BFGS дефинитивно има ефекта и да смо помоћу њега спустили вредност губитка за додатни ред величине.</p>
+<figure class="align-default" id="id6">
+<span id="huxley-loss"></span><a class="reference internal image-reference" href="../_images/huxley-loss.png"><img alt="../_images/huxley-loss.png" src="../_images/huxley-loss.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 47 </span><span class="caption-text">Функција губитка током обучавања</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Тродимензионални приказ резултата дат је на <a class="reference internal" href="#huxley-res1"><span class="std std-numref">Сл. 48</span></a>. Из оваквог приказа није погодно утврђивати било какву тачност решења, али је довољан за квалитативни увид. Уочљиво је да близу <span class="math notranslate nohighlight">\(t=0\)</span> (<span class="math notranslate nohighlight">\(x_2\)</span> на слици) има неколико колокационих тачака где је <span class="math notranslate nohighlight">\(n(x,t)&lt;0\)</span>, али свеукупно решење делује логично.</p>
+<figure class="align-default" id="id7">
+<span id="huxley-res1"></span><a class="reference internal image-reference" href="../_images/huxley-res1.png"><img alt="../_images/huxley-res1.png" src="../_images/huxley-res1.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 48 </span><span class="caption-text">Тродимензионални приказ добијених резултата. <span class="math notranslate nohighlight">\(x_1\)</span> је просторна координата, а <span class="math notranslate nohighlight">\(x_2\)</span> временска.</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Прецизнију визуелну анализу резултата можемо обавити тек графичким представљањем вероватноће закачињања мостова <span class="math notranslate nohighlight">\(n(x,t)\)</span> дуж <span class="math notranslate nohighlight">\(x\)</span> осе у неколико различитих временских тренутака, као што је дато на <a class="reference internal" href="#huxley-res2"><span class="std std-numref">Сл. 49</span></a>. Као што смо очекивали, уочљива је мала нестабилност око тачке <span class="math notranslate nohighlight">\(x=h\)</span> у неколико првих временских корака, али се она губи како процес закачињања напредује.</p>
+<figure class="align-default" id="id8">
+<span id="huxley-res2"></span><a class="reference internal image-reference" href="../_images/huxley-res2.png"><img alt="../_images/huxley-res2.png" src="../_images/huxley-res2.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 49 </span><span class="caption-text">Величина <span class="math notranslate nohighlight">\(n(x,t)\)</span> у неколико различитих временских тренутака</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Упоређивање резултата са онима који су добијени методом карактеристика излази из оквира овог практокума, па ћемо тај део прескочити. На крају је важно напоменути да једну потенцијалну примену ФПНМ на коју до сада нисмо обраћали пажњу, а може бити од велике користи. Наиме, док код класичних нумеричких метода за решавање парцијалних диференцијалних једначина, решење у временском кораку <span class="math notranslate nohighlight">\(m+1\)</span> зависи од решења које смо имали у временском кораку <span class="math notranslate nohighlight">\(m\)</span>. Код свих примера које смо обрадили помоћу ФПНМ то није случај, јер се време узима као било која друга променљива по којој се врши парцијална диференцијација. Ако погледамо <a class="reference internal" href="#huxley-res2"><span class="std std-numref">Сл. 49</span></a> очигледно је да у тренутку <span class="math notranslate nohighlight">\(t=0,006\)</span> имамо грешку. Међутим, та <strong>грешка се не пропагира на касније времернске тренутке</strong> баш из наведеног разлога.</p>
+<p>Овај другачији третман времена као улазне променљиве има импликације и на перформансе. Наиме, када се ФПНМ модел користи у продукцији, и потребно нам је да знамо нпр. <span class="math notranslate nohighlight">\(n(x,t=t_1)\)</span> није потребно да прођемо кроз све временске кораке <span class="math notranslate nohighlight">\(t \le t_1\)</span>, већ одмах можемо да избацимо резултат, једним проласком кроз обучену ФПНМ. Тиме се време значајно штеди и за неколико редова величине. Тиме се отварају неке нове примене, нарочито у области моделовања на више скала, као на пример у <span id="id4">Svičević [<a class="reference internal" href="../literatura/literatura.html#id26" title="Marina Svičević. Višeskalni računarski model mišića zasnovan na makromodelu konačnih elemenata i Hakslijevom mikromodelu. PhD thesis, Универзитет у Крагујевцу, Природно-математички факултет, 2020.">Svivcevic20</a>]</span>. Таквим скоком у перформансама било би могуће овакве сложене моделе изводити скоро у реалном времену.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="1-uvod.html" class="btn btn-neutral float-left" title="Увод" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../solari/index.html" class="btn btn-neutral float-right" title="Моделовање производње соларних електрана" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2023, Милош Ивановић.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

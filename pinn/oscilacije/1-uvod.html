@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="sr" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Осцилатор &mdash; документација Физички поткрепљене неуронске мреже - Практикум прво</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Индекс" href="../genindex.html" />
+    <link rel="search" title="Претрага" href="../search.html" />
+    <link rel="next" title="Имплементација" href="2-implementacija.html" />
+    <link rel="prev" title="Механичке осцилације" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Физички поткрепљене неуронске мреже - Практикум
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Садржај</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../uvod/index.html">Увод</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toplota/index.html">Провођење топлоте</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Механичке осцилације</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Осцилатор</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sekcija-prepriguseni">Препригушени случај</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sekcija-kriticnopriguseni">Критично-пригушени случај</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sekcija-podpriguseni">Подпригушени случај</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="2-implementacija.html">Имплементација</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-rezultati.html">Решења директног проблема</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4-inverzni.html">Инверзни проблем</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../hidrologija/index.html">Хидрологија</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../akustika/index.html">Акустика</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misici/index.html">Моделовање мишића</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solari/index.html">Моделовање производње соларних електрана</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../literatura/literatura.html">Литература</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Физички поткрепљене неуронске мреже - Практикум</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Механичке осцилације</a></li>
+      <li class="breadcrumb-item active">Осцилатор</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/oscilacije/1-uvod.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="oscilacije-uvod">
+<span id="id1"></span><h1>Осцилатор<a class="headerlink" href="#oscilacije-uvod" title="Permalink to this heading"></a></h1>
+<p>Једно од најједноставнијих периодичних кретања у механици је осцилаторно кретање (осциловање), где се тело креће по истој путањи, али мења смер кретања. Ако бисмо разматрали осцилаторно кретање у идеалним условима, без трења и отпора средине, оно би трајало бесконачно дуго. При таквим слободним, <strong>непригушеним осцилацијама</strong>, осцилатор не губи енергију, a амплитуда се не мења у току времена. Међутим, у реалним условима, мора да се узме у обзир утицај околине на кретање тела. Осциловање успорава са временом, смањују се амплитуде, јер се укупна механичка енергија троши на савладавање отпора средине. То су тзв. <strong>пригушене  осцилације</strong>, када осцилатор губи енергију и амплитуда се смањује у току времена. Трећи случај би био када губитак енергије осцилатора може да се надокнади деловањем спољашње периодичне силе. Амплитуда осциловања ће при оваквом начину кретања остати константна, уколико се при сваком циклусу кретања у систем дода енергија једнака оној енергији коју је систем изгубио. Овакво кретање се назива <strong>принудно осциловање</strong>.</p>
+<figure class="align-default" id="id6">
+<span id="opruga"></span><a class="reference internal image-reference" href="../_images/opruga.png"><img alt="../_images/opruga.png" src="../_images/opruga.png" style="width: 40%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 15 </span><span class="caption-text">Поставка експеримента са опругом и тегом. На тег делују сила еластичности опруге и сила трења.</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Проблем који решавамо представља моделовање осциловања тега који виси на опрузи, као што је приказано на <a class="reference internal" href="#opruga"><span class="std std-numref">Сл. 15</span></a>. Параметри који утичу на кретање су маса тега, кеофицијент трења и коефицијент еластичности опруге. Силе које утичу на кретање осцилатора су:</p>
+<ul class="simple">
+<li><p><strong>Повратна сила опруге</strong> <span class="math notranslate nohighlight">\(F_f = k \cdot x\)</span> вуче тег ка тачки мировања и директно је пропорционална отклону клатна. Њен смер је супротан од смера отклона. Параметар <span class="math notranslate nohighlight">\(k\)</span> представља константу опруге.</p></li>
+<li><p><strong>Сила трења</strong> <span class="math notranslate nohighlight">\(F_r = -\mu \cdot \dot{x}\)</span> је пропорционална брзини тега, док је смер увек супротан смеру кретања тега. Параметар <span class="math notranslate nohighlight">\(\mu\)</span> представља коефицијент трења.</p></li>
+</ul>
+<p>Дакле, сила инерције је супротстављена двема силама:</p>
+<div class="math notranslate nohighlight">
+\[m \ddot{x} = -\mu \dot{x} - k x\]</div>
+<p>или трансформисано:</p>
+<div class="math notranslate nohighlight" id="equation-eq-oscilacije-dif">
+<span class="eqno">(20)<a class="headerlink" href="#equation-eq-oscilacije-dif" title="Permalink to this equation"></a></span>\[\ddot{x} + \frac{\mu}{m} \dot{x} + \frac{k}{m} x = 0\]</div>
+<p>Ова једначина је линеарна хомогена диференцијална једначина другог реда са константним коефицијентима.  За аналитичко решавање диференцијалне једначине овог типа користи се експоненцијална функција облика:</p>
+<div class="math notranslate nohighlight">
+\[x(t) = C e^{\lambda t}\]</div>
+<p>Први и други извод ове једначине гласе:</p>
+<div class="math notranslate nohighlight" id="equation-eq-izvodi">
+<span class="eqno">(21)<a class="headerlink" href="#equation-eq-izvodi" title="Permalink to this equation"></a></span>\[\dot{x}(t) = \lambda C e^{\lambda t}, \qquad \ddot{x}(t) = \lambda^2 C e^{\lambda t}\]</div>
+<p>Заменом једначина <a class="reference internal" href="#equation-eq-izvodi">(21)</a> у диференцијалну једначину <a class="reference internal" href="#equation-eq-oscilacije-dif">(20)</a> и скраћивањем добијамо:</p>
+<div class="math notranslate nohighlight" id="equation-eq-karakteristicna">
+<span class="eqno">(22)<a class="headerlink" href="#equation-eq-karakteristicna" title="Permalink to this equation"></a></span>\[\lambda^2 + \frac{\mu}{m} \lambda + \frac{k}{m} = 0\]</div>
+<p>Ова једначина се назива <strong>карактеристичном једначином</strong>. Како је у питању квадратна једначина, разматрамо два решења:</p>
+<div class="math notranslate nohighlight">
+\[\lambda_{1,2} = -\frac{\mu}{2m} \pm \sqrt{\left(\frac{\mu}{2m}\right)^2-\frac{k}{m}}.\]</div>
+<p>Да бисмо додатно упростили израз, уводимо нове константе <span class="math notranslate nohighlight">\(\delta\)</span> и <span class="math notranslate nohighlight">\(\omega_0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\delta=\frac{\mu}{2m}, \qquad \omega_0=\sqrt{\frac{k}{m}},\]</div>
+<p>па се решења карактеристичне једначине могу изразити у облику:</p>
+<div class="math notranslate nohighlight" id="equation-eq-karakteristicna1">
+<span class="eqno">(23)<a class="headerlink" href="#equation-eq-karakteristicna1" title="Permalink to this equation"></a></span>\[\lambda_{1,2} = -\delta \pm \sqrt{\delta^2-\omega_0^2}.\]</div>
+<p>У зависности од избора константи <span class="math notranslate nohighlight">\(\delta\)</span> и <span class="math notranslate nohighlight">\(\omega_0\)</span>, дискриминанта може бити: већа од нуле, мања од нуле или једнака нули. Стога <span class="math notranslate nohighlight">\(\lambda_1\)</span> и <span class="math notranslate nohighlight">\(\lambda_2\)</span> могу бити:</p>
+<ul class="simple">
+<li><p>два реална различита решења,</p></li>
+<li><p>два конјуговано комплексна решења и</p></li>
+<li><p>два једнака реална решења.</p></li>
+</ul>
+<p>Сваки од ових случајева захтева другачији приступ аналитичком решавању. Уопштено решење хомогене једначине има облик:</p>
+<div class="math notranslate nohighlight" id="equation-eq-opste">
+<span class="eqno">(24)<a class="headerlink" href="#equation-eq-opste" title="Permalink to this equation"></a></span>\[x(t) = C_1 \cdot x_1(t) + C_2 \cdot x_2(t),\]</div>
+<p>где фунцкије <span class="math notranslate nohighlight">\(x_1(t)\)</span> и <span class="math notranslate nohighlight">\(x_2(t)\)</span> зависе од вредности детерминанте у једначини <a class="reference internal" href="#equation-eq-karakteristicna1">(23)</a>. Сада ћемо размотрити све наведене случајеве.</p>
+<section id="sekcija-prepriguseni">
+<span id="id2"></span><h2>Препригушени случај<a class="headerlink" href="#sekcija-prepriguseni" title="Permalink to this heading"></a></h2>
+<p>Уколико је <span class="math notranslate nohighlight">\(\delta &gt; \omega_0\)</span>, онда доминира сила трења. Стога је дискриминанта у једначини <a class="reference internal" href="#equation-eq-karakteristicna1">(23)</a> позитивна и постоје два различита реална решења <span class="math notranslate nohighlight">\(\lambda_1 \ne \lambda_2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[x_1(t)=C_1 e^{\lambda_1 t}, \qquad x_2(t)=C_2 e^{\lambda_2 t}.\]</div>
+<p>Заменом у једначину <a class="reference internal" href="#equation-eq-opste">(24)</a> добијамо опште решење диференцијалне једначине:</p>
+<div class="math notranslate nohighlight">
+\[x(t) = C_1 e^{\left(-\delta+\sqrt{\delta^2-\omega_0^2}\right) t} + C_2 e^{\left(-\delta-\sqrt{\delta^2-\omega_0^2}\right) t}.\]</div>
+<p>Услов који смо навели за препригушени случај налаже да је</p>
+<div class="math notranslate nohighlight">
+\[\delta &gt; \sqrt{\delta^2-\omega_0^2},\]</div>
+<p>па је стога решење збир двеју ескпоненцијалних опадајућих функција. Како бисмо даље упростили израз, заменићемо корен новом константом:</p>
+<div class="math notranslate nohighlight">
+\[\alpha = \sqrt{\delta^2-\omega_0^2},\]</div>
+<p>па коначно решење за препригушени случај гласи:</p>
+<div class="math notranslate nohighlight">
+\[x(t) = e^{-\delta t} \left(C_1 e^{\alpha t} + C_2 e^{-\alpha t}\right).\]</div>
+<p>Интеграционе константе <span class="math notranslate nohighlight">\(C_1\)</span> и <span class="math notranslate nohighlight">\(C_2\)</span> можемо добити из почетних услова, тј. почетног положаја и почетне брзине тега:</p>
+<div class="math notranslate nohighlight">
+\[x(0)=x_0, \quad \dot{x}(0)=v_0.\]</div>
+<figure class="align-default" id="id7">
+<span id="prepriguseni"></span><a class="reference internal image-reference" href="../_images/prepriguseni.png"><img alt="../_images/prepriguseni.png" src="../_images/prepriguseni.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 16 </span><span class="caption-text">Промена положаја тега у току времена за препригушени случај осциловања. Добијено помоћу <a class="reference external" href="https://beltoforion.de/en/harmonic_oscillator/">симулатора</a>.</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>На <a class="reference internal" href="#prepriguseni"><span class="std std-numref">Сл. 16</span></a> можемо видети графички приказ општег аналитичког решења за препригушени случај осцилатора. Овај дијаграм приказује кретање тега током времена. Црвена линија означава компоненту решења <span class="math notranslate nohighlight">\(C_1 e^{\lambda_1 t}\)</span>, док зелена означава другу компоненту решења <span class="math notranslate nohighlight">\(C_2 e^{\lambda_1 t}\)</span>. Црна линија је збир ова два парцијална решења и представља укупно решење диференцијалне једначине препригушеног случаја за задате почетне услове.</p>
+</section>
+<section id="sekcija-kriticnopriguseni">
+<span id="id4"></span><h2>Критично-пригушени случај<a class="headerlink" href="#sekcija-kriticnopriguseni" title="Permalink to this heading"></a></h2>
+<p>Овај случај се дешава када је <span class="math notranslate nohighlight">\(\delta=\omega_0\)</span>. У овом случају једначина <a class="reference internal" href="#equation-eq-karakteristicna1">(23)</a> има само једно решење</p>
+<div class="math notranslate nohighlight">
+\[\lambda=\lambda_1=\lambda_2=-\delta\]</div>
+<p>Две компоненте решења диференцијалне једначине су онда:</p>
+<div class="math notranslate nohighlight">
+\[x_1(t)=C_1 e^{\lambda t}, \qquad x_2(t) = t C_2 e^{\lambda t}.\]</div>
+<p>Заменом ових израза у опште решење <a class="reference internal" href="#equation-eq-opste">(24)</a> добијамо:</p>
+<div class="math notranslate nohighlight">
+\[x(t) = e^{-\delta t} (C_1 + t C_2)\]</div>
+<p>Интеграционе константе <span class="math notranslate nohighlight">\(C_1\)</span> и <span class="math notranslate nohighlight">\(C_2\)</span> можемо добити из почетних услова, тј. почетног положаја и почетне брзине тега.</p>
+<figure class="align-default" id="id8">
+<span id="kriticno-priguseni"></span><a class="reference internal image-reference" href="../_images/kriticno-priguseni.png"><img alt="../_images/kriticno-priguseni.png" src="../_images/kriticno-priguseni.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 17 </span><span class="caption-text">Промена положаја тега у току времена за критично пригушени случај осциловања. Добијено помоћу <a class="reference external" href="https://beltoforion.de/en/harmonic_oscillator/">симулатора</a>.</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>На <a class="reference internal" href="#kriticno-priguseni"><span class="std std-numref">Сл. 17</span></a> видимо графички приказ општег решења критично пригушеног случаја. На дијаграму опажамо кретање клатна током времена за задате почетне услове.</p>
+</section>
+<section id="sekcija-podpriguseni">
+<span id="id5"></span><h2>Подпригушени случај<a class="headerlink" href="#sekcija-podpriguseni" title="Permalink to this heading"></a></h2>
+<p>Подпригушени случ наступа када је <span class="math notranslate nohighlight">\(\delta &lt; \omega_0\)</span>, тј. дискриминанта једначине <a class="reference internal" href="#equation-eq-karakteristicna1">(23)</a> је негативна. Стога су <span class="math notranslate nohighlight">\(\lambda_1\)</span> и <span class="math notranslate nohighlight">\(\lambda_2\)</span> комплексни бројеви. Експоненцијални израз</p>
+<div class="math notranslate nohighlight">
+\[x(t) = C e^{\lambda t}\]</div>
+<p>се поново користи за добијање компоненти решења ове диференцијалне једначине:</p>
+<div class="math notranslate nohighlight">
+\[x_1(t)=C_1 e^{\lambda_1 t}, \qquad x_2(t) = C_2 e^{\lambda_2 t}.\]</div>
+<p>Заменом у израз <a class="reference internal" href="#equation-eq-opste">(24)</a> и заменом <span class="math notranslate nohighlight">\(\lambda\)</span> добијамо:</p>
+<div class="math notranslate nohighlight" id="equation-eq-podpriguseni">
+<span class="eqno">(25)<a class="headerlink" href="#equation-eq-podpriguseni" title="Permalink to this equation"></a></span>\[x(t) = e^{-\delta t} \left( C_1 e^{\sqrt{\delta^2-\omega_0^2} t} + C_2 e^{-\sqrt{\delta^2-\omega_0^2} t} \right).\]</div>
+<p>Сада радимо са комплексним решењима јер су вредности негативне. Стога константе <span class="math notranslate nohighlight">\(C_1\)</span> и <span class="math notranslate nohighlight">\(C_2\)</span> имају комплексне вредности. За рад са комплексним вредностима користимо Ојлерову формулу:</p>
+<div class="math notranslate nohighlight">
+\[e^{i\phi} = \cos\phi + i\sin\phi\]</div>
+<p>Корисно би било да изменимо једначину тако што бисмо раздвојили имагинарне делове:</p>
+<div class="math notranslate nohighlight">
+\[\sqrt{\delta^2-\omega_0^2} = \sqrt{-1 \cdot (\omega_0^2-\delta^2)} = i \sqrt{\omega_0^2-\delta^2}.\]</div>
+<p>Добијамо део који се састоји од имагинарне вредности <span class="math notranslate nohighlight">\(i\)</span> помноженом кореном реалних вредности. Да бисмо упростили даља израчунавања, замењујемо корен новом константом</p>
+<div class="math notranslate nohighlight">
+\[\omega = \sqrt{\omega_0^2-\delta^2}\]</div>
+<p>Ова константа представља <strong>природну фреквенцију хармонијског осцилатора</strong>. Тада једначина <a class="reference internal" href="#equation-eq-podpriguseni">(25)</a> може да се трансформише у:</p>
+<div class="math notranslate nohighlight">
+\[x(t) = e^{-\delta t} \left( C_1 e^{i\omega t} + C_2 e^{-i\omega t} \right).\]</div>
+<p>Са физичке стране, интересују нас само реалне вредности. Да бисмо их пронашли, неопходно је да раздвојимо имагинарни и реални део. Као што је већ поменуто,
+константе  <span class="math notranslate nohighlight">\(C_1\)</span> и <span class="math notranslate nohighlight">\(C_2\)</span> су константе са комплексним вредностима, а њихов поларни облик је:</p>
+<div class="math notranslate nohighlight">
+\[C_1 = \hat{C_1}e^{i\phi_1}, \qquad C_2 = \hat{C_2}e^{i\phi_2}\]</div>
+<p>Како аналитичко решавање овог проблема није у фокусу овог материјала, нећемо до краја аналитички изводити израз, већ само навести крајње решење за подпригушени случај, након одабира реалних решења и трансформације и одабира одговарајућих константи:</p>
+<div class="math notranslate nohighlight">
+\[x(t) = e^{-\delta t} (2A\cos(\phi+\omega t))\]</div>
+<p><span class="math notranslate nohighlight">\(A\)</span> је амплитуда, а <span class="math notranslate nohighlight">\(\phi\)</span> је фазни померај. Константе се могу добити из почетних услова, као што су:</p>
+<div class="math notranslate nohighlight">
+\[x(0)=x_0, \quad \dot{x}(0)=v_0.\]</div>
+<p>Овим смо извели сва потребна аналитичка решења са којима ћемо поредити решење добијено помоћу ФПНМ приступа.</p>
+<figure class="align-default" id="id9">
+<span id="podpriguseni"></span><a class="reference internal image-reference" href="../_images/podpriguseni.png"><img alt="../_images/podpriguseni.png" src="../_images/podpriguseni.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 18 </span><span class="caption-text">Промена положаја тега у току времена за подпригушени случај осциловања. Добијено помоћу <a class="reference external" href="https://beltoforion.de/en/harmonic_oscillator/">симулатора</a>.</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Механичке осцилације" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="2-implementacija.html" class="btn btn-neutral float-right" title="Имплементација" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2023, Милош Ивановић.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

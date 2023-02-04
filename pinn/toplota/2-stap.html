@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="sr" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Једнодимензиони директни проблем &mdash; документација Физички поткрепљене неуронске мреже - Практикум прво</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Индекс" href="../genindex.html" />
+    <link rel="search" title="Претрага" href="../search.html" />
+    <link rel="next" title="Једнодимензиони инверзни проблем" href="3-stap-inv.html" />
+    <link rel="prev" title="Једначина провођења топлоте" href="1-uvod.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Физички поткрепљене неуронске мреже - Практикум
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Садржај</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../uvod/index.html">Увод</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Провођење топлоте</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1-uvod.html">Једначина провођења топлоте</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Једнодимензиони директни проблем</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Решавање методом коначних разлика (МКР)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Решавање помоћу ФПНМ</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="3-stap-inv.html">Једнодимензиони инверзни проблем</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4-stefan.html">Стефанов проблем у моделима топљења</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../oscilacije/index.html">Механичке осцилације</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hidrologija/index.html">Хидрологија</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../akustika/index.html">Акустика</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misici/index.html">Моделовање мишића</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solari/index.html">Моделовање производње соларних електрана</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../literatura/literatura.html">Литература</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Физички поткрепљене неуронске мреже - Практикум</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Провођење топлоте</a></li>
+      <li class="breadcrumb-item active">Једнодимензиони директни проблем</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/toplota/2-stap.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="stap">
+<span id="id1"></span><h1>Једнодимензиони директни проблем<a class="headerlink" href="#stap" title="Permalink to this heading"></a></h1>
+<p>Танак штап од хомогеног материјала је окружен изолацијом, тако да се промене температуре у штапу дешавају само као последица размене топлоте ка крајевима штапа и провођења топлоте дуж штапа. Штап је јединичне дужине. Оба краја су изложена мешавини воде и леда температуре 0. Почетна температура на растојању <span class="math notranslate nohighlight">\(x\)</span> од левог краја штапа је <span class="math notranslate nohighlight">\(sin{(\pi x)}\)</span>, као што се види на <a class="reference internal" href="#fdheat"><span class="std std-numref">Сл. 3</span></a>.</p>
+<figure class="align-default" id="id9">
+<span id="fdheat"></span><a class="reference internal image-reference" href="../_images/fdheat.png"><img alt="../_images/fdheat.png" src="../_images/fdheat.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 3 </span><span class="caption-text">Експериментална поставка проблема провођења топлоте дуж штапа. На крајевима штапа налази се мешавина воде и леда. Штап је изолован од утицаја спољашње средине.</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Ради поређења, показаћемо сада како се овај релативно једноставан проблем формулише помоћу класичне методе коначних разлика, а затим ћемо решити директни и инверзни проблем описане поставке ФПНМ методом.</p>
+<section id="id2">
+<h2>Решавање методом коначних разлика (МКР)<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<p>Парцијална диференцијална једначина <a class="reference internal" href="1-uvod.html#equation-eq-toplota1">(10)</a> моделује температуру у било којој тачки штапа у било ком временском тренутку према <span id="id3">Recktenwald [<a class="reference internal" href="../literatura/literatura.html#id12" title="Gerald W Recktenwald. Finite-difference approximations to the heat equation. Mechanical Engineering, 2004.">Rec04</a>]</span>. Ова једначина се решава методом коначних разлика, која даје апроксимацију решења за распоред температуре, примењујући просторну и временску дискретизацију. Програмска имплементација решења чува температуру сваке тачке дискретизације у дводимензионој матрици. Сваки ред садржи температурну дистрибуцију штапа у неком тренутку времена. Штап је подељен на <span class="math notranslate nohighlight">\(n\)</span> делова дужине <span class="math notranslate nohighlight">\(h\)</span>, па стога сваки ред има <span class="math notranslate nohighlight">\(n+1\)</span> елемената. Начелно, што је веће <span class="math notranslate nohighlight">\(n\)</span>, мања је грешка апрокцимације. Време од 0 до <span class="math notranslate nohighlight">\(T\)</span> је подељено у <span class="math notranslate nohighlight">\(m\)</span> дискретних интервала дужине <span class="math notranslate nohighlight">\(k\)</span>, па стога матрица има <span class="math notranslate nohighlight">\(m+1\)</span> редова, као што је приказано на <a class="reference internal" href="#fdheat2"><span class="std std-numref">Сл. 5</span></a>.</p>
+<figure class="align-default" id="id10">
+<span id="fdheat1"></span><a class="reference internal image-reference" href="../_images/fdheat1.png"><img alt="../_images/fdheat1.png" src="../_images/fdheat1.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 4 </span><span class="caption-text">Како време тече, штап се хлади. Метода коначних разлика омогућава израчунавање температуре у фиксном броју тачака у равномерним временским интервалима. Смањење просторног и временског корака углавном доводи до прецизнијег решења.</span><a class="headerlink" href="#id10" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id11">
+<span id="fdheat2"></span><a class="reference internal image-reference" href="../_images/fdheat2.png"><img alt="../_images/fdheat2.png" src="../_images/fdheat2.png" style="width: 60%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 5 </span><span class="caption-text">Дискретизација једначине провођења топлоте методом коначних разлика</span><a class="headerlink" href="#id11" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Свака тачка <span class="math notranslate nohighlight">\(u_{i,j}\)</span> представља елемент матрице који садржи температуру на позицији <span class="math notranslate nohighlight">\(i \cdot h\)</span>, у тренутку <span class="math notranslate nohighlight">\(j \cdot k\)</span>. На крајевима штапа је температура увек нула. У почетном тренутку, температура у тачки <span class="math notranslate nohighlight">\(x\)</span> је, као што је већ речено, <span class="math notranslate nohighlight">\(sin{(\pi x)}\)</span>. Алгоритам иде корак по корак кроз време, користи вредности из тренутка <span class="math notranslate nohighlight">\(j\)</span> да би израчунао вредности у тренутку <span class="math notranslate nohighlight">\(j+1\)</span>. Формула која репрезентује варијанту апроксимације FTCS (<em>Forward Time Centered Space</em>) као у <span id="id4">Recktenwald [<a class="reference internal" href="../literatura/literatura.html#id12" title="Gerald W Recktenwald. Finite-difference approximations to the heat equation. Mechanical Engineering, 2004.">Rec04</a>]</span> се овде даје без извођења и гласи:</p>
+<div class="math notranslate nohighlight" id="equation-eq-diskretna">
+<span class="eqno">(11)<a class="headerlink" href="#equation-eq-diskretna" title="Permalink to this equation"></a></span>\[u_{i,j+1} = R \cdot u_{i-1,j}+(1-2R) \cdot u_{i,j} + R \cdot u_{i+1,j},\]</div>
+<p>где је</p>
+<div class="math notranslate nohighlight">
+\[R = \alpha \frac{k}{h^2}.\]</div>
+<p>Целокупна анализа различитих експлицитних и имплицитних метода дата је у поменутој референци, а кључни део кода у програмском језику Пајтон имплемениран је на следећи начин:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span> <span class="k">def</span> <span class="nf">heatFTCS</span><span class="p">(</span><span class="n">nt</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">nx</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">tmax</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+<span class="linenos"> 2</span>     <span class="n">h</span> <span class="o">=</span> <span class="n">L</span> <span class="o">/</span> <span class="p">(</span><span class="n">nx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos"> 3</span>     <span class="n">k</span> <span class="o">=</span> <span class="n">tmax</span> <span class="o">/</span> <span class="p">(</span><span class="n">nt</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos"> 4</span>     <span class="n">r</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">k</span> <span class="o">/</span> <span class="n">h</span><span class="o">**</span><span class="mi">2</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span>     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">nx</span><span class="p">)</span>
+<span class="linenos"> 7</span>     <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tmax</span><span class="p">,</span> <span class="n">nt</span><span class="p">)</span>
+<span class="linenos"> 8</span>     <span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nx</span><span class="p">,</span> <span class="n">nt</span><span class="p">))</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span>     <span class="c1"># Почетни услов</span>
+<span class="linenos">11</span>     <span class="n">U</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span> <span class="o">/</span> <span class="n">L</span><span class="p">)</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>     <span class="c1"># Главна петља за МКР</span>
+<span class="linenos">14</span>     <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nt</span><span class="p">):</span>
+<span class="linenos">15</span>         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nx</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+<span class="linenos">16</span>             <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">U</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">r</span><span class="p">)</span> <span class="o">*</span> <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">r</span> <span class="o">*</span> <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span>     <span class="c1"># Егзактно решење за поређење</span>
+<span class="linenos">19</span>     <span class="n">ue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span> <span class="o">/</span> <span class="n">L</span><span class="p">)</span> <span class="o">*</span> \
+<span class="linenos">20</span>         <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="p">[</span><span class="n">nt</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">alpha</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">L</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">L</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Као што детаљно објашњава <span id="id5">Recktenwald [<a class="reference internal" href="../literatura/literatura.html#id12" title="Gerald W Recktenwald. Finite-difference approximations to the heat equation. Mechanical Engineering, 2004.">Rec04</a>]</span>, ако се МКР петља формулише експлицитно као што је то случај код FTCS технике, мора се пажљиво изабрати временски и просторни корак, како би нумеричка пропагација била „бржа” од физичке. Решење које се добија помоћу МКР шеме се може видети на <a class="reference internal" href="#ftcs"><span class="std std-numref">Сл. 6</span></a>.</p>
+<figure class="align-default" id="id12">
+<span id="ftcs"></span><a class="reference internal image-reference" href="../_images/ftcs.png"><img alt="../_images/ftcs.png" src="../_images/ftcs.png" style="width: 60%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 6 </span><span class="caption-text">Решење које се добија МКР методом користећи експлицитну FTCS технику у тренутку <span class="math notranslate nohighlight">\(t=0.1s\)</span></span><a class="headerlink" href="#id12" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Овај проблем има и аналитичко решење, па је погодан за тестирање различитих нумеричких метода. То решење гласи:</p>
+<div class="math notranslate nohighlight" id="equation-eq-analiticko1">
+<span class="eqno">(12)<a class="headerlink" href="#equation-eq-analiticko1" title="Permalink to this equation"></a></span>\[u(x,t) = \sin\left(\frac{\pi x}{L}\right) \cdot e^{-\frac{\alpha\pi^2}{L^2}t}.\]</div>
+<p>или у нашем случају, када је <span class="math notranslate nohighlight">\(L=1\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[u(x,t) = \sin(\pi x) \cdot e^{-\alpha \pi^2 t}.\]</div>
+<p>Експлицитне технике попут FTCS не гарантују конзистентност решења коју гарантују имплицитне технике као што је BTCS (<em>Backward Time Centered Space</em>). МКР је устаљени приступ који за већину правилно дефинисаних просторних домена ради веома добро. За овако једноставну поставку као што је једнодимензионо провођење топлоте и када су сви параметри проблема познати (овде је то <span class="math notranslate nohighlight">\(\alpha\)</span>), МКР је често оптимална метода. Међутим, код већине проблема из праксе то није случај. Хајде да размотримо како да овај проблем решимо користећи ФПНМ и директно упоредимо са МКР.</p>
+</section>
+<section id="id6">
+<h2>Решавање помоћу ФПНМ<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h2>
+<p>Решење једначине <a class="reference internal" href="#fdheat"><span class="std std-numref">Сл. 3</span></a> са већ постављеним граничним и почетним условима:</p>
+<div class="math notranslate nohighlight" id="equation-eq-granicni1">
+<span class="eqno">(13)<a class="headerlink" href="#equation-eq-granicni1" title="Permalink to this equation"></a></span>\[\begin{split}u(x=0,t)=u(x=1,t)=0, \, \forall t \\
+u(x,t=0) = sin{(\pi x)}\end{split}\]</div>
+<p>потражићемо помоћу ФПНМ приступа. Иако је могуће да методе имплементирамо директно као <span id="id7">Raissi <em>et al.</em> [<a class="reference internal" href="../literatura/literatura.html#id3" title="Maziar Raissi, Paris Perdikaris, and George E Karniadakis. Physics-informed neural networks: a deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations. Journal of Computational Physics, 378:686–707, 2019.">RPK19</a>]</span> користећи оквир за дубоко учење као што је <a class="reference external" href="https://www.tensorflow.org/">Tensorflow</a>, ипак ћемо искористити помоћ библиотека које додатно апстрахују ФПНМ ентитете и омогућавају кориснику да се фокусира на проблем који решава. Овај пример решићемо користећи бибиотеку <a class="reference external" href="https://www.sciann.com/">SCIANN</a> аутора <span id="id8">Haghighat and Juanes [<a class="reference internal" href="../literatura/literatura.html#id13" title="Ehsan Haghighat and Ruben Juanes. Sciann: a keras/tensorflow wrapper for scientific computations and physics-informed deep learning using artificial neural networks. Computer Methods in Applied Mechanics and Engineering, 373:113552, 2021.">HJ21</a>]</span>. Поступак решавања објаснићемо директно кроз програмски код:</p>
+<div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-number">Листинг 1 </span><span class="caption-text">ФПНМ - провођење топлоте</span><a class="headerlink" href="#id13" title="Permalink to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="linenos"> 2</span> <span class="kn">import</span> <span class="nn">sciann</span> <span class="k">as</span> <span class="nn">sn</span>
+<span class="linenos"> 3</span> <span class="kn">from</span> <span class="nn">sciann.utils.math</span> <span class="kn">import</span> <span class="n">diff</span><span class="p">,</span> <span class="n">sign</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">exp</span>
+<span class="linenos"> 4</span> <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">pi</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span> <span class="n">x</span> <span class="o">=</span> <span class="n">sn</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="linenos"> 7</span> <span class="n">t</span> <span class="o">=</span> <span class="n">sn</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="linenos"> 8</span> <span class="n">u</span> <span class="o">=</span> <span class="n">sn</span><span class="o">.</span><span class="n">Functional</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">],</span> <span class="mi">3</span><span class="o">*</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span> <span class="s1">&#39;tanh&#39;</span><span class="p">)</span>
+<span class="linenos"> 9</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span> <span class="n">L1</span> <span class="o">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">diff</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span> <span class="n">TOLX</span> <span class="o">=</span> <span class="mf">0.011</span>
+<span class="linenos">14</span> <span class="n">TOLT</span> <span class="o">=</span> <span class="mf">0.0011</span>
+<span class="linenos">15</span> <span class="n">C1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sign</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">TOLT</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">sin</span><span class="p">(</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
+<span class="linenos">16</span> <span class="n">C2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="mi">0</span><span class="o">+</span><span class="n">TOLX</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="linenos">17</span> <span class="n">C3</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">TOLX</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span> <span class="n">m</span> <span class="o">=</span> <span class="n">sn</span><span class="o">.</span><span class="n">SciModel</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">],</span> <span class="p">[</span><span class="n">L1</span><span class="p">,</span> <span class="n">C1</span><span class="p">,</span> <span class="n">C2</span><span class="p">,</span> <span class="n">C3</span><span class="p">],</span> <span class="s1">&#39;mse&#39;</span><span class="p">,</span> <span class="s1">&#39;Adam&#39;</span><span class="p">)</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span> <span class="n">x_data</span><span class="p">,</span> <span class="n">t_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span>
+<span class="linenos">22</span>     <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">),</span>
+<span class="linenos">23</span>     <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+<span class="linenos">24</span> <span class="p">)</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span> <span class="n">h</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">train</span><span class="p">([</span><span class="n">x_data</span><span class="p">,</span> <span class="n">t_data</span><span class="p">],</span> <span class="mi">4</span><span class="o">*</span><span class="p">[</span><span class="s1">&#39;zero&#39;</span><span class="p">],</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.002</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span> <span class="c1"># Test</span>
+<span class="linenos">29</span> <span class="n">nx</span><span class="p">,</span> <span class="n">nt</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">10</span>
+<span class="linenos">30</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">t_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span>
+<span class="linenos">31</span>     <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">,</span> <span class="n">nx</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span>
+<span class="linenos">32</span>     <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">nt</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">33</span> <span class="p">)</span>
+<span class="linenos">34</span> <span class="n">u_pred</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="p">[</span><span class="n">x_test</span><span class="p">,</span> <span class="n">t_test</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<p>Варијабле <span class="math notranslate nohighlight">\(x\)</span> и <span class="math notranslate nohighlight">\(t\)</span> се на почетку дефинишу на прописани начин. Основни појам који се користи у SCIANN библиотеци за апстракцију ФПНМ је функционал, који је овде означен са <span class="math notranslate nohighlight">\(u\)</span>, који као улаз узима <span class="math notranslate nohighlight">\(x\)</span> и <span class="math notranslate nohighlight">\(t\)</span>, има 3 скривена слоја са по 20 неурона и као активацију свих тих неурона узима функцију хиперболичког тангенса. Први сабирак копозитне функције губитка произилази из саме диференцијалне једначине <a class="reference internal" href="1-uvod.html#equation-eq-toplota1">(10)</a>. Као што се види, за диференцирање се користи специјални оператор <code class="docutils literal notranslate"><span class="pre">diff()</span></code> из библиотеке:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">L1</span> <span class="o">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">diff</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Најзанимљивији и не баш тако очигледан је начин дефинисања почетног услова <code class="docutils literal notranslate"><span class="pre">C1</span></code> и граничних услова <code class="docutils literal notranslate"><span class="pre">C2</span></code> и <code class="docutils literal notranslate"><span class="pre">C3</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">C1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sign</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">TOLT</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">sin</span><span class="p">(</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
+<span class="n">C2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="mi">0</span><span class="o">+</span><span class="n">TOLX</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="n">C3</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">TOLX</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Овде је <code class="docutils literal notranslate"><span class="pre">C1</span></code> једнак нули у свим тачкама узорковања осим за <span class="math notranslate nohighlight">\(t \le TOLT\)</span>. Толеранције <em>TOLX</em> и <em>TOLT</em> су постављене тако да „хватају” прву/последњу врсту или колону колокационих тачака, у зависности шта је потребно. Уместо функције знака <code class="docutils literal notranslate"><span class="pre">sign()</span></code>, могу се користити и глаткије функције, као што је хиперболички тангенс. ФПНМ модел се формира помоћу <code class="docutils literal notranslate"><span class="pre">SciModel</span></code> конструктора који дефинише и тип функције губитка и алгоритам оптимизације, тј. обучавања:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">sn</span><span class="o">.</span><span class="n">SciModel</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">],</span> <span class="p">[</span><span class="n">L1</span><span class="p">,</span> <span class="n">C1</span><span class="p">,</span> <span class="n">C2</span><span class="p">,</span> <span class="n">C3</span><span class="p">],</span> <span class="s1">&#39;mse&#39;</span><span class="p">,</span> <span class="s1">&#39;Adam&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Обучавање модела се покреће методом <code class="docutils literal notranslate"><span class="pre">train()</span></code>, при чему се наводе следећи параметри:</p>
+<ol class="arabic simple">
+<li><p><strong>Скуп колокационих тачака за тренирање</strong>.  Овде је то правилна еквидистантна мрежа тачака по обе варијабле. Хоризонтала је простор, а вертикала време.</p></li>
+<li><p><strong>Почетне вредности компоненти функције губитка</strong>. Уобичајено је да се на почетку поставе на нуле.</p></li>
+<li><p><strong>Стопа учења</strong>,</p></li>
+<li><p><strong>Величина batch-a</strong>. Треба имати на уму да ако је број тачака домена у којима се намећу гранични услови значајно мањи у односу на укупан број колокационих тачака, параметар  оптимизације <code class="docutils literal notranslate"><span class="pre">batch_size</span></code> треба да буде подешен на велики број који гарантује доследну оптимизацију мини <em>batch</em>-a. У супротном, може да се деси да неки мини <em>batch</em>-еви не добију ниједну колокациону тачку која припада граничним условима и стога не генеришу тачан градијент за ажурирање методом градијентног спуста.</p></li>
+<li><p><strong>Број епоха</strong>.</p></li>
+</ol>
+<figure class="align-default" id="id14">
+<span id="loss1"></span><a class="reference internal image-reference" href="../_images/loss1.png"><img alt="../_images/loss1.png" src="../_images/loss1.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 7 </span><span class="caption-text">Историја обуке једнодимензионог модела провођења топлоте.</span><a class="headerlink" href="#id14" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Ток обуке можемо да испратимо кроз стандардне <em>Tensorflow</em> објекте, као што је <code class="docutils literal notranslate"><span class="pre">h.history['loss']</span></code>, као што се види на <a class="reference internal" href="#loss1"><span class="std std-numref">Сл. 7</span></a>. Пошто се заврши обука ФПНМ-а, можемо формирати тестни скуп тачака слично као што смо то учинили и са колокационим тачкама и проверити резултате предикције позивом методе <code class="docutils literal notranslate"><span class="pre">eval()</span></code> на објекту истренираног модела. Резултат поља температуре дуж штапа у тренутку <span class="math notranslate nohighlight">\(t=0,1\)</span> и његово поређење са аналитичким решењем види се на <a class="reference internal" href="#heat1"><span class="std std-numref">Сл. 8</span></a>.</p>
+<figure class="align-default" id="id15">
+<span id="heat1"></span><a class="reference internal image-reference" href="../_images/heat-pinn1.png"><img alt="../_images/heat-pinn1.png" src="../_images/heat-pinn1.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 8 </span><span class="caption-text">Поље температуре дуж штапа у тренутку <span class="math notranslate nohighlight">\(t=0,1\)</span> добијено методом ФПНМ.</span><a class="headerlink" href="#id15" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Чисто практично гледано, <strong>ФПНМ решење једноставног директног проблема као што је овај и не пружа никакве посебне предности у односу на класичну МКР методу</strong>. Прво, решавање дуже траје и захтева упошљавање више рачунарских ресурса и зависности у виду додатних библиотека за тензорски рачун. Даље, спецификација почетних и граничних услова код ФПНМ има своје специфичности. Треће, неопходно је методом пробе и грешке подесити хипер-параметре модела, као што су: број скривених слојева, број неурона по слоју, активациона функција, брзина учења (<em>Learning Rate</em>) итд. Од избора хипер-параметара конвергенција решења може значајно да зависи.</p>
+<p>Са друге стране, за разлику од МКР и МКЕ (<em>Метода Коначних Елемената</em>), ФПНМ нам дозвољава да проблем дефинишемо чистим диференцијалним једначинама и произвољним граничним условима (Дирихлеови, Нојманови, периодични, скуп тачака). <strong>Нема потребе за специфицирањем алгебарске везе између чворова</strong> (тј. колокационих тачака у ФПНМ) и решавањем тако постављеног система једначина. Захваљујући овој чињеници, било која нова физика у виду новог граничног услова или промена у самој диференцијалној једначини може да се изведе веома лако, омогућавајући брзу проверу хипотеза и израду прототипова.</p>
+<p>Друго, док све класичне методе прорачун морају да изведу кроз временске кораке (<em>time stepping</em>), <strong>ФПНМ омогућава брзу инференцију</strong> на већ обученој мрежи за било који временски тренутак <span class="math notranslate nohighlight">\(t\)</span> поставњен на улазу мреже. За неке примене у реалном времену где је брзина од кључног значаја, ово може да буде пресудно.</p>
+<p>Треће, ФПНМ методолошки не разликује <strong>директне проблеме</strong> (у којима се решава позната диференцијална једначина) од <strong>инверзних проблема</strong>, код којих су неки од параметара непознати, али постоје додатни услови из којих се непознати параметри могу добити процесом тренинга. У наредној теми <a class="reference internal" href="3-stap-inv.html#stap-inverzni"><span class="std std-ref">Једнодимензиони инверзни проблем</span></a> демонстрираћемо један такав проблем.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="1-uvod.html" class="btn btn-neutral float-left" title="Једначина провођења топлоте" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="3-stap-inv.html" class="btn btn-neutral float-right" title="Једнодимензиони инверзни проблем" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2023, Милош Ивановић.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

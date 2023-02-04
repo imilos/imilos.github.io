@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="sr" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Имплементација &mdash; документација Физички поткрепљене неуронске мреже - Практикум прво</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Индекс" href="../genindex.html" />
+    <link rel="search" title="Претрага" href="../search.html" />
+    <link rel="next" title="Решења директног проблема" href="3-rezultati.html" />
+    <link rel="prev" title="Осцилатор" href="1-uvod.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Физички поткрепљене неуронске мреже - Практикум
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Садржај</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../uvod/index.html">Увод</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toplota/index.html">Провођење топлоте</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Механичке осцилације</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1-uvod.html">Осцилатор</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Имплементација</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-rezultati.html">Решења директног проблема</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4-inverzni.html">Инверзни проблем</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../hidrologija/index.html">Хидрологија</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../akustika/index.html">Акустика</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misici/index.html">Моделовање мишића</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solari/index.html">Моделовање производње соларних електрана</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../literatura/literatura.html">Литература</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Физички поткрепљене неуронске мреже - Практикум</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Механичке осцилације</a></li>
+      <li class="breadcrumb-item active">Имплементација</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/oscilacije/2-implementacija.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="oscilacije-implementacija">
+<span id="id1"></span><h1>Имплементација<a class="headerlink" href="#oscilacije-implementacija" title="Permalink to this heading"></a></h1>
+<p>Да бисмо реализовали предложени модел пригушених осцилација у једној димензији описан обичном диференцијалном једначином у секцији <a class="reference internal" href="1-uvod.html#oscilacije-uvod"><span class="std std-ref">Осцилатор</span></a>, уместо библиотеке SCIANN користићемо нешто новију библиотеку DeepXDE <span id="id2">Lu <em>et al.</em> [<a class="reference internal" href="../literatura/literatura.html#id16" title="Lu Lu, Xuhui Meng, Zhiping Mao, and George Em Karniadakis. Deepxde: a deep learning library for solving differential equations. SIAM Review, 63(1):208–228, 2021.">LMMK21</a>]</span>. Идеја је да овим материјалом покријемо све значајне софтверске оквире који подржавају ФПНМ методологију у тренутку писања (2022-2023). Како аутори кажу, DeepXDE библиотека је дизајнирана да служи и као образовно средство које ће се користити у високом школству и као истраживачки алат за решавање проблема у компјутерским наукама и инжењерству. Конкретно, DeepXDE може да решава проблеме за унапред дате почетне и граничне услове, као и инверзне проблеме уз нека додатна мерења. Подржава домене сложене геометрије и омогућава да кориснички код буде компактан, веома сличан математичкој формулацији.</p>
+<p>У односу на SCIANN, приступ DeepXDE подразумева нешто виши степен апстракције, па тиме и лакоће употребе. На пример, компликације око постављања колокационих тачака у којима важе гранични и почетни услови, као и величина <em>batch</em>-a, не потпадају под бригу корисника, већ се сама библиотека стара о томе да специфицирани број тачака подлеже граничним условима. Тај ниво апстракције у неким специфичним случајевима може представљати препреку, али у великој већини случајева доприноси јаснијем дефинисању проблема.</p>
+<p>На следећем листингу дати су значајни делови имплмементације:</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-number">Листинг 4 </span><span class="caption-text">Решење проблема пригушених осцилација у 1Д коришћењем DeepXDE библиотеке</span><a class="headerlink" href="#id3" title="Permalink to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">deepxde</span> <span class="k">as</span> <span class="nn">dde</span>
+<span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="linenos"> 3</span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="n">m</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="linenos"> 6</span><span class="n">mu</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="linenos"> 7</span><span class="n">k</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="c1"># Pocetni uslovi</span>
+<span class="linenos">10</span><span class="n">x0</span><span class="p">,</span> <span class="n">v0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="n">delta</span> <span class="o">=</span> <span class="n">mu</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">m</span><span class="p">)</span>
+<span class="linenos">13</span><span class="n">w0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="o">/</span><span class="n">m</span><span class="p">)</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="c1"># Da li je tacka blizu t=0 (provera pocetnog uslova)</span>
+<span class="linenos">16</span><span class="k">def</span> <span class="nf">boundary_l</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">on_initial</span><span class="p">):</span>
+<span class="linenos">17</span>    <span class="k">return</span> <span class="n">on_initial</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="c1"># Jednacina ODE</span>
+<span class="linenos">20</span><span class="k">def</span> <span class="nf">Ode</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
+<span class="linenos">21</span>        <span class="n">dxdt</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">jacobian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+<span class="linenos">22</span>        <span class="n">dxdtt</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">hessian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+<span class="linenos">23</span>        <span class="k">return</span> <span class="n">m</span> <span class="o">*</span> <span class="n">dxdtt</span> <span class="o">+</span> <span class="n">mu</span> <span class="o">*</span> <span class="n">dxdt</span> <span class="o">+</span> <span class="n">k</span><span class="o">*</span><span class="n">x</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="c1"># x(0)=x0</span>
+<span class="linenos">26</span><span class="k">def</span> <span class="nf">bc_func1</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="linenos">27</span>    <span class="k">return</span> <span class="n">outputs</span> <span class="o">-</span> <span class="n">x0</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span><span class="c1"># x&#39;(0)=v0</span>
+<span class="linenos">30</span><span class="k">def</span> <span class="nf">bc_func2</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="linenos">31</span>    <span class="k">return</span> <span class="n">dde</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">jacobian</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">j</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-</span> <span class="n">v0</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span><span class="c1"># Resava se na domenu t=(0,10)</span>
+<span class="linenos">34</span><span class="n">interval</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">TimeDomain</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="linenos">35</span>
+<span class="linenos">36</span><span class="c1"># Pocetni uslovi</span>
+<span class="linenos">37</span><span class="n">ic1</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">icbc</span><span class="o">.</span><span class="n">OperatorBC</span><span class="p">(</span><span class="n">interval</span><span class="p">,</span> <span class="n">bc_func1</span><span class="p">,</span> <span class="n">boundary_l</span><span class="p">)</span>
+<span class="linenos">38</span><span class="n">ic2</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">icbc</span><span class="o">.</span><span class="n">OperatorBC</span><span class="p">(</span><span class="n">interval</span><span class="p">,</span> <span class="n">bc_func2</span><span class="p">,</span> <span class="n">boundary_l</span><span class="p">)</span>
+<span class="linenos">39</span>
+<span class="linenos">40</span><span class="c1"># Definsanje problema, granicnih uslova, broja kolokacionih tacaka</span>
+<span class="linenos">41</span><span class="n">data</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">TimePDE</span><span class="p">(</span><span class="n">interval</span><span class="p">,</span> <span class="n">Ode</span><span class="p">,</span> <span class="p">[</span><span class="n">ic1</span><span class="p">,</span> <span class="n">ic2</span><span class="p">],</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">solution</span><span class="o">=</span><span class="n">func</span><span class="p">,</span> <span class="n">num_test</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="linenos">42</span>
+<span class="linenos">43</span><span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">30</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">44</span><span class="n">activation</span> <span class="o">=</span> <span class="s2">&quot;tanh&quot;</span>
+<span class="linenos">45</span><span class="n">init</span> <span class="o">=</span> <span class="s2">&quot;Glorot uniform&quot;</span>
+<span class="linenos">46</span><span class="n">net</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">FNN</span><span class="p">(</span><span class="n">layers</span><span class="p">,</span> <span class="n">activation</span><span class="p">,</span> <span class="n">init</span><span class="p">)</span>
+<span class="linenos">47</span>
+<span class="linenos">48</span><span class="n">model</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">net</span><span class="p">)</span>
+<span class="linenos">49</span>
+<span class="linenos">50</span><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;adam&quot;</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">.001</span><span class="p">,</span> <span class="n">loss_weights</span><span class="o">=</span><span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;l2 relative error&quot;</span><span class="p">])</span>
+<span class="linenos">51</span><span class="n">losshistory</span><span class="p">,</span> <span class="n">train_state</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">epochs</span><span class="o">=</span><span class="mi">30000</span><span class="p">)</span>
+<span class="linenos">52</span>
+<span class="linenos">53</span><span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">54</span><span class="n">x_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>На почетку се дефинишу импорти и константе проблема, као и додатне константе <code class="docutils literal notranslate"><span class="pre">delta</span></code> и <code class="docutils literal notranslate"><span class="pre">w0</span></code> које смо користили приликом извођења аналитичког решења. Функцију</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">boundary_l</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">on_initial</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">on_initial</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>ћемо искористити за тестирање да ли је дата колокациона тачка близу тачке <code class="docutils literal notranslate"><span class="pre">t=0</span></code>, тј. да ли за дату тачку важи почетни услов. Употребићемо је при формирању почетних услова за позицију и брзину. Даље, као што назив сугерише, наредна функција</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Ode</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
+        <span class="n">dxdt</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">jacobian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">dxdtt</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">hessian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">m</span> <span class="o">*</span> <span class="n">dxdtt</span> <span class="o">+</span> <span class="n">mu</span> <span class="o">*</span> <span class="n">dxdt</span> <span class="o">+</span> <span class="n">k</span><span class="o">*</span><span class="n">x</span>
+</pre></div>
+</div>
+<p>представља поставку проблема у свом извворном облику једначине <a class="reference internal" href="1-uvod.html#equation-eq-oscilacije-dif">(20)</a>. Овде је очигледна једна од главних предности ФПНМ, тј. да неке додатне трансформације у интеграционим тачкама нису потребне, већ само поставка диференцијалне једначине у виду функције губитка и граничних услова у истом облику. Услужне методе <code class="docutils literal notranslate"><span class="pre">dde.grad.jacobian</span></code> и <code class="docutils literal notranslate"><span class="pre">dde.grad.hessian</span></code> враћају прве, односно друге изводе по улазним варијаблама примењуући тзв. аутоматску диференцијацију. Подразумевано се у позадини користи <em>Tensorflow</em> за тензорске операције ниског нивоа.</p>
+<p>Поставка два почетна услова у форми функције губитка дата је у следеће две методе, за координату и брзину респективно:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bc_func1</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">outputs</span> <span class="o">-</span> <span class="n">x0</span>
+
+<span class="k">def</span> <span class="nf">bc_func2</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">dde</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">jacobian</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">j</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-</span> <span class="n">v0</span>
+</pre></div>
+</div>
+<p>Након поставке једнодимензионог временског домена у коме се проблем решава:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">interval</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">TimeDomain</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>можемо да формирамо и објекте граничних услова комбинујући функције губитка са функцијом локације <code class="docutils literal notranslate"><span class="pre">boundary_l()</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ic1</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">icbc</span><span class="o">.</span><span class="n">OperatorBC</span><span class="p">(</span><span class="n">interval</span><span class="p">,</span> <span class="n">bc_func1</span><span class="p">,</span> <span class="n">boundary_l</span><span class="p">)</span>
+<span class="n">ic2</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">icbc</span><span class="o">.</span><span class="n">OperatorBC</span><span class="p">(</span><span class="n">interval</span><span class="p">,</span> <span class="n">bc_func2</span><span class="p">,</span> <span class="n">boundary_l</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Сада имамо све елементе да формирамо објекат проблема који решавамо. Овде ћемо то учинити методом <code class="docutils literal notranslate"><span class="pre">dde.data.TimePDE</span></code> за временски зависне проблеме:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">TimePDE</span><span class="p">(</span><span class="n">interval</span><span class="p">,</span> <span class="n">Ode</span><span class="p">,</span> <span class="p">[</span><span class="n">ic1</span><span class="p">,</span> <span class="n">ic2</span><span class="p">],</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">solution</span><span class="o">=</span><span class="n">func</span><span class="p">,</span> <span class="n">num_test</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Специфицирамо редом рачунски домен, основну једначину, листу граничних услова, број колокационих тачака за основни домен (100), број колокационих тачака за граничне услове (20), егзактно решење (ако постоји) и број тестних тачака (за поређење са егзактним решењем). У овом примеру ћемо игнорисати егзактно решење. Одмах се види разлика у поставци у односу на SCIANN приступ у начину навођења колокационих тачака. Наиме, код DeepXDE колокационе тачке се не генеришу мануелно, већ се препушта библиотеци да то уради за нас, што указује на један виши ниво апстракције.</p>
+<p>Наредне линије кода конструишу неуронску мрежу која ће се користити као апроксимација проблема, са свим својим хипер-параметрима:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">30</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">activation</span> <span class="o">=</span> <span class="s2">&quot;tanh&quot;</span>
+<span class="n">init</span> <span class="o">=</span> <span class="s2">&quot;Glorot uniform&quot;</span>
+<span class="n">net</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">FNN</span><span class="p">(</span><span class="n">layers</span><span class="p">,</span> <span class="n">activation</span><span class="p">,</span> <span class="n">init</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Наша мрежа има један улаз, један излаз и два скривена слоја од по 30 неурона, са активацијом скривених слојева у виду <code class="docutils literal notranslate"><span class="pre">tanh</span></code> функције и одговарајућом иницијализацијом. На крају, можемо да кренемо у обучавање, када спојивши проблем и генерисану неуронску мрежу формирамо модел:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">net</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;adam&quot;</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">.001</span><span class="p">,</span> <span class="n">loss_weights</span><span class="o">=</span><span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;l2 relative error&quot;</span><span class="p">])</span>
+<span class="n">losshistory</span><span class="p">,</span> <span class="n">train_state</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">epochs</span><span class="o">=</span><span class="mi">30000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Ово су стандардне методе које се широко користе у области дубоког учења, па је довољно само поменути да се наводи алгоритам оптимизације, брзина учења и начин прорачуна грешке која управља овим процесом. Специфичност за ФПНМ је што овде листом <code class="docutils literal notranslate"><span class="pre">loss_weights</span></code> можемо и да „пондеришемо” тежине основне диференцијалне једначине, првог и другог граничног услова, респективно. У наредној секцији <a class="reference internal" href="3-rezultati.html#oscilacije-rezultati"><span class="std std-ref">Решења директног проблема</span></a> ћемо размотрити решења за сва три случаја пригушеног осциловања.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="1-uvod.html" class="btn btn-neutral float-left" title="Осцилатор" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="3-rezultati.html" class="btn btn-neutral float-right" title="Решења директног проблема" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2023, Милош Ивановић.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

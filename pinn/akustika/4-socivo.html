@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="sr" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Дводимензиони проблем са сочивом &mdash; документација Физички поткрепљене неуронске мреже - Практикум прво</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Индекс" href="../genindex.html" />
+    <link rel="search" title="Претрага" href="../search.html" />
+    <link rel="next" title="Моделовање мишића" href="../misici/index.html" />
+    <link rel="prev" title="Решавање на домену облика квадрата са шупљином" href="3-rupa.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Физички поткрепљене неуронске мреже - Практикум
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Садржај</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../uvod/index.html">Увод</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toplota/index.html">Провођење топлоте</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oscilacije/index.html">Механичке осцилације</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hidrologija/index.html">Хидрологија</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Акустика</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1-uvod.html">Увод</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-ravan.html">Решавање на домену облика квадрата</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-rupa.html">Решавање на домену облика квадрата са шупљином</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Дводимензиони проблем са сочивом</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Имплементација</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Резултати</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../misici/index.html">Моделовање мишића</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solari/index.html">Моделовање производње соларних електрана</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../literatura/literatura.html">Литература</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Физички поткрепљене неуронске мреже - Практикум</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Акустика</a></li>
+      <li class="breadcrumb-item active">Дводимензиони проблем са сочивом</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/akustika/4-socivo.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="akustika-socivo">
+<span id="id1"></span><h1>Дводимензиони проблем са сочивом<a class="headerlink" href="#akustika-socivo" title="Permalink to this heading"></a></h1>
+<p>Овај одељак се бави нешто модификованим <a class="reference external" href="https://www.dealii.org/current/doxygen/deal.II/step_29.html">примером из туторијала</a> за познати софтверски оквир за рад са методом коначних елемената <strong>Deal.II</strong>. Првобитна сврха овог примера је да симулира својства фокусирања ултразвучног таласа који генерише сочиво претварача са променљивом геометријом. Савремене примене у медицинском имиџингу користе ултразвучне таласе не само за сврхе снимања, већ и за изазивање одређених локалних ефеката у материјалу, као што су промене у оптичким својствима, које се затим могу мерити другим техникама снимања. Витални састојак ових метода је способност фокусирања интензитета ултразвучног таласа у одређеном делу материјала, идеално у тачки, како би се могла испитати својства материјала на тој локацији.</p>
+<p>Карактеристична таласна дужина ултразвука нешто мања од феномена које смо до сада моделовали ФПНМ методом, те би нам био потребан изузетно велики број колокационих тачака што продужава тренирање. Зато смо таласну дужину нешто повећали (смањили фреквенцију), док остале параметре нисмо мењали.</p>
+<p>Како бисмо извели једначине за овај проблем, звук узимамо као талас којим се шири промена притиска:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial^2 U}{\partial t^2} - c^2 \Delta U = 0,\]</div>
+<p>где је <span class="math notranslate nohighlight">\(c\)</span> брзина звука, која се због једноставности узима као константа, <span class="math notranslate nohighlight">\(U = U(x,t) ,\; x \in \Omega, \; t \in \mathrm{R}\)</span>. Поставка проблема дата је на <a class="reference internal" href="#id3"><span class="std std-numref">Сл. 42</span></a>.</p>
+<figure class="align-default" id="id8">
+<span id="id3"></span><a class="reference internal image-reference" href="../_images/akustika3.png"><img alt="../_images/akustika3.png" src="../_images/akustika3.png" style="width: 60%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 42 </span><span class="caption-text">Поставка проблема и гранични услови</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Граница <span class="math notranslate nohighlight">\(\Gamma=\partial\Omega\)</span> подељена је на два дела, и то <span class="math notranslate nohighlight">\(\Gamma_1\)</span> и <span class="math notranslate nohighlight">\(\Gamma_2 = \Gamma\setminus\Gamma_1\)</span>, где <span class="math notranslate nohighlight">\(\Gamma_1\)</span> представља сочиво, а <span class="math notranslate nohighlight">\(\Gamma_2\)</span> апсорбујућу границу. Заправо, желимо да направимо такав гранични услов на <span class="math notranslate nohighlight">\(\Gamma_2\)</span> тако да се опонаша знатно већи домен. На <span class="math notranslate nohighlight">\(\Gamma_1\)</span>, претварач генерише таласе константне фреквенције <span class="math notranslate nohighlight">\(\omega &gt; 0\)</span> и константне јединичне амплитуде:</p>
+<div class="math notranslate nohighlight">
+\[U(x,t) = \cos{\omega t}, \qquad x\in \Gamma_1\]</div>
+<p>Пошто нема других (интерних или граничних) извора и пошто само извор емитује таласе фреквенције <span class="math notranslate nohighlight">\(\omega\)</span>, дозвољено је да извршимо раздвајање променљивих <span class="math notranslate nohighlight">\(U(x,t) = \textrm{Re}\left(u(x)\,e^{i\omega t})\right)\)</span>. Комплексна функција <span class="math notranslate nohighlight">\(u(x)\)</span> описује просторну зависност амплитуде и фазе (релативно у односу на извор) таласа фреквенције <span class="math notranslate nohighlight">\(\omega\)</span>, док је амлитуда величина која нас интересује. Ако овако формулисану функцију уврстимо у таласну једначину, видимо да за <span class="math notranslate nohighlight">\(u\)</span> имамо</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}-\omega^2 u(x) - c^2\Delta u(x) = 0, \qquad x \in \Omega, \\
+u(x) = 1,  \qquad x \in \Gamma_1.\end{split}\]</div>
+<p>Да бисмо нашли одговарајуће граничне услове на <span class="math notranslate nohighlight">\(\Gamma_2\)</span> који опонашају апсорбујућу границу, размотримо талас облика <span class="math notranslate nohighlight">\(V(x,t)=e^{i(k\cdot x - \omega t)}\)</span> фреквенције <span class="math notranslate nohighlight">\(\omega\)</span> који се простире у правцу <span class="math notranslate nohighlight">\(k \in {\mathrm{R}^2}\)</span>. Да би <span class="math notranslate nohighlight">\(V\)</span> био решење таласне једначине, мора да важи <span class="math notranslate nohighlight">\(|k|=\frac{\omega}{c}\)</span>. Претпоставимо да талас долази до <span class="math notranslate nohighlight">\(x_0 \in \Gamma_2\)</span> под правим углом, на пример <span class="math notranslate nohighlight">\(n=\frac{k}{|k|}\)</span> где <span class="math notranslate nohighlight">\(n\)</span> означава нормалу на <span class="math notranslate nohighlight">\(\Omega \in x_0\)</span>. Онда у <span class="math notranslate nohighlight">\(x_0\)</span>, овај талас задовољава једначину</p>
+<div class="math notranslate nohighlight">
+\[c (n\cdot\nabla V) + \frac{\partial V}{\partial t} = (i\, c\, |k| - i\, \omega) V = 0.\]</div>
+<p>Постављањем граничног услова</p>
+<div class="math notranslate nohighlight">
+\[c (n\cdot\nabla U) + \frac{\partial U}{\partial t} = 0, \qquad x\in\Gamma_2,\]</div>
+<p>таласи који ударају у границу <span class="math notranslate nohighlight">\(\Gamma_2\)</span> под правим углом биће савршено апсорбовани. Са друге стране, они делови таласног поља који не падају под правим углом не задовољавају овај услов, па ће долазити до парцијалних рефлексија. У основи, директни делови таласа ће проћи кроз границу као да она не постоји, док ће остали бити рефлектовани назад у домен.</p>
+<p>Уколико смо спремни да прихватимо овако предложену апроксимацију, онда за <span class="math notranslate nohighlight">\(u\)</span> важи следеће:</p>
+<div class="math notranslate nohighlight" id="equation-eq-sistem">
+<span class="eqno">(31)<a class="headerlink" href="#equation-eq-sistem" title="Permalink to this equation"></a></span>\[\begin{split}-\omega^2 u - c^2\Delta u = 0, \qquad x \in \Omega, \\
+c (n\cdot\nabla u) + i\,\omega\, u=0, \qquad x \in \Gamma_2, \\
+u=1,  \qquad x \in \Gamma_1.\end{split}\]</div>
+<p>препознајемо Хелмхолцову једначину са Дирихлеовим условом на <span class="math notranslate nohighlight">\(\Gamma_1\)</span> и мешаним граничним условом на <span class="math notranslate nohighlight">\(\Gamma_2\)</span>. Због услова на <span class="math notranslate nohighlight">\(\Gamma_2\)</span> не можемо да третирамо реалане и имагинарне делове <span class="math notranslate nohighlight">\(u\)</span> посебно. Оно што можемо да урадимо је да формирамо систем од две парцијалне диференцијалне једначине у којима фигуришу реални и имагинарни део <span class="math notranslate nohighlight">\(u\)</span>, са граничним условима на <span class="math notranslate nohighlight">\(\Gamma_2\)</span> које везују ове две компоненте. Ако означимо да је <span class="math notranslate nohighlight">\(v=\textrm{Re}\;u,\; w=\textrm{Im}\;u\)</span>, систем <a class="reference internal" href="#equation-eq-sistem">(31)</a> гласи:</p>
+<div class="math notranslate nohighlight" id="equation-eq-sistem1">
+<span class="eqno">(32)<a class="headerlink" href="#equation-eq-sistem1" title="Permalink to this equation"></a></span>\[\begin{split}-\omega^2 v - c^2 \Delta v=0 \quad \\
+-\omega^2 w - c^2 \Delta w=0 \quad \\
+x \in \Omega,
+    \\
+c (n\cdot\nabla v) - \omega \, w=0 \quad \\
+c (n\cdot\nabla w) + \omega \, v=0 \quad \\
+x \in \Gamma_2,
+\\
+v=1 \quad \\
+w=0 \quad \\
+x \in \Gamma_1.\end{split}\]</div>
+<p>Дакле, прве две једначине важе у целом домену <span class="math notranslate nohighlight">\(\Omega\)</span>, друге две на граници <span class="math notranslate nohighlight">\(\Gamma_2\)</span>, а последље две на <span class="math notranslate nohighlight">\(\Gamma_1\)</span>. Овде први пут имамо систем диференцијалних једначина, али ни то не би требало да буде проблем за ФПНМ приступ, ако подразумевамо да је систем затворен, тј. једнозначан.</p>
+<section id="id4">
+<h2>Имплементација<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<p>На основу система једначина <a class="reference internal" href="#equation-eq-sistem1">(32)</a> треба да формирамо композитну функцију губитка, да формирамо ФПНМ мрежу и да је истренирамо на довољном броју колокационих тачака. Ево кључних делова имплементације остварене помоћу оквира SCIANN:</p>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-number">Листинг 10 </span><span class="caption-text">Решење проблема простирања таласа у 2Д домену са сочивом</span><a class="headerlink" href="#id9" title="Permalink to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="linenos"> 3</span><span class="kn">import</span> <span class="nn">sciann</span> <span class="k">as</span> <span class="nn">sn</span>
+<span class="linenos"> 4</span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">pi</span>
+<span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">sciann.utils.math</span> <span class="kn">import</span> <span class="n">diff</span><span class="p">,</span> <span class="n">sign</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">sqrt</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="c1"># Brzina talasa</span>
+<span class="linenos"> 8</span><span class="n">c</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="linenos"> 9</span><span class="c1"># Frekvencija</span>
+<span class="linenos">10</span><span class="n">omega</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="mi">4</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="n">x</span> <span class="o">=</span> <span class="n">sn</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="linenos">13</span><span class="n">y</span> <span class="o">=</span> <span class="n">sn</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="linenos">14</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">sn</span><span class="o">.</span><span class="n">Functional</span> <span class="p">([</span><span class="s2">&quot;v&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">],</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="mi">3</span><span class="o">*</span><span class="p">[</span><span class="mi">200</span><span class="p">]</span> <span class="p">,</span> <span class="s1">&#39;sin&#39;</span><span class="p">)</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="c1"># Diferencijalne jednacine za v i w</span>
+<span class="linenos">17</span><span class="n">L1</span> <span class="o">=</span> <span class="o">-</span><span class="n">omega</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">v</span> <span class="o">-</span> <span class="n">c</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">diff</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">c</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">diff</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="linenos">18</span><span class="n">L2</span> <span class="o">=</span> <span class="o">-</span><span class="n">omega</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">w</span> <span class="o">-</span> <span class="n">c</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">diff</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">c</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">diff</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="n">TOL</span> <span class="o">=</span> <span class="mf">0.015</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span><span class="c1"># Dirihleov uslov na G1 (y=0 i 0.4&lt;x&lt;0.6)</span>
+<span class="linenos">23</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">d</span> <span class="o">=</span>  <span class="mf">0.39762422</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.57715550</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.03696364</span><span class="p">,</span>  <span class="mf">1.60337246</span>
+<span class="linenos">24</span><span class="n">C1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sign</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">c</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">d</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">TOL</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mf">0.4</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mf">0.6</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">v</span><span class="p">)</span>
+<span class="linenos">25</span><span class="n">C2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sign</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">c</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">d</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">TOL</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mf">0.4</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mf">0.6</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span><span class="c1"># Gornja granica G2 (gde je y=1)</span>
+<span class="linenos">28</span><span class="n">C3</span> <span class="o">=</span>  <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">sign</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">TOL</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span> <span class="n">c</span><span class="o">*</span><span class="n">diff</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="n">omega</span><span class="o">*</span><span class="n">w</span> <span class="p">)</span>
+<span class="linenos">29</span><span class="n">C4</span> <span class="o">=</span>  <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">sign</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">TOL</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span> <span class="n">c</span><span class="o">*</span><span class="n">diff</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="n">omega</span><span class="o">*</span><span class="n">v</span> <span class="p">)</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span><span class="c1"># Desna granica G2 (gde je x=1)</span>
+<span class="linenos">32</span><span class="n">C5</span> <span class="o">=</span>  <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">TOL</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span> <span class="n">c</span><span class="o">*</span><span class="n">diff</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">omega</span><span class="o">*</span><span class="n">w</span> <span class="p">)</span>
+<span class="linenos">33</span><span class="n">C6</span> <span class="o">=</span>  <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">TOL</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span> <span class="n">c</span><span class="o">*</span><span class="n">diff</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">omega</span><span class="o">*</span><span class="n">v</span> <span class="p">)</span>
+<span class="linenos">34</span>
+<span class="linenos">35</span><span class="c1"># Leva granica G2 (gde je x=0)</span>
+<span class="linenos">36</span><span class="n">C7</span> <span class="o">=</span>  <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="mi">0</span><span class="o">+</span><span class="n">TOL</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span> <span class="o">-</span><span class="n">c</span><span class="o">*</span><span class="n">diff</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">omega</span><span class="o">*</span><span class="n">w</span> <span class="p">)</span>
+<span class="linenos">37</span><span class="n">C8</span> <span class="o">=</span>  <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="mi">0</span><span class="o">+</span><span class="n">TOL</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span> <span class="o">-</span><span class="n">c</span><span class="o">*</span><span class="n">diff</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">omega</span><span class="o">*</span><span class="n">v</span> <span class="p">)</span>
+<span class="linenos">38</span>
+<span class="linenos">39</span><span class="c1"># Donja granica G2 (gde je y=0) i (x&lt;0.4 or x&gt;0.6)</span>
+<span class="linenos">40</span><span class="n">C9</span> <span class="o">=</span>   <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sign</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="p">(</span><span class="mi">0</span><span class="o">+</span><span class="n">TOL</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mf">0.4</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mf">0.6</span><span class="p">))</span> <span class="p">)</span> <span class="o">*</span> <span class="p">(</span> <span class="o">-</span><span class="n">c</span><span class="o">*</span><span class="n">diff</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="n">omega</span><span class="o">*</span><span class="n">w</span> <span class="p">)</span>
+<span class="linenos">41</span><span class="n">C10</span> <span class="o">=</span>  <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sign</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="p">(</span><span class="mi">0</span><span class="o">+</span><span class="n">TOL</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mf">0.4</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mf">0.6</span><span class="p">))</span> <span class="p">)</span> <span class="o">*</span> <span class="p">(</span> <span class="o">-</span><span class="n">c</span><span class="o">*</span><span class="n">diff</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="n">omega</span><span class="o">*</span><span class="n">v</span> <span class="p">)</span>
+<span class="linenos">42</span>
+<span class="linenos">43</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="linenos">44</span>
+<span class="linenos">45</span><span class="n">kolokacione_tacke</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="s1">&#39;kolokacione_tacke.txt&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+<span class="linenos">46</span>
+<span class="linenos">47</span><span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">kolokacione_tacke</span><span class="p">:</span>
+<span class="linenos">48</span>    <span class="n">ind</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">e</span>
+<span class="linenos">49</span>    <span class="n">x_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+<span class="linenos">50</span>    <span class="n">y_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y1</span><span class="p">)</span>
+<span class="linenos">51</span>
+<span class="linenos">52</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x_data</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_data</span><span class="p">)</span>
+<span class="linenos">53</span>
+<span class="linenos">54</span><span class="c1"># Model i obucavanje</span>
+<span class="linenos">55</span><span class="n">m</span> <span class="o">=</span> <span class="n">sn</span><span class="o">.</span><span class="n">SciModel</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="p">[</span><span class="n">L1</span><span class="p">,</span><span class="n">L2</span><span class="p">,</span><span class="n">C1</span><span class="p">,</span><span class="n">C2</span><span class="p">,</span><span class="n">C3</span><span class="p">,</span><span class="n">C4</span><span class="p">,</span><span class="n">C5</span><span class="p">,</span><span class="n">C6</span><span class="p">,</span><span class="n">C7</span><span class="p">,</span><span class="n">C8</span><span class="p">,</span><span class="n">C9</span><span class="p">,</span><span class="n">C10</span><span class="p">],</span> <span class="s1">&#39;mse&#39;</span><span class="p">,</span> <span class="s1">&#39;Adam&#39;</span><span class="p">)</span>
+<span class="linenos">56</span><span class="n">h</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">train</span><span class="p">([</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">],</span> <span class="mi">12</span><span class="o">*</span><span class="p">[</span><span class="s1">&#39;zero&#39;</span><span class="p">],</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span> <span class="n">adaptive_weights</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;method&#39;</span><span class="p">:</span><span class="s1">&#39;NTK&#39;</span><span class="p">,</span> <span class="s1">&#39;freq&#39;</span><span class="p">:</span><span class="mi">200</span><span class="p">})</span>
+<span class="linenos">57</span>
+<span class="linenos">58</span><span class="c1"># Test</span>
+<span class="linenos">59</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span>
+<span class="linenos">60</span>    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span>
+<span class="linenos">61</span>    <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="linenos">62</span><span class="p">)</span>
+<span class="linenos">63</span><span class="n">v_pred</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="p">[</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">])</span>
+<span class="linenos">64</span><span class="n">w_pred</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="p">[</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<p>Након уобичајених импорта пакета, формирамо ФПНМ мреже за реални део <span class="math notranslate nohighlight">\(v\)</span> и имагинарни део <span class="math notranslate nohighlight">\(w\)</span> непознате функције <span class="math notranslate nohighlight">\(u\)</span>. И овде ћемо ићи са аактивационом функцијом <span class="math notranslate nohighlight">\(\sin(x)\)</span>. Интересантан део кода је дефинисање граничног услова на <span class="math notranslate nohighlight">\(\Gamma_1\)</span> према последње две једначине у систему <a class="reference internal" href="#equation-eq-sistem1">(32)</a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span> <span class="o">=</span>  <span class="mf">0.39762422</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.57715550</span><span class="p">,</span> <span class="mf">1.60337246</span>
+<span class="n">C1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sign</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">c</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">TOL</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mf">0.4</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mf">0.6</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">v</span><span class="p">)</span>
+<span class="n">C2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sign</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">c</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">TOL</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mf">0.4</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mf">0.6</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">w</span><span class="o">-</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Једначина <span class="math notranslate nohighlight">\(y = a + b \cdot x + c \cdot x^2\)</span> представља једначину спољне линије сочива <span class="math notranslate nohighlight">\(\Gamma_1\)</span>, у којој су коефицијенти <span class="math notranslate nohighlight">\(a,b,c\)</span> добијени фитовањем. Дакле, прва заграда у граничним условима значи да узимамо колокационе тачке које припадају танком појасу изнад линије <span class="math notranslate nohighlight">\(\Gamma_1\)</span>, док друга и трећа заграда имају ненулту вредност само ако је <span class="math notranslate nohighlight">\(0,4 &lt; x &lt; 0,6\)</span>.</p>
+<p>Гранични услови <code class="docutils literal notranslate"><span class="pre">C3,</span> <span class="pre">C4,</span> <span class="pre">C5,</span> <span class="pre">C6,</span> <span class="pre">C7,</span> <span class="pre">C8</span></code> се односе на мешану формулацију према друге две једначине у систему <a class="reference internal" href="#equation-eq-sistem1">(32)</a> и важе на <span class="math notranslate nohighlight">\(\Gamma_2\)</span>. На пример:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">C5</span> <span class="o">=</span>  <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">TOL</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span> <span class="n">c</span><span class="o">*</span><span class="n">diff</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">omega</span><span class="o">*</span><span class="n">w</span> <span class="p">)</span>
+<span class="n">C6</span> <span class="o">=</span>  <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">TOL</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span> <span class="n">c</span><span class="o">*</span><span class="n">diff</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">omega</span><span class="o">*</span><span class="n">v</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>се односи на десну границу где је <code class="docutils literal notranslate"><span class="pre">x=1</span></code> и узима колокационе тачке које се налазе у танком појасу ширине <code class="docutils literal notranslate"><span class="pre">TOL</span></code> са леве стране те границе.</p>
+<p>Компоненте функције губитка <code class="docutils literal notranslate"><span class="pre">C9</span></code> и <code class="docutils literal notranslate"><span class="pre">C10</span></code> односе се такође на границу <span class="math notranslate nohighlight">\(\Gamma_2\)</span>, али на линији где је <span class="math notranslate nohighlight">\(y=0\)</span> и <span class="math notranslate nohighlight">\(x &lt; 0,4\)</span> или <span class="math notranslate nohighlight">\(x &gt; 0,6\)</span>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">C9</span> <span class="o">=</span>   <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sign</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="p">(</span><span class="mi">0</span><span class="o">+</span><span class="n">TOL</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mf">0.4</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mf">0.6</span><span class="p">))</span> <span class="p">)</span> <span class="o">*</span> <span class="p">(</span> <span class="o">-</span><span class="n">c</span><span class="o">*</span><span class="n">diff</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="n">omega</span><span class="o">*</span><span class="n">w</span> <span class="p">)</span>
+<span class="n">C10</span> <span class="o">=</span>  <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sign</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="p">(</span><span class="mi">0</span><span class="o">+</span><span class="n">TOL</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mf">0.4</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mf">0.6</span><span class="p">))</span> <span class="p">)</span> <span class="o">*</span> <span class="p">(</span> <span class="o">-</span><span class="n">c</span><span class="o">*</span><span class="n">diff</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="n">omega</span><span class="o">*</span><span class="n">v</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>Овим смо комплетирали свих 12 компоненти функције губитка. Пошто их има толико, није једноставно извршити њихово пондерисање, односно доделу тежина свакој компоненти. У оваквим ситуацијама помажу методе за адаптивно одређивање тежина компоненти током обуке. У нашем решењу:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">h</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">train</span><span class="p">([</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">],</span> <span class="mi">12</span><span class="o">*</span><span class="p">[</span><span class="s1">&#39;zero&#39;</span><span class="p">],</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span> <span class="n">adaptive_weights</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;method&#39;</span><span class="p">:</span><span class="s1">&#39;NTK&#39;</span><span class="p">,</span> <span class="s1">&#39;freq&#39;</span><span class="p">:</span><span class="mi">200</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>употребили смо иновативну методу <em>Neural Tangent Kernel</em> (NTK) према <span id="id5">Wang <em>et al.</em> [<a class="reference internal" href="../literatura/literatura.html#id24" title="Sifan Wang, Xinling Yu, and Paris Perdikaris. When and why pinns fail to train: a neural tangent kernel perspective. Journal of Computational Physics, 449:110768, 2022.">WYP22</a>]</span>. Објашњење методе излази из оквира овог практикума, па је нећемо детаљно разрађивати. Такође, ваља напоменути да смо колокационе тачке учитали из посебног фајла <code class="docutils literal notranslate"><span class="pre">kolokacione_tacke.txt</span></code>, који је добијен тако што смо исписали чворове коначних елемената који се добијају из генератора мреже <a class="reference external" href="https://www.dealii.org">пакета Deal.II</a>.</p>
+</section>
+<section id="id6">
+<h2>Резултати<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h2>
+<p>Као што је на почетку одељка већ речено, пример је преузет из документације за пакет који се бави анализом методом коначних елемената <a class="reference external" href="https://www.dealii.org/current/doxygen/deal.II/step_29.html">Deal.II</a>, тако да можемо да упоредимо решење за <span class="math notranslate nohighlight">\(v=\textrm{Re}\;u\)</span> које смо добили помоћу ФПНМ (<a class="reference internal" href="#socivo-res-pinn"><span class="std std-numref">Сл. 43</span></a>) и решење које се добија класичном методом коначних елемената (<a class="reference internal" href="#socivo-res-fem"><span class="std std-numref">Сл. 44</span></a>). Решење добијено МКЕ методом можемо сматрати референтним, јер је коришћена веома густа мрежа и показана је конвергенција.</p>
+<figure class="align-default" id="id10">
+<span id="socivo-res-pinn"></span><a class="reference internal image-reference" href="../_images/socivo-v.png"><img alt="../_images/socivo-v.png" src="../_images/socivo-v.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 43 </span><span class="caption-text">Решење за <span class="math notranslate nohighlight">\(v=\textrm{Re}\;u\)</span> добијено помоћу ФПНМ</span><a class="headerlink" href="#id10" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id11">
+<span id="socivo-res-fem"></span><a class="reference internal image-reference" href="../_images/rezultati-socivo-fem1.png"><img alt="../_images/rezultati-socivo-fem1.png" src="../_images/rezultati-socivo-fem1.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 44 </span><span class="caption-text">Решење за <span class="math notranslate nohighlight">\(v=\textrm{Re} \; u\)</span> добијено методом коначних елемената</span><a class="headerlink" href="#id11" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Квалитативно гледано, ФПНМ решење има исте карактеристике као МКЕ решење. Међутим, око сочива и прима границама <span class="math notranslate nohighlight">\(\Gamma_2\)</span> очигледан је пад квалитета решења. Узрок можемо тражити на неколико места:</p>
+<ul class="simple">
+<li><p>Прво, код МКЕ је извор на линији сочива <span class="math notranslate nohighlight">\(\Gamma_1\)</span> могуће прецизније специфицирати по самој линији, а не у појединачним тачкама као код ФПНМ.</p></li>
+<li><p>Могуће је да 50.000 колокационих тачака није довољно за обучавање.</p></li>
+<li><p>Примећено је да обучавање оптимизационим алгоритам <code class="docutils literal notranslate"><span class="pre">Adam</span></code> не може да спусти вредност губитка испод неке границе. Овде вероватно треба експериментисати са варијабилном стопом учења, или додати неки други оптимизатор као у примеру <a class="reference internal" href="../hidrologija/3-poplavni.html#poplavni"><span class="std std-ref">Пропагација поплавног таласа у отвореном каналу</span></a>.</p></li>
+</ul>
+<p>Даље експериментисање на овом примеру остављамо читаоцу.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="3-rupa.html" class="btn btn-neutral float-left" title="Решавање на домену облика квадрата са шупљином" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../misici/index.html" class="btn btn-neutral float-right" title="Моделовање мишића" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2023, Милош Ивановић.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

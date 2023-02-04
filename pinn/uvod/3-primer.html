@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="sr" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Пример конструкције функције губитка &mdash; документација Физички поткрепљене неуронске мреже - Практикум прво</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Индекс" href="../genindex.html" />
+    <link rel="search" title="Претрага" href="../search.html" />
+    <link rel="next" title="Провођење топлоте" href="../toplota/index.html" />
+    <link rel="prev" title="Физички поткрепљене неуронске мреже" href="2-metoda.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Физички поткрепљене неуронске мреже - Практикум
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Садржај</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Увод</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1-istorija.html">Кратка историја методе</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-metoda.html">Физички поткрепљене неуронске мреже</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Пример конструкције функције губитка</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Начин излагања примера</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../toplota/index.html">Провођење топлоте</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oscilacije/index.html">Механичке осцилације</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hidrologija/index.html">Хидрологија</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../akustika/index.html">Акустика</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misici/index.html">Моделовање мишића</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solari/index.html">Моделовање производње соларних електрана</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../literatura/literatura.html">Литература</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Физички поткрепљене неуронске мреже - Практикум</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Увод</a></li>
+      <li class="breadcrumb-item active">Пример конструкције функције губитка</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/uvod/3-primer.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="primer">
+<span id="id1"></span><h1>Пример конструкције функције губитка<a class="headerlink" href="#primer" title="Permalink to this heading"></a></h1>
+<p>Резоновање из претходног одељка <a class="reference internal" href="2-metoda.html#metoda"><span class="std std-ref">Физички поткрепљене неуронске мреже</span></a> ћемо поткрепити једноставним примером. Започнимо прво тако што ћемо узети неку једноставну диференцијалну једначину. Изабраћемо <a class="reference external" href="https://en.wikipedia.org/wiki/Logistic_function">логистичку једначину</a> (<em>Logistic Equation</em>) која представља модел раста популације. Та једначина гласи:</p>
+<div class="math notranslate nohighlight" id="equation-eq-logisticka1">
+<span class="eqno">(4)<a class="headerlink" href="#equation-eq-logisticka1" title="Permalink to this equation"></a></span>\[\frac{df}{dt} = R \cdot t(1-t)\]</div>
+<p>Функција <span class="math notranslate nohighlight">\(f(t)\)</span> представља стопу раста популације током времена <span class="math notranslate nohighlight">\(t\)</span>, док параметар <span class="math notranslate nohighlight">\(R\)</span> одређује максималну стопу раста. Како бисмо од фамилије кривих које задовољавају решење ове обичне диференцијалне једначине изабрали једну криву као решење, морамо поставити гранични, тј. почетни услов. Нека то буде:</p>
+<div class="math notranslate nohighlight" id="equation-eq-logisticka2">
+<span class="eqno">(5)<a class="headerlink" href="#equation-eq-logisticka2" title="Permalink to this equation"></a></span>\[f(t=0) = \frac{1}{2}.\]</div>
+<p>Како је аналитичко решење ове једначине познато, поређењем са њим можемо проверити тачност ФПНМ методе. Тиме ћемо почети да разоткривамо потенцијал примене и на комплексније обичне и парцијалне диференцијалне једначине. Да се подсетимо, ФПНМ су засноване на две фундаменталне особине неуронских мрежа:</p>
+<ul class="simple">
+<li><p>Формално је показано да су <strong>неуронске мреже универзалне функције апроксимације</strong>, тако да неуронска мрежа може да апроксимира било коју функцију, а самим тим и решење за нашу логистичку једначину.</p></li>
+<li><p>Једноставно је и јефтино израчунати изводе било ког реда излаза из неуронске мреже за било који дати улаз коришћењем <strong>аутоматске диференцијације</strong>.</p></li>
+</ul>
+<p>Дакле, као што је речено, можемо да конструишемо функцију губитка тако да, када се минимизује, диференцијална једначине буде задовољена:</p>
+<div class="math notranslate nohighlight" id="equation-eq-logisticka3">
+<span class="eqno">(6)<a class="headerlink" href="#equation-eq-logisticka3" title="Permalink to this equation"></a></span>\[\mathcal{L}_{r} = \frac{df_{NN}(t)}{dt} - R \cdot t(1-t) = 0,\]</div>
+<p>где је <span class="math notranslate nohighlight">\(f_{NN}(t)\)</span> излаз неуронске мреже са једним улазом чији се извод израчунава аутоматским диференцирањем. Одмах видимо да, уколико излаз из мреже задовољава <a class="reference internal" href="#equation-eq-logisticka3">(6)</a>, заправо се та једначина решава. Да би се израчунао стварни допринос функцији губитка који се добија из диференцијалне једначине, потребно је специфицирати скуп тзв. колокационих тачака у домену проблема и проценити средњу квадратну грешку (<em>Mean Squared Error - MSE</em>) или неку другу функцију губитка:</p>
+<div class="math notranslate nohighlight" id="equation-eq-logisticka4">
+<span class="eqno">(7)<a class="headerlink" href="#equation-eq-logisticka4" title="Permalink to this equation"></a></span>\[\mathcal{L}_{r} = \frac{1}{N_{r}}\sum_{i = 1}^{N_{r}} \left(  \left. \frac{df_{NN}}{dt} \right|_{t_i} - R t_j (1-t_i) \right)^2,\]</div>
+<p>где je <span class="math notranslate nohighlight">\(N_{r}\)</span> број колокационих тачака <span class="math notranslate nohighlight">\(t_j\)</span> у којима се рачуна функција губитка. Губитак заснован само на резидуалима не осигурава јединствено решење, па стога укључујемо и гранични услов, тако што га додајемо функцији губитка на исти начин као у једначини <a class="reference internal" href="#equation-eq-logisticka4">(7)</a>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-logisticka5">
+<span class="eqno">(8)<a class="headerlink" href="#equation-eq-logisticka5" title="Permalink to this equation"></a></span>\[\mathcal{L}_{0} = \frac{1}{N_{0}}\sum_{i = 1}^{N_{0}} \left(  \left. f_{NN}(t) \right|_{t_i} - \frac12 \right)^2, \qquad t_i \approx 0.\]</div>
+<p>Сада имамо оба елемента да дефинишемо укупну функцију губитка <span class="math notranslate nohighlight">\(\mathcal{L}\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-logisticka6">
+<span class="eqno">(9)<a class="headerlink" href="#equation-eq-logisticka6" title="Permalink to this equation"></a></span>\[\mathcal{L} = \mathcal{L}_{r} + \mathcal{L}_{0}.\]</div>
+<p>Током оптимизације (тј. тренинга у терминологији неуронских мрежа), горњи израз се минимизује и излаз из мреже тренира да задовољи диференцијалну једначину и задат гранични услов, чиме се  апроксимира коначно, јединствено решење диференцијалне једначине. Концепт ФПНМ је веома једноставан, и користећи идеју описану у претходном тексту, можемо додати више граничних услова, додати комплексније или решавати временски зависне вишедимензионалне проблеме користећи мрежу са вишеструким улазима.</p>
+<p>Решење наше логистичке једначине је добро позната сигмоид функција приказана на <a class="reference internal" href="#sigmoid"><span class="std std-numref">Сл. 2</span></a>.</p>
+<figure class="align-default" id="id4">
+<span id="sigmoid"></span><a class="reference internal image-reference" href="../_images/logistic.png"><img alt="../_images/logistic.png" src="../_images/logistic.png" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 2 </span><span class="caption-text">Сигмоидна функција која се добија као решење једначине <a class="reference internal" href="#equation-eq-logisticka1">(4)</a> са почетним условом <a class="reference internal" href="#equation-eq-logisticka2">(5)</a></span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<section id="id3">
+<h2>Начин излагања примера<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<p>Излагање ћемо наставити конкретним примерима. Свако поглавље практикума (Провођење топлоте, Осцилације, …) бави се посебном феноменологијом и садржи по један или више директних или инверзних решених проблема. Сваки пример је поткрепљен теоријском позадином, припадајућим програмским кодом који имплементира ФПНМ решење, као и анализом тачности и ефикасности ФПНМ решења у односу на аналитичка решења, уколико постоје, или решења добијена класичним нумеричким методама.</p>
+<p>Ваља напоменути да примери нису сотирани по тежини, већ искључиво по феноменологији која се моделује. Ако ипак треба да препоручимо читаоцу одакле да крене са практичним радом, рецимо да <a class="reference internal" href="../oscilacije/index.html#oscilacije"><span class="std std-ref">Механичке осцилације</span></a> и <a class="reference internal" href="../toplota/2-stap.html#stap"><span class="std std-ref">Једнодимензиони директни проблем</span></a> представљају добру основу.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="2-metoda.html" class="btn btn-neutral float-left" title="Физички поткрепљене неуронске мреже" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../toplota/index.html" class="btn btn-neutral float-right" title="Провођење топлоте" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2023, Милош Ивановић.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

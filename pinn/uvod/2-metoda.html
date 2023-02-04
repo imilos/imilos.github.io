@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="sr" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Физички поткрепљене неуронске мреже &mdash; документација Физички поткрепљене неуронске мреже - Практикум прво</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Индекс" href="../genindex.html" />
+    <link rel="search" title="Претрага" href="../search.html" />
+    <link rel="next" title="Пример конструкције функције губитка" href="3-primer.html" />
+    <link rel="prev" title="Кратка историја методе" href="1-istorija.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Физички поткрепљене неуронске мреже - Практикум
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Садржај</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Увод</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1-istorija.html">Кратка историја методе</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Физички поткрепљене неуронске мреже</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-primer.html">Пример конструкције функције губитка</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../toplota/index.html">Провођење топлоте</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oscilacije/index.html">Механичке осцилације</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hidrologija/index.html">Хидрологија</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../akustika/index.html">Акустика</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misici/index.html">Моделовање мишића</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solari/index.html">Моделовање производње соларних електрана</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../literatura/literatura.html">Литература</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Физички поткрепљене неуронске мреже - Практикум</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Увод</a></li>
+      <li class="breadcrumb-item active">Физички поткрепљене неуронске мреже</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/uvod/2-metoda.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="metoda">
+<span id="id1"></span><h1>Физички поткрепљене неуронске мреже<a class="headerlink" href="#metoda" title="Permalink to this heading"></a></h1>
+<p>Физички поткрепљена неуронска мрежа (у даљем тексту ФПНМ) је техника машинског учења која може се користити за апроксимацију решења парцијалне диференцијалне једначине. Парцијалне диференцијалне једначине са одговарајућим почетним и граничним условима могу се изразити у општем облику као:</p>
+<div class="math notranslate nohighlight" id="equation-eq-osnovne">
+<span class="eqno">(1)<a class="headerlink" href="#equation-eq-osnovne" title="Permalink to this equation"></a></span>\[\begin{split}u_{t}\mathcal{+ N}\lbrack u\rbrack &amp;= 0,\ \ X \in \Omega,\ t \in \lbrack 0,T\rbrack, \\
+u(X,0) &amp;= h(X),\ \ X \in \Omega, \\
+u(X,t) &amp;= g(X,t),\ \ X \in \Omega_{g},\ t \in \lbrack 0,T\rbrack.\end{split}\]</div>
+<p>Овде је <span class="math notranslate nohighlight">\(\mathcal{N}\)</span> диференцијални оператор, <span class="math notranslate nohighlight">\(X \in {\Omega \subseteq R}^{d}\)</span> и <span class="math notranslate nohighlight">\(t \in R\)</span> представљају просторне и временске координате, респективно, док је <span class="math notranslate nohighlight">\(\Omega \subseteq R\)</span> целокупни домен проблема. <span class="math notranslate nohighlight">\(\Omega_{g} \subseteq \Omega\)</span> представља рачунски домен граничних услова, <span class="math notranslate nohighlight">\(u(X,t)\)</span> је решење парцијалне диференцијалне једначине са почетним  условом <span class="math notranslate nohighlight">\(h(X)\)</span> и граничним условом <span class="math notranslate nohighlight">\(g(X,t)\)</span>. Оваква формулација се такође може применити и на парцијалне диференцијалне једначине вишег реда, пошто се једначине вишег реда могу написати и у облику система једначина првог реда.</p>
+<p>У оригиналној формулацији <span id="id2">Raissi <em>et al.</em> [<a class="reference internal" href="../literatura/literatura.html#id3" title="Maziar Raissi, Paris Perdikaris, and George E Karniadakis. Physics-informed neural networks: a deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations. Journal of Computational Physics, 378:686–707, 2019.">RPK19</a>]</span>, ФПНМ се састоји од две подмреже:</p>
+<ul class="simple">
+<li><p>апроксиматор мреже и</p></li>
+<li><p>резидуалне мреже.</p></li>
+</ul>
+<p><strong>Апроксиматор мрежа</strong> прима улаз <span class="math notranslate nohighlight">\((X,t)\)</span>, пролази кроз процес обуке и као излаз даје приближно решење <span class="math notranslate nohighlight">\(\widehat{u}(X,t)\)</span> парцијалне диференцијалне једначине. Мрежа апроксиматора се тренира на мрежи тачака, тзв. <strong>колокационих тачака</strong>, узоркованих из домена проблема. Тежине и пристрасности апроксиматор мреже су параметри који се могу тренирати минимизирањем композитне функције губитка у следећем облику:</p>
+<div class="math notranslate nohighlight" id="equation-eq-loss1">
+<span class="eqno">(2)<a class="headerlink" href="#equation-eq-loss1" title="Permalink to this equation"></a></span>\[\mathcal{L =}\mathcal{L}_{r} + \mathcal{L}_{0} + \mathcal{L}_{b},\]</div>
+<p>где су</p>
+<div class="math notranslate nohighlight" id="equation-eq-loss2">
+<span class="eqno">(3)<a class="headerlink" href="#equation-eq-loss2" title="Permalink to this equation"></a></span>\[\begin{split}\mathcal{L}_{r} = \frac{1}{N_{r}}\sum_{i = 1}^{N_{r}}{\left| u\left( X^{i},t^{i} \right) + \mathcal{N}\left\lbrack u\left( X^{i},t^{i} \right) \right\rbrack \right|^{2},} \\
+\mathcal{L}_{0} = \frac{1}{N_{0}}\sum_{i = 1}^{N_{0}}{\left| u\left( X^{i},t^{i} \right) - h^{i} \right|^{2},} \\
+\mathcal{L}_{b} = \frac{1}{N_{b}}\sum_{i = 1}^{N_{b}}\left| u\left( X^{i},t^{i} \right) - g^{i} \right|^{2}.\end{split}\]</div>
+<p>Овде, <span class="math notranslate nohighlight">\(\mathcal{L}_{r}\)</span>, <span class="math notranslate nohighlight">\(\mathcal{L}_{0}\)</span> и <span class="math notranslate nohighlight">\(\mathcal{L}_{b}\)</span> представљају резидуале основне диференцијалне једначине, почетних и граничних
+услова, респективно. Поред тога, <span class="math notranslate nohighlight">\(N_{r}\)</span>, <span class="math notranslate nohighlight">\(N_{0}\)</span> и <span class="math notranslate nohighlight">\(N_{b}\)</span> су бројеви колокационих тачака домена проблема, домена почетних и граничних услова, респективно. Ови резидуали се израчунавају компонентом ФПНМ модела који се не обучава, а зове се <strong>резидуална мрежа</strong>. Да би се израчунао губитак
+<span class="math notranslate nohighlight">\(\mathcal{L}_{r}\)</span>, ФПНМ захтева изводе излаза у односу на улазе. Тај рачун се постиже тзв. аутоматском диференцијацијом.</p>
+<p><strong>Аутоматска диференцијација</strong> је кључни покретач развоја ФПНМ-а и кључни је елемент који разликује ФПНМ од сличних настојања 90-их година прошлог века. На пример, <span id="id3">Psichogios and Ungar [<a class="reference internal" href="../literatura/literatura.html#id10" title="Dimitris C. Psichogios and Lyle H. Ungar. A hybrid neural network-first principles approach to process modeling. AIChE Journal, 38:1499-1511, 1992.">PU92</a>]</span> и <span id="id4">Lagaris <em>et al.</em> [<a class="reference internal" href="../literatura/literatura.html#id11" title="I.E. Lagaris, A. Likas, and D.I. Fotiadis. Artificial neural networks for solving ordinary and partial differential equations. IEEE Transactions on Neural Networks, 9:987-1000, 1998.">LLF98</a>]</span> су се ослањали на мануелно извођење правила пропагације уназад. Данас се рачуна на аутоматску диференцијацију која је имплементиранa у већини оквира за дубоко учење, као што су <a class="reference external" href="https://www.tensorflow.org/">Tensorflow</a> и <a class="reference external" href="https://pytorch.org/">PyTorch</a>. На овај начин избегавамо нумеричку дискретизацију током рачунања извода свих редова у простор-времену.</p>
+<p>Шема типичног ФПНМ-а је приказана на <a class="reference internal" href="#pinnschema"><span class="std std-numref">Сл. 1</span></a> на којој је једноставна парцијална диференцијална једначина <span class="math notranslate nohighlight">\(\frac{\partial f}{\partial x} + \frac{\partial f}{\partial y} = 0\)</span> искоришћена као пример. Као што је приказано, мрежа апроксиматора се користи за апроксимацију решења <span class="math notranslate nohighlight">\(u(X,t)\)</span>, које затим иде на резидуалну мрежу за израчунавање функције губитка диференцијалне једначине <span class="math notranslate nohighlight">\(\mathcal{L}_{r}\)</span>, губитка граничних услова <span class="math notranslate nohighlight">\(\mathcal{L}_{b}\)</span>, и губитка почетних услова <span class="math notranslate nohighlight">\(\mathcal{L}_{0}\)</span>. Тежине и пристрасности апроксиматорске мреже обучени су коришћењем прилагођене функције губитка која се састоји од резидуала <span class="math notranslate nohighlight">\(\mathcal{L}_{r}\)</span>, <span class="math notranslate nohighlight">\(\mathcal{L}_{0}\)</span>, и <span class="math notranslate nohighlight">\(\mathcal{L}_{b}\)</span> кроз технику градијента спуштања засновану на пропагацији уназад.</p>
+<figure class="align-default" id="id5">
+<span id="pinnschema"></span><a class="reference internal image-reference" href="../_images/pinn.png"><img alt="../_images/pinn.png" src="../_images/pinn.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 1 </span><span class="caption-text">Архитектура ФПНМ-а и стандардна петља за обуку ФПНМ-а конструисана за решавање једноставне парцијалне диференцијалне једначине, где <em>PDE</em> и <em>Cons</em> означавају једначине, док <em>R</em> и <em>I</em> представљају њихове резидуале. Мрежа апроксиматора је подвргнута процесу обуке и даје приближно решење. Резидуална мрежа је део ФПНМ-а који се не обучава и који је способан да израчуна изводе излаза апроксиматорске мреже у односу на улазе, што резултира композитном функцијом губитка, означеном са <em>MSE</em>.</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>У наредној секцији <a class="reference internal" href="3-primer.html#primer"><span class="std std-ref">Пример конструкције функције губитка</span></a> описаћемо како би изгледала конструкција композитне функције губитка за логистичку једначину.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="1-istorija.html" class="btn btn-neutral float-left" title="Кратка историја методе" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="3-primer.html" class="btn btn-neutral float-right" title="Пример конструкције функције губитка" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2023, Милош Ивановић.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

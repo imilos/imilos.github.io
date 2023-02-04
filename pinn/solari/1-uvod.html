@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="sr" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Увод &mdash; документација Физички поткрепљене неуронске мреже - Практикум прво</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Индекс" href="../genindex.html" />
+    <link rel="search" title="Претрага" href="../search.html" />
+    <link rel="next" title="Основне једначине модела" href="2-pvwatts.html" />
+    <link rel="prev" title="Моделовање производње соларних електрана" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Физички поткрепљене неуронске мреже - Практикум
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Садржај</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../uvod/index.html">Увод</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toplota/index.html">Провођење топлоте</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oscilacije/index.html">Механичке осцилације</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hidrologija/index.html">Хидрологија</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../akustika/index.html">Акустика</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misici/index.html">Моделовање мишића</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Моделовање производње соларних електрана</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Увод</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#solari-komponente">Компоненте зрачења</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Оријентација и локација панела</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Начини повезивања панела</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#peak-power-kwp">Номинална снага панела (<em>Peak Power - kWp</em>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Инвертер</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i-v">I-V карактеристика соларне ћелије</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="2-pvwatts.html">Основне једначине модела</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-implementacija.html">Пример прорачуна производње</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4-rezultati.html">Резултати</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../literatura/literatura.html">Литература</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Физички поткрепљене неуронске мреже - Практикум</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Моделовање производње соларних електрана</a></li>
+      <li class="breadcrumb-item active">Увод</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/solari/1-uvod.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="solari-uvod">
+<span id="id1"></span><h1>Увод<a class="headerlink" href="#solari-uvod" title="Permalink to this heading"></a></h1>
+<p>У овом поглављу бавићемо се једним врло практичним проблемом, који је аутору и сарадницима и послужио као један од основних мотива за рад са ФПНМ. Наиме, ради се о „вечитом јазу” између резултата које даје модел и стварних мерења. Како овај јаз смањити, тј. како помирити модел и стварне податке? Примера ради, соларне електране су прилично добро покривене различитим физичким моделима који дају одличне резултате, али <strong>само ако су сви улазни параметри и параметри самог система познати</strong>, што углавном није случај. Прво, подаци о времену као што су температура, компоненте сунчевог зрачења и брзина ветра нису сасвим прецизни. Ту је и фактор старења самих панела који умањује њихову ефикасност, могућа прекривеност снегом и прашином и разни други фактори који реално утичу на производњу.</p>
+<p>Са друге стране, било који соларни систем новије производње нуди инстант мерење излазне снаге наизменичне струје на излазу из инвертера. Покушаћемо да одговоримо на питање да ли је могуће ове мерене податке „вратити” у модел, тј. њиховим коришћењем побољшати предвиђање модела у будућности. Додатно треба нагласити да модел соларног система који ћемо демонстрирати <span id="id2">Dobos [<a class="reference internal" href="../literatura/literatura.html#id27" title="Aron P Dobos. Pvwatts version 5 manual. Technical Report, National Renewable Energy Lab.(NREL), Golden, CO (United States), 2014.">Dob14</a>]</span> и није заснован на обичној или парцијалној диференцијалној једначини, већ на једноставном аналитичком изразу. Строго гледано, могуће је искористити и обичну дубоку неуронску мрежу да опише понашање такве једначине и мануелно формирати и функцију губитка која ће испоштовати и једначину и мерене податке. Међутим, ФПНМ библиотека као што је DeepXDE пружа добар софтверски оквир који у великој мери олакшава рад са оваквим роблемима.</p>
+<p>У наставку ћемо објаснити основе на којима функционишу соларне електране, укључујући значајне улазне варијабле, начин функционисања и карактеристике самих уређаја.</p>
+<section id="solari-komponente">
+<span id="id3"></span><h2>Компоненте зрачења<a class="headerlink" href="#solari-komponente" title="Permalink to this heading"></a></h2>
+<p>Kоличина сунчеве енергије прикупљена од стране соларног панела између осталог зависи од <strong>његове оријентације</strong>. На пример, соларни панел окренут ка западу ће прикупљати малу количину сунчеве енергије током јутра јер је оријентисан ка тамнијем делу неба. Са померањем сунца, соларни панел се све више обасјава, па сакупља веће количине зрачења. Ово је кључ <em>Plane of Array</em> (POA) концепта који подразумева количину сунчеве светлости која се може прикупити за задати положај панела. Локација, нагнутост и оријентација панела су од кључног значаја за процену количине енергије која на панел пада. Осунчаност се изражава у ватима по квадратном метру <span class="math notranslate nohighlight">\(\frac{W}{m^2}\)</span>.</p>
+<figure class="align-default" id="id9">
+<span id="komponente"></span><a class="reference internal image-reference" href="../_images/tutorial-1-dnidhighi.png"><img alt="../_images/tutorial-1-dnidhighi.png" src="../_images/tutorial-1-dnidhighi.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 50 </span><span class="caption-text">Илустрација директног и дифузног сунчевог зрачења</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Kада се моделује озраченсот равни панела, из практичних разлога, посматрају се следеће три компоненте:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">GHI</span></code> – <strong>Глобална хоризонтална озраченост</strong>, укупна јачина сунчеве светлости која пада на хоризонталну раван, <a class="reference internal" href="#ghi"><span class="std std-numref">Сл. 51</span></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DHI</span></code> – <strong>Дифузна хоризонтална озраченост</strong>, део сунчеве светлости која пада на хоризонталну раван, али која не долази директно од сунца, <a class="reference internal" href="#dhi"><span class="std std-numref">Сл. 52</span></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DNI</span></code> – <strong>Директна нормална озраченост</strong>, део сунчеве светлости која долази директно од сунца, <a class="reference internal" href="#dni"><span class="std std-numref">Сл. 53</span></a>.</p></li>
+</ul>
+<p>Свака од наведених компоненти се одговарајућим мерним поступком и инструментом посебно мери. На пример, израчунавање компоненте директног зрачења <code class="docutils literal notranslate"><span class="pre">DNI</span></code> која пада на панел решава се једноставно на основу упадног угла. Проналажење компоненте дифузне озрачености <code class="docutils literal notranslate"><span class="pre">DHI</span></code> је сложеније и може варирати у зависности од атмосферских услова. У употреби су различити приступи за конверзију <code class="docutils literal notranslate"><span class="pre">DHI</span></code> у дифузну компоненту. Трећа компонента зрачења <code class="docutils literal notranslate"><span class="pre">GHI</span></code> је светлост која се одбија од тла пре него што је сакупи фото-напонска плоча. На Интернету се могу пронаћи бесплатне базе историјских података. На појединим плаћеним сервисима могу се наћи и прогнозе све три компоненте. Серије на овим сервисима су углавном сатне учестаности.</p>
+<figure class="align-default" id="id10">
+<span id="ghi"></span><a class="reference internal image-reference" href="../_images/t1-ghi.png"><img alt="../_images/t1-ghi.png" src="../_images/t1-ghi.png" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 51 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">GHI</span></code>- Глобална хоризонтална озраченост</span><a class="headerlink" href="#id10" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id11">
+<span id="dhi"></span><a class="reference internal image-reference" href="../_images/t1-dhi.png"><img alt="../_images/t1-dhi.png" src="../_images/t1-dhi.png" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 52 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">DHI</span></code> – Дифузна хоризонтална озраченост</span><a class="headerlink" href="#id11" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id12">
+<span id="dni"></span><a class="reference internal image-reference" href="../_images/t1-dni.png"><img alt="../_images/t1-dni.png" src="../_images/t1-dni.png" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 53 </span><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">DNI</span></code> – Директна нормална озраченост</span><a class="headerlink" href="#id12" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id4">
+<h2>Оријентација и локација панела<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<p>Два су кључна угла који дефинишу оријентацију соларног панела. Један одређује правац постављања панела (север, истог, југ, запад), а други одређује нагнутост соларног панела у односу на хоризонталну раван. <code class="docutils literal notranslate"><span class="pre">Azimuth</span></code> одређује правац постављања панела, при чему договорно важи да је север 0, исток 90, југ 180, а запад 270 степени. <code class="docutils literal notranslate"><span class="pre">Tilt</span></code> који одређује нагнутост соларног панела има вредност 0 ако је панел постављен хоризонтално, а вредност 90 уколико је постављен потпуно вертикално. У зависности од начина постављања система, и један и други угао могу бити фиксне вредности или временске серије. На таквим системима се обично <code class="docutils literal notranslate"><span class="pre">tilt</span></code> мења, пративши кретање сунца на небу и обезбеђујући већу озраченост нормалном компонентом.</p>
+<figure class="align-default" id="id13">
+<a class="reference internal image-reference" href="../_images/Tilt-vs-Azimuth.jpg"><img alt="../_images/Tilt-vs-Azimuth.jpg" src="../_images/Tilt-vs-Azimuth.jpg" style="width: 60%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 54 </span><span class="caption-text">Оријентација соларног панела</span><a class="headerlink" href="#id13" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Одређивање тачне <strong>локације панела</strong> је веома важно приликом рачунања угла који Сунце заклапа са панелом у различито доба године. Параметри за рачунање угла који сунце заклапа са панелом су:</p>
+<ul class="simple">
+<li><p>географска ширина,</p></li>
+<li><p>географска дужина,</p></li>
+<li><p>надморска висина и</p></li>
+<li><p>временска зона.</p></li>
+</ul>
+</section>
+<section id="id5">
+<h2>Начини повезивања панела<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
+<p>Соларни панели се у електрично коло могу редно (серијски) и паралелно. Редна веза сумира напон у електричном колу, док паралелна веза повећава јачину струје. Могуће је направити и комбинацију редне и паралелне везе.</p>
+<figure class="align-default" id="id14">
+<span id="serijska-isti"></span><a class="reference internal image-reference" href="../_images/alt105.png"><img alt="../_images/alt105.png" src="../_images/alt105.png" style="width: 60%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 55 </span><span class="caption-text"><strong>Серијска веза соларних панела истих карактеристика</strong>. Сви соларни панели су истог типа и имају исту излазну снагу. Укупан напон електричног кола је збир напона на сваком панелу. У овом примеру имамо 3 панела који производе напон од 6V и струју јачине 3A, односно електрично коло има напон од 18V и струју јачине 3A. Укупна снага везе је <span class="math notranslate nohighlight">\(18V \cdot 3A = 54W\)</span> при <a class="reference external" href="https://www.alternative-energy-tutorials.com/solar-power/connecting-solar-panels-together.html">максималној осунчаности</a>.</span><a class="headerlink" href="#id14" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id15">
+<span id="serijska-razliciti"></span><a class="reference internal image-reference" href="../_images/alt106.png"><img alt="../_images/alt106.png" src="../_images/alt106.png" style="width: 60%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 56 </span><span class="caption-text"><strong>Серијска веза соларних панела различитих волтажа</strong>. У овом примеру сви соларни панели су различитих типова, имају различиту снагу, али им је заједничка максимална јачина струје. Kада су везани серијски, заједно производе електрични напон од 21V и струју јачине 3А, односно снага је 63W. Јачинаструје је иста као и у претходном примеру, али је промењен напон (5V+7V+9V).</span><a class="headerlink" href="#id15" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id16">
+<span id="serijska-razliciti-iv"></span><a class="reference internal image-reference" href="../_images/alt107.png"><img alt="../_images/alt107.png" src="../_images/alt107.png" style="width: 60%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 57 </span><span class="caption-text"><strong>Серијска веза панела различитих напона и јачина електричне струје</strong>. У овој методи соларни панели су различитих типова, сваки панел има различит напон, јачину струје и снагу. Укупни напон електричног кола поново се рачуна као збир напона на сваком соларном панелу (3V+7V+9V), док је јачина струја у колу ограничена панелом с најмањом јачином струје - 1A. Тиме је снага лимитирана на само 19W од могућих 69W. Употреба соларних панела различитих струја није ефикасна у редној вези.</span><a class="headerlink" href="#id16" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id17">
+<span id="paralelna-isti"></span><a class="reference internal image-reference" href="../_images/alt112.png"><img alt="../_images/alt112.png" src="../_images/alt112.png" style="width: 60%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 58 </span><span class="caption-text"><strong>Паралелна веза соларних панела истих карактеристика</strong>. Сви соларни панели на слици имају исте карактеристике, напон, јачину електричне струје и снагу. Напон на сваком панелу је 6V па је и укупан напон кола 6V. Јачина струје на излазу представља збир свих јачина електричне струје на панелима 3A+3A+3A=9A. Остварена снага при потпуној осунчаности панела износи 54W.</span><a class="headerlink" href="#id17" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id18">
+<span id="paralelna-razliciti"></span><a class="reference internal image-reference" href="../_images/alt113.png"><img alt="../_images/alt113.png" src="../_images/alt113.png" style="width: 60%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 59 </span><span class="caption-text"><strong>Паралелна веза соларних панела различитих напона и јачина струје</strong>. Да би радили у паралелиној вези, сви соларни панели морају имати исти напон, односно напон на свим панелима биће једнак најмањем напону на једном од панела. Дакле, укупан напон кола износи 3V, док је укупна јачина електричне струје одређена збиром струја 1A+3A+5A=9A. Снага износи само 27W. Због ових губитака не препоручује се паралелна веза соларних панела различитих напона.</span><a class="headerlink" href="#id18" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="peak-power-kwp">
+<h2>Номинална снага панела (<em>Peak Power - kWp</em>)<a class="headerlink" href="#peak-power-kwp" title="Permalink to this heading"></a></h2>
+<p>Мерења снаге соларних панела у лабораторији или фабрици врши се под стандардизованим условимa. Ти услови дефинисани су интеграционим стандардном IEC-60904-1 и то су:</p>
+<ul class="simple">
+<li><p>Интензитет осунчаности износи <span class="math notranslate nohighlight">\(1000W/m^2\)</span> на целој површини соларног панела. У реалним условима ова вредност је неретко већа.</p></li>
+<li><p>Температура панела износи 25°C. Спектар светлости мора бити исти као глобални спектар светлости дефинисан у IEC 60904-3. Одговара спектру светлости по сунчаном дану са положајем сунца око 40° изнад хоризонта и панелом који је окренут према сунцу, а са хоризонтом заклапа угао од 40°.</p></li>
+</ul>
+<p>Измерена снага при овим условима назива се номинална снага или снага у пику – <em>Peak Power</em>. Номинална снага изражава се у киловат-пику <em>kWp</em>. Ако није позната укупна декларисана номинална снага соларних панела, а познати су површина соларних панела <span class="math notranslate nohighlight">\(m^2\)</span> и декларисана ефикасност у %, може се израчунати по формули:</p>
+<div class="math notranslate nohighlight">
+\[NominalnaSnaga = 1\frac{kW}{m^2} \cdot Povrsina \cdot \frac{Efikasnost}{100}\]</div>
+<p>У већини случајева номинална снага је позната и дата је у спецификацији производа од стране произвођача. Номинална снага још се назива и максимална снага и означава са <span class="math notranslate nohighlight">\(P_{max}\)</span>.</p>
+</section>
+<section id="id7">
+<h2>Инвертер<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h2>
+<p>Соларним панелима производи се једносмерна струја (DC). Да би се употребила произведена електрична енергија, потребно је извршити DC/AC конверзију. У употреби су различити типови инвертера:</p>
+<ul class="simple">
+<li><p><em>Grid-tie inverter</em> - Прикључени су на дистрибутивну електричну мрежу, односно произведена електрична енергија прослеђује се дистрибутивној електричној мрежи. За њихов рад није потребна батерија.</p></li>
+<li><p><em>Off-grid inverter</em> – Познати су и као независни инвертери. Конвертују једносмерну струју из батерија у наизменичну. Углавном се користе за више домаћинства, или стамбену зграду.</p></li>
+<li><p><em>Hybrid inverter</em> – Конвертују DC у AC и могу се користити и као <em>off-grid</em> и као <em>grid-tie</em> системи.</p></li>
+<li><p><em>String inverter</em> – Најчешће се користе у домаћинствима. Називају се „стринг” јер се на њих прикључује низ соларних панела. Може се прикључити и више низова одједном.</p></li>
+</ul>
+<p>Сваки инвертер има дефинисану максималну снагу. То је важно из два разлога: (1) електронске компоненте инвертера дизајниране су за рад са одређеним опсегом напона и (2) и сами соларни панели су дизајнирани за рад до одређене снаге.</p>
+<p>Инвертери, наравно, не могу пружити већу излазну снагу од прописане. Када се на улаз инвертера доводи једносмерна струја снаге веће од прописане улазне снаге појављује се одсецање инвертера, тј. инвертер има исту излазну снагу и поред повећања снаге на улазу. Инвертер може мењати напон на улазу како би смањио снагу на улазу. Повећава оперативни напон соларних панела преко њиховог дефинисаног максимума, чиме се смањује јачина произведене струје, односно умањује се снага на улазу инвертера.</p>
+<p>Размотримо ситуацију где су упарени соларни панели снаге 6 kW са DC/AC инвертером снаге 5 kW. На први поглед изгледа да ће доста снаге бити изгубљено, али велики број произвођача препоручују управо овакав однос. Овде уводимо појам односа снага DC и AC познат и као <em>Inverter Load Ratio</em> - ILR.  У овом примеру тај однос износи 1,2 (6kW/5kW).  Пројектанти оваквих ситема су генерално конзервативни по питању DC/AC односа. Већина сматра да је однос 1,1 идеалан, а 1,2 прејак. Ипак, однос 1,2 доводи до најмањих губитака, док 1,25 или 1,3 могу остварити одређене економске бенефите при куповини, јер се користе <a class="reference external" href="https://help.helioscope.com/article/248-understanding-dc-ac-ratio">јефтинији инвертери</a>.</p>
+</section>
+<section id="i-v">
+<h2>I-V карактеристика соларне ћелије<a class="headerlink" href="#i-v" title="Permalink to this heading"></a></h2>
+<p>Крива I-V карактеристике приказује однос струје и напона соларне ћелије, соларног панела или низа панела. Детаљно описује ефикасност конверзије соларне енергије у електричну. Познавање електричне I-V карактеристике и номиналне снаге <span class="math notranslate nohighlight">\(P_{max}\)</span> панела је кључно за одређивање ефикасности.</p>
+<p>Интензитет зрачења којим се обасјава соларна ћелија одређује интензитет струје, док <strong>повећање температуре соларне ћелије смањује напон</strong>. Крива I-V карактеристике је графичка репрезентација операција у соларној ћелији или панелу сумирајући однос између струје и напона, односно осунчаности и температуре. Крива пружа потребне информације за конфигурацију соларног панела, како би се конфигурисао за рад близу своје оптималне снаге (<em>Peak Power</em>).</p>
+<figure class="align-default" id="id19">
+<span id="iv-kriva"></span><a class="reference internal image-reference" href="../_images/alt120.png"><img alt="../_images/alt120.png" src="../_images/alt120.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 60 </span><span class="caption-text">Карактеристична I-V крива</span><a class="headerlink" href="#id19" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>На <a class="reference internal" href="#iv-kriva"><span class="std std-numref">Сл. 60</span></a> види се I-V карактеристика (плава линија) типичне силиконске соларне ћелије при нормалним условима. Снага испоручена од стране једне соларне ћелије или панела је производ излазне струје и напона. Крива снаге у зависности од напона означена је љубичастом бојом. Соларна ћелија је <strong>пасивни уређај у електричном колу</strong>. I-V крива приказује све могућности за рад соларне ћелије, али стварни однос струје и напона зависиће од додатног оптерећења у електричном колу.</p>
+<p>На пример, када је на ћелију прикључена батерија, напон је 12V, а струја је висока. С друге стране, када је прикључен потрошач, мења се однос струје и напона. Размотримо два крајња случаја:</p>
+<ul class="simple">
+<li><p><strong>Отворено коло</strong> није повезано на оптерећење. Тада је струја на нули, а напон има максималну вредност. Такав напон назива се напоном отвореног кола, <em>Open Circuit Voltage</em>, односно <span class="math notranslate nohighlight">\(V_{OC}\)</span>.</p></li>
+<li><p><strong>Коло кратког споја</strong>, када су позитивни и негативни крај соларне ћелије у кратком споју. Напон на соларној ћелији је једнак нули, док је струја максимална. Таква струја назива се струјом кратког споја - <em>Short Circuit Current</em>, <span class="math notranslate nohighlight">\(I_{SC}\)</span>.</p></li>
+</ul>
+<p>За нас је најзанимљивији случај у којем комбинација струје и напона даје највећу вредност снаге. Означимо те вредности са <span class="math notranslate nohighlight">\(I_{MP}\)</span> и <span class="math notranslate nohighlight">\(V_{MP}\)</span>. То је тачка у којој соларна ћелија генерише максимум снаге и означена је у горњем десном углу зеленог правоугаоника на слици ознаком MPP (<em>Maximum Power Point</em>). Дакле, идеална производња соларне ћелије дефинисана је тачком <em>MPP</em> која се налази на превоју I-V карактеристичне криве. Одговарајуће вредности за <span class="math notranslate nohighlight">\(I_{MP}\)</span> и <span class="math notranslate nohighlight">\(V_{MP}\)</span> могу се проценити на основу напона отвореног кола <span class="math notranslate nohighlight">\(V_{MP}\approx (0,85-0,9) \cdot V_{OC}\)</span> и струје кратког споја <span class="math notranslate nohighlight">\(V_{MP}\approx (0,85-0,95) \cdot I_{SC}\)</span>.</p>
+<p>С обзиром да на напон соларног панела <strong>значајно утиче његова температура</strong>, стварне вредности излазне снаге могу варирати. До сада смо разматрали I-V карактеристичну криву једне соларне ћелије или једног панела. Када имамо више увезаних соларних панела крива I-V карактеристике има исти облик, само су вредности скалиране. Као што смо већ поменули, панели могу бити увезани серијски или паралелно, односно могу произвести већи напон или већу струју. У сваком случају, горњи десни угао осенченог правоугаоника означаваће MPP. Постоје још два значајна параметара који описују рад панела:</p>
+<ul class="simple">
+<li><p>FF (<em>Fill Factor</em>) - Преставља однос максималне снаге коју низ соларних панела може да произведе под нормалним условима и производа струје кратког споја и напона отвореног кола, <span class="math notranslate nohighlight">\(FF=P_{max} / (I_{SC} \cdot U_{OP})\)</span>. Што је вредност ближа јединици, може се произвести више снаге. Уобичајене вредности су између 0,7 и 0,8.</p></li>
+<li><p>%Eff (<em>Percent Efficiency</em>) - Ефикасност низа соларних панела је однос између максималне електричне снаге коју могу произвести и осунчаности. Данас је ефикасност панела углавном око 10% до 12%, у зависности од типа технологије.</p></li>
+</ul>
+<p>У наредном одељку <a class="reference internal" href="2-pvwatts.html#pvwatts"><span class="std std-ref">Основне једначине модела</span></a> изложићемо основне једначине које ћемо користити за формирање модела базираног на ФПНМ.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Моделовање производње соларних електрана" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="2-pvwatts.html" class="btn btn-neutral float-right" title="Основне једначине модела" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2023, Милош Ивановић.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

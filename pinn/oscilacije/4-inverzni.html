@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="sr" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Инверзни проблем &mdash; документација Физички поткрепљене неуронске мреже - Практикум прво</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Индекс" href="../genindex.html" />
+    <link rel="search" title="Претрага" href="../search.html" />
+    <link rel="next" title="Хидрологија" href="../hidrologija/index.html" />
+    <link rel="prev" title="Решења директног проблема" href="3-rezultati.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Физички поткрепљене неуронске мреже - Практикум
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Садржај</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../uvod/index.html">Увод</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toplota/index.html">Провођење топлоте</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Механичке осцилације</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1-uvod.html">Осцилатор</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-implementacija.html">Имплементација</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-rezultati.html">Решења директног проблема</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Инверзни проблем</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../hidrologija/index.html">Хидрологија</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../akustika/index.html">Акустика</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../misici/index.html">Моделовање мишића</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solari/index.html">Моделовање производње соларних електрана</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../literatura/literatura.html">Литература</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Физички поткрепљене неуронске мреже - Практикум</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Механичке осцилације</a></li>
+      <li class="breadcrumb-item active">Инверзни проблем</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/oscilacije/4-inverzni.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="oscilacije-inverzni">
+<span id="id1"></span><h1>Инверзни проблем<a class="headerlink" href="#oscilacije-inverzni" title="Permalink to this heading"></a></h1>
+<p>Као што смо већ у више наврата нагласили, права снага ФПНМ долази до изражаја код проблема у којима је потребно идентификовати непознате параметре. Разлог томе је што ФПНМ метода инверзне проблеме третира на исти начин као директне. Важно је само да се проблем постави не дозвољавајући вишезначност, што ћемо демонстрирати на следећем примеру. Замислимо експеримент постављен као на <a class="reference internal" href="1-uvod.html#opruga"><span class="std std-numref">Сл. 15</span></a> у коме нам је познат само коефицијент трења <span class="math notranslate nohighlight">\(\mu=0,6\)</span>, а не знамо ни масу куглице <span class="math notranslate nohighlight">\(m\)</span> ни коефицијент еластичности опруге <span class="math notranslate nohighlight">\(k\)</span>. Задатак нам је да идентификујемо ова два параметра тако што ћемо пустити куглицу да осцилује и на основу њеног кретања дати ФПНМ да одреди елементе који недостају.</p>
+<p>Рецимо да смо визуелно утврдили да је у питању <strong>подпригушени случај</strong>. Прва стратегија мерења која би могла да буде реално изводљива је да куглицу отклонимо за <span class="math notranslate nohighlight">\(x_0=2\)</span> и само пустимо (<span class="math notranslate nohighlight">\(v_0=0\)</span>), а онда штоперицом одредимо временске тренутке у којима куглица пролази кроз равнотежни положај и да те тренутке забележимо:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>t</strong></p></td>
+<td><p>1,18</p></td>
+<td><p>3,27</p></td>
+<td><p>5,37</p></td>
+<td><p>7,46</p></td>
+<td><p>9,55</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>x</strong></p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+<p>Дакле, поред граничних и почетних услова <span class="math notranslate nohighlight">\((x_0=2,v_0=0)\)</span> увешћемо и граничне услове типа <code class="docutils literal notranslate"><span class="pre">PointSet</span></code> који дефинишу вредност моделоване функције у појединим тачкама. Програмски код који имплементира овај инверзни проблем дат је на следећем листингу.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-number">Листинг 5 </span><span class="caption-text">Инверзни проблем пригушених осцилација у 1Д. Непознати параметри су <code class="docutils literal notranslate"><span class="pre">m</span></code> и <code class="docutils literal notranslate"><span class="pre">k</span></code>.</span><a class="headerlink" href="#id2" title="Permalink to this code"></a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">deepxde</span> <span class="k">as</span> <span class="nn">dde</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">deepxde.backend</span> <span class="kn">import</span> <span class="n">tf</span>
+<span class="linenos"> 3</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="linenos"> 4</span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="n">m</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="linenos"> 7</span><span class="n">mu</span> <span class="o">=</span> <span class="mf">0.6</span>
+<span class="linenos"> 8</span><span class="n">k</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">2.</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="n">x0</span><span class="p">,</span> <span class="n">v0</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="n">delta</span> <span class="o">=</span> <span class="n">mu</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">m</span><span class="p">)</span>
+<span class="linenos">13</span><span class="n">w0</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="o">/</span><span class="n">m</span><span class="p">)</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="c1"># Da li je tacka blizu t=0 (provera pocetnog uslova)</span>
+<span class="linenos">16</span><span class="k">def</span> <span class="nf">boundary_l</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">on_initial</span><span class="p">):</span>
+<span class="linenos">17</span>    <span class="k">return</span> <span class="n">on_initial</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="c1"># Jednacina ODE</span>
+<span class="linenos">20</span><span class="k">def</span> <span class="nf">Ode</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
+<span class="linenos">21</span>        <span class="n">dxdt</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">jacobian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+<span class="linenos">22</span>        <span class="n">dxdtt</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">hessian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+<span class="linenos">23</span>        <span class="k">return</span> <span class="n">m</span> <span class="o">*</span> <span class="n">dxdtt</span> <span class="o">+</span> <span class="n">mu</span> <span class="o">*</span> <span class="n">dxdt</span> <span class="o">+</span> <span class="n">k</span><span class="o">*</span><span class="n">x</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="c1"># x(0)=x0</span>
+<span class="linenos">26</span><span class="k">def</span> <span class="nf">bc_func1</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="linenos">27</span>    <span class="k">return</span> <span class="n">outputs</span> <span class="o">-</span> <span class="n">x0</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span><span class="c1"># x&#39;(0)=v0</span>
+<span class="linenos">30</span><span class="k">def</span> <span class="nf">bc_func2</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="linenos">31</span>    <span class="k">return</span> <span class="n">dde</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">jacobian</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">j</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-</span> <span class="n">v0</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span><span class="c1"># Resava se na domenu t=(0,10)</span>
+<span class="linenos">34</span><span class="n">interval</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">TimeDomain</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="linenos">35</span>
+<span class="linenos">36</span><span class="c1"># Pocetni uslovi</span>
+<span class="linenos">37</span><span class="n">ic1</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">icbc</span><span class="o">.</span><span class="n">OperatorBC</span><span class="p">(</span><span class="n">interval</span><span class="p">,</span> <span class="n">bc_func1</span><span class="p">,</span> <span class="n">boundary_l</span><span class="p">)</span>
+<span class="linenos">38</span><span class="n">ic2</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">icbc</span><span class="o">.</span><span class="n">OperatorBC</span><span class="p">(</span><span class="n">interval</span><span class="p">,</span> <span class="n">bc_func2</span><span class="p">,</span> <span class="n">boundary_l</span><span class="p">)</span>
+<span class="linenos">39</span>
+<span class="linenos">40</span><span class="n">bc_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.18</span><span class="p">,</span> <span class="mf">3.27</span><span class="p">,</span> <span class="mf">5.37</span><span class="p">,</span> <span class="mf">7.46</span><span class="p">,</span> <span class="mf">9.55</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">41</span><span class="n">bc_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span> <span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">42</span><span class="n">ic3</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">icbc</span><span class="o">.</span><span class="n">PointSetBC</span><span class="p">(</span><span class="n">bc_x</span><span class="p">,</span> <span class="n">bc_y</span><span class="p">,</span> <span class="n">component</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos">43</span>
+<span class="linenos">44</span><span class="c1"># Definsanje problema, granicnih uslova, broja kolokacionih tacaka</span>
+<span class="linenos">45</span><span class="n">data</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">TimePDE</span><span class="p">(</span><span class="n">interval</span><span class="p">,</span> <span class="n">Ode</span><span class="p">,</span> <span class="p">[</span><span class="n">ic1</span><span class="p">,</span> <span class="n">ic2</span><span class="p">,</span> <span class="n">ic3</span><span class="p">],</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">solution</span><span class="o">=</span><span class="n">func</span><span class="p">,</span> <span class="n">num_test</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="linenos">46</span>
+<span class="linenos">47</span><span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">30</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">48</span><span class="n">activation</span> <span class="o">=</span> <span class="s2">&quot;tanh&quot;</span>
+<span class="linenos">49</span><span class="n">init</span> <span class="o">=</span> <span class="s2">&quot;Glorot uniform&quot;</span>
+<span class="linenos">50</span><span class="n">net</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">FNN</span><span class="p">(</span><span class="n">layers</span><span class="p">,</span> <span class="n">activation</span><span class="p">,</span> <span class="n">init</span><span class="p">)</span>
+<span class="linenos">51</span>
+<span class="linenos">52</span><span class="n">model</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">net</span><span class="p">)</span>
+<span class="linenos">53</span>
+<span class="linenos">54</span><span class="c1"># Callback funkcija koja stampa varijablu na svakih 1000 epoha</span>
+<span class="linenos">55</span><span class="n">variable1</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">VariableValue</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="linenos">56</span><span class="n">variable2</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">VariableValue</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="linenos">57</span>
+<span class="linenos">58</span><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;adam&quot;</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">.001</span><span class="p">,</span> <span class="n">loss_weights</span><span class="o">=</span><span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;l2 relative error&quot;</span><span class="p">],</span> <span class="n">external_trainable_variables</span><span class="o">=</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">])</span>
+<span class="linenos">59</span><span class="n">losshistory</span><span class="p">,</span> <span class="n">train_state</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">epochs</span><span class="o">=</span><span class="mi">50000</span><span class="p">,</span> <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">variable1</span><span class="p">,</span> <span class="n">variable2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<p>Објаснићемо само делове који се разликују у односу на директни проблем решен у секцији <a class="reference internal" href="2-implementacija.html#oscilacije-implementacija"><span class="std std-ref">Имплементација</span></a>. За почетак, ту су непознати параметри које декларишемо на следећи начин:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">k</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">2.</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>У загради се дају почетне вредности параметра. Следеће линије дефинишу поменути додатни <code class="docutils literal notranslate"><span class="pre">PointSet</span></code> гранични услов (услове) који важе у појединим тачкама <em>унутар домена</em>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bc_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.18</span><span class="p">,</span> <span class="mf">3.27</span><span class="p">,</span> <span class="mf">5.37</span><span class="p">,</span> <span class="mf">7.46</span><span class="p">,</span> <span class="mf">9.55</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">bc_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span> <span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ic3</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">icbc</span><span class="o">.</span><span class="n">PointSetBC</span><span class="p">(</span><span class="n">bc_x</span><span class="p">,</span> <span class="n">bc_y</span><span class="p">,</span> <span class="n">component</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Како бисмо обезбедили праћење вредности непознатих параметара током обуке, потребно је да поставимо тзв. <code class="docutils literal notranslate"><span class="pre">callback</span></code> функције, које ће се позивати на сваких 1000 епоха:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">variable1</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">VariableValue</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">variable2</span> <span class="o">=</span> <span class="n">dde</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">VariableValue</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Приликом постављања модела постављамо екстерне варијабле за тренирање <code class="docutils literal notranslate"><span class="pre">k</span></code> и <code class="docutils literal notranslate"><span class="pre">m</span></code>, док се при позиву тренинга наводе <code class="docutils literal notranslate"><span class="pre">callback</span></code> функције:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;adam&quot;</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">.001</span><span class="p">,</span> <span class="n">loss_weights</span><span class="o">=</span><span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;l2 relative error&quot;</span><span class="p">],</span> <span class="n">external_trainable_variables</span><span class="o">=</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">])</span>
+<span class="n">losshistory</span><span class="p">,</span> <span class="n">train_state</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">epochs</span><span class="o">=</span><span class="mi">50000</span><span class="p">,</span> <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">variable1</span><span class="p">,</span> <span class="n">variable2</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Након завршеног обучавања, добија се, очигледно погрешно, решење које је приказано на <a class="reference internal" href="#inverzni-pogresno"><span class="std std-numref">Сл. 23</span></a>. У односу на аналитичко решење које је постављено користећи вредности параметара <code class="docutils literal notranslate"><span class="pre">m=1</span></code> и <code class="docutils literal notranslate"><span class="pre">k=2,25</span></code>, добијене вредности <code class="docutils literal notranslate"><span class="pre">m=0,287</span></code> и <code class="docutils literal notranslate"><span class="pre">k=1,22</span></code> се пуно разликују.</p>
+<figure class="align-default" id="id3">
+<span id="inverzni-pogresno"></span><a class="reference internal image-reference" href="../_images/resenje1-inv-pogresno.png"><img alt="../_images/resenje1-inv-pogresno.png" src="../_images/resenje1-inv-pogresno.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 23 </span><span class="caption-text">ФПНМ решење инверзног проблема са непознатим параметрима. Пронађене вредности су <code class="docutils literal notranslate"><span class="pre">m=0,287</span></code> и <code class="docutils literal notranslate"><span class="pre">k=1,22</span></code>.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Зашто смо добили овако лоше решење? Одговор се крије у лоше постављеним граничним условима који доводе до неједнозначности инверзног проблема. Наиме, постоји више сценарија, тј. парова <code class="docutils literal notranslate"><span class="pre">(m,k)</span></code> који задовољавају граничне услове постављене само у тачкама проласка тега кроз равнотежни положај. Очигледно је да морамо да додамо још неку тачку ван равнотежног положаја, како бисмо обезбедили једнозначно решење. Замислимо да смо измерили и тренутак када је тег био на највећој негативној удаљености у односу на равнотежни положај и колика је та удаљеност била. Додајмо сада и ту тачку у постављени <code class="docutils literal notranslate"><span class="pre">PointSet</span></code>, који сада изгледа овако:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>t</strong></p></td>
+<td><p>1,18</p></td>
+<td><p>3,27</p></td>
+<td><p>5,37</p></td>
+<td><p>7,46</p></td>
+<td><p>9,55</p></td>
+<td><p>2,12</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>x</strong></p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>-1,67</p></td>
+</tr>
+</tbody>
+</table>
+<p>Погледом на <a class="reference internal" href="#inverzni-ispravno"><span class="std std-numref">Сл. 24</span></a> одмах се види да је поклапање са аналитичким решењем у овако постављеном проблему скоро па идеално.</p>
+<figure class="align-default" id="id4">
+<span id="inverzni-ispravno"></span><a class="reference internal image-reference" href="../_images/resenje1-inv.png"><img alt="../_images/resenje1-inv.png" src="../_images/resenje1-inv.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Сл. 24 </span><span class="caption-text">ФПНМ решење инверзног проблема са непознатим параметрима. Пронађене вредности су <code class="docutils literal notranslate"><span class="pre">m=0,98</span></code> и <code class="docutils literal notranslate"><span class="pre">k=2,26</span></code>.</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Исправност решења додатно потврђују параметри <code class="docutils literal notranslate"><span class="pre">m=0,98</span></code> и <code class="docutils literal notranslate"><span class="pre">k=2,26</span></code>, чије су вредности веома блиске онима које су дате у аналитичкој поставци <code class="docutils literal notranslate"><span class="pre">m=1</span></code> и <code class="docutils literal notranslate"><span class="pre">k=2,25</span></code>. На овај начин смо показали да приступ решавању инверзног проблема, иако методолошки сличан, има специфичности о којима треба водити рачуна. Код директних проблема решење је увек једнозначно, док код инверзних морају да се обезбеде одговарајући услови који у довољној мери детерминишу решење.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="3-rezultati.html" class="btn btn-neutral float-left" title="Решења директног проблема" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../hidrologija/index.html" class="btn btn-neutral float-right" title="Хидрологија" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2023, Милош Ивановић.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
